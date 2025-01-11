@@ -65,11 +65,23 @@ The composition root creates the actual instances and configures the application
 
 ## OTS items
 
-  - Microsoft .NET
-  - OpenTelemetry.NET
-  - Microsoft Dependency Injection
-  - Argument parsing library (?)
-  - Moq
-  - Microsoft.Extensions.Configuration
-  - Microsoft.Extensions.Configuration.Json
-  - Microsoft.Extensions.Configuration.Binder
+The tool uses the following OTS items:
+
+  - For CagCap project
+     - CommandLineParser
+     - LibUsbDotNet
+     - Microsoft.Extensions.Configuration
+     - Microsoft.Extensions.Configuration.Binder
+     - Microsoft.Extensions.Configuration.Json
+     - Microsoft.Extensions.DependencyInjection
+     - Microsoft.Extensions.Logging.Console
+     - Microsoft.Extensions.Options
+     - OpenTelemetry
+     - System.IO.Ports
+     
+  - For test projects
+    - coverlet.collector
+    - Microsoft.NET.Test.Sdk
+    - Moq
+    - xunit
+    - xunit.runner.visualstudio

@@ -8,3 +8,5 @@
 /test/bin/
 /test/obj
 /test/report
+/test/coverage-report
+/test/test-results
