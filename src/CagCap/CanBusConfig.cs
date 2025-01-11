@@ -5,6 +5,9 @@
 
 namespace CagCap
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     internal class CanBusConfig
     {
         public required bool Enable { get; set; }

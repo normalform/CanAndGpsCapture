@@ -42,9 +42,9 @@ namespace CagCap.Frameworks.Device.Canable
 
         public override string ToString()
         {
-            var extendedText = Extended ? ", Extended " : string.Empty;
-            var errorText = Error ? ", Error " : string.Empty;
-            var rtrText = Rtr ? ", RTR " : string.Empty;
+            var extendedText = Extended ? ", Extended" : string.Empty;
+            var errorText = Error ? ", Error" : string.Empty;
+            var rtrText = Rtr ? ", RTR" : string.Empty;
             return $"Id: {Id}(0x{Id:x}){rtrText}{extendedText}{errorText}, raw ID: 0x{this.rawId:x}";
         }
     }

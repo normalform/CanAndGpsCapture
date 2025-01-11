@@ -79,17 +79,17 @@ namespace CagCap.Frameworks.Device.Canable
             public uint TimestampUs;
         }
 
-        internal static CandleDataFrame FromByteArray(byte[] data)
+        internal static T FromByteArray<T>(byte[] data) where T : struct
         {
-            if (data.Length < Marshal.SizeOf<CandleDataFrame>())
+            if (data.Length < Marshal.SizeOf<T>())
             {
-                throw new ArgumentException("Data buffer is too small to contain a CandleDataFrame.");
+                throw new ArgumentException($"Data buffer is too small to contain a {typeof(T)}.");
             }
 
             GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
-                return Marshal.PtrToStructure<CandleDataFrame>(handle.AddrOfPinnedObject());
+                return Marshal.PtrToStructure<T>(handle.AddrOfPinnedObject());
             }
             finally
             {

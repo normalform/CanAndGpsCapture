@@ -10,6 +10,7 @@ namespace CagCap.Frameworks.Device.Canable
     using LibUsbDotNet.Main;
     using Microsoft.Extensions.Logging;
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
     using System.Threading;
     using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace CagCap.Frameworks.Device.Canable
         private readonly CancellationTokenSource cancellationTokenSource = new();
         public event EventHandler<CanMessage>? DataReceived;
 
+        [ExcludeFromCodeCoverage]
         public UsbAccess(ILogger<UsbAccess> logger)
         {
             this.logger = logger;
@@ -103,6 +105,7 @@ namespace CagCap.Frameworks.Device.Canable
             return usbUtils.GetDeviceSymbolicName(VendorId, ProductId);
         }
 
+        [ExcludeFromCodeCoverage]
         public void SendFrame(int channel, CandleDataStructure.CandleDataFrame frame)
         {
             frame.EchoId = 0;
@@ -117,11 +120,13 @@ namespace CagCap.Frameworks.Device.Canable
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void StartReceive()
         {
             Task.Run(() => this.ReadDataAsync(this.cancellationTokenSource.Token));
         }
 
+        [ExcludeFromCodeCoverage]
         private void Close()
         {
             this.logger.LogInformation("Closing UsbAccess");
@@ -136,6 +141,7 @@ namespace CagCap.Frameworks.Device.Canable
             }
         }
 
+        [ExcludeFromCodeCoverage]
         private async Task ReadDataAsync(CancellationToken cancellationToken)
         {
             if (this.reader != null)
@@ -147,7 +153,7 @@ namespace CagCap.Frameworks.Device.Canable
                     var ec = this.reader.Read(buffer, 2000, out int bytesRead);
                     if (ec == ErrorCode.None && bytesRead > 0)
                     {
-                        var frame = CandleDataStructure.FromByteArray(buffer);
+                        var frame = CandleDataStructure.FromByteArray<CandleDataStructure.CandleDataFrame>(buffer);
                         var canId = new CanId(frame.CanId);
 
                         var data = new byte[Math.Min(frame.CanDlc, (byte)8)];
@@ -170,6 +176,7 @@ namespace CagCap.Frameworks.Device.Canable
             }
         }
 
+        [ExcludeFromCodeCoverage]
         private static void ResetEndPoint(UsbEndpointBase? endpoint)
         {
             if (endpoint != null)
@@ -179,12 +186,14 @@ namespace CagCap.Frameworks.Device.Canable
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void UsbControlMessageSet<T>(CanRequest request, ushort value, ushort index, T structure) where T : struct
         {
             byte requestType = UsbDirOut | UsbTypeVendor | UsbRecipInterface;
             this.UsbControlMessage(request, requestType, value, index, ref structure);
         }
 
+        [ExcludeFromCodeCoverage]
         public T UsbControlMessageGet<T>(CanRequest request, ushort value, ushort index) where T : struct
         {
             T structure = default;
@@ -193,6 +202,7 @@ namespace CagCap.Frameworks.Device.Canable
             return structure;
         }
 
+        [ExcludeFromCodeCoverage]
         private void UsbControlMessage<T>(CanRequest request, byte requestType, ushort value, ushort index, ref T structure) where T : struct
         {
             if (this.usbDevice == null)
@@ -249,7 +259,7 @@ namespace CagCap.Frameworks.Device.Canable
             }
         }
 
-
+        [ExcludeFromCodeCoverage]
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -267,6 +277,7 @@ namespace CagCap.Frameworks.Device.Canable
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void Dispose()
         {
             this.Dispose(true);

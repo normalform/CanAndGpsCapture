@@ -8,7 +8,9 @@ namespace CagCap.Frameworks.Device.Canable
     using LibUsbDotNet;
     using LibUsbDotNet.Main;
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     internal class UsbUtils : IUsbUtils
     {
         public Guid[] GetDeviceSymbolicName(int vendtorId, int productId)

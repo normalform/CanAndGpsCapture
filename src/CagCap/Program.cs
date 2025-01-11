@@ -14,7 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
 
+[ExcludeFromCodeCoverage]
 class Program
 {
     static void Main(string[] args)
@@ -120,6 +122,7 @@ class Program
 
 class Options
 {
+    [ExcludeFromCodeCoverage]
     [Option('h', "help", Required = false, HelpText = "Show help information.")]
     public bool Help { get; set; }
 }

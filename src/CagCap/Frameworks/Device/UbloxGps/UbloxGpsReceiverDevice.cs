@@ -7,9 +7,11 @@ namespace CagCap.Frameworks.Device.UbloxGps
 {
     using Microsoft.Extensions.Logging;
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO.Ports;
     using System.Threading.Tasks;
 
+    [ExcludeFromCodeCoverage]
     public class UbloxGpsReceiverDevice : IUbloxGpsReceiverDevice, IDisposable
     {
         private readonly SerialPort serialPort;
@@ -96,7 +98,6 @@ namespace CagCap.Frameworks.Device.UbloxGps
             {
                 if (disposing)
                 {
-                    // Dispose managed resources
                     if (serialPort != null)
                     {
                         if (serialPort.IsOpen)
@@ -106,8 +107,6 @@ namespace CagCap.Frameworks.Device.UbloxGps
                         serialPort.Dispose();
                     }
                 }
-
-                // Dispose unmanaged resources
 
                 disposed = true;
             }
