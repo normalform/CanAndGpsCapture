@@ -22,7 +22,7 @@ Before you run the **cagcap.exe**, check and update the configuration file `apps
     - BaudRate: The baud rate of the CAN bus interface.
   - CAN Bus enable: true or false
     - Enable: True or False to enable or disable the CAN data interface.
-    - BitRate: The bitrate of the CAN bus interface. (only 10000, 20000, 50000, 83333, 100000, 125000, 250000, 500000, 800000, 1000000 are supported) )
+    - BitRate: The bitrate of the CAN bus interface. (only 10000, 20000, 50000, 83333, 100000, 125000, 250000, 500000, 800000, 1000000 are supported)
     - SamplePoint: The sample point of the CAN bus interface. (only 50.0%, 62.5%, 75.0%, and 87.5% are supported)
     - EnableListenOnly: True or False to enable or disable the listen-only mode.
     - EnableLoopback: True or False to enable or disable the loopback mode.
