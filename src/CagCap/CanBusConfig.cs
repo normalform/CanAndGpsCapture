@@ -8,6 +8,13 @@ namespace CagCap
     internal class CanBusConfig
     {
         public required bool Enable { get; set; }
-        public required string Port { get; set; }
+        public required int BitRate { get; set; }
+        public required string SamplePoint { get; set; }
+        public bool EnableListenOnly { get; set; }
+        public bool EnableLoopback { get; set; }
+        public bool EnableHwTimestamp { get; set; }
+        public bool EnableIdentity { get; set; }
+        public bool EnableUserId { get; set; }
+        public bool EnablePadPacketsToMaxPacketSize { get; set; }
     }
 }

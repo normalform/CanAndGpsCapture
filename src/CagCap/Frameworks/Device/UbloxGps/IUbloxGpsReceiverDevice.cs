@@ -3,7 +3,11 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("CagcapTests")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+namespace CagCap.Frameworks.Device.UbloxGps
+{
+    internal interface IUbloxGpsReceiverDevice
+    {
+        Task WriteAsync(string data);
+        event EventHandler<string> DataReceived;
+    }
+}

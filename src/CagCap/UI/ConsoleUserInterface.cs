@@ -5,7 +5,7 @@
 
 namespace CagCap.UI
 {
-    internal class ConsoleUserInterface: IUserInterface
+    internal class ConsoleUserInterface : IUserInterface
     {
         public void Start()
         {
