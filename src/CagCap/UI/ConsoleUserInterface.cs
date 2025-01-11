@@ -5,7 +5,10 @@
 
 namespace CagCap.UI
 {
-    internal class ConsoleUserInterface: IUserInterface
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
+    internal class ConsoleUserInterface : IUserInterface
     {
         public void Start()
         {

@@ -5,6 +5,9 @@
 
 namespace CagCap
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     internal class GpsReceiverConfig
     {
         public required bool Enable { get; set; }
