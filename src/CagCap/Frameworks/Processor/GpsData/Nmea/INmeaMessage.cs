@@ -3,11 +3,15 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Device.UbloxGps
+namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
-    internal interface IUbloxGpsReceiverDevice
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    internal interface INmeaMessage
     {
-        Task WriteAsync(string data);
-        event EventHandler<string> DataReceived;
     }
 }

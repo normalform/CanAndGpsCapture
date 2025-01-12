@@ -7,6 +7,8 @@ using CagCap;
 using CagCap.Application;
 using CagCap.Frameworks.Device.Canable;
 using CagCap.Frameworks.Device.UbloxGps;
+using CagCap.Frameworks.Processor.GpsData;
+using CagCap.Frameworks.Processor.GpsDataProcessor;
 using CagCap.UI;
 
 using CommandLine;
@@ -45,7 +47,8 @@ class Program
         var gpsConfig = serviceProvider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
         if (gpsConfig.Enable)
         {
-            var gpsReceiverUblox = serviceProvider.GetRequiredService<IUbloxGpsReceiverDevice>();
+            var gpsReceiverUblox = serviceProvider.GetRequiredService<IGpsReceiverDevice>();
+            var gpsDataProcessor = serviceProvider.GetRequiredService<IGpsDataProcessor>();
         }
 
         var canBusConfig = serviceProvider.GetRequiredService<IOptions<CanBusConfig>>().Value;
@@ -99,12 +102,20 @@ class Program
             return new CanableDevice(usbAccess, config, loggerFactory);
         });
 
-        services.AddSingleton<IUbloxGpsReceiverDevice>(
+        services.AddSingleton<IGpsReceiverDevice>(
             provider =>
             {
                 var config = provider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
                 var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
                 return new UbloxGpsReceiverDevice(config.Port, config.BaudRate, loggerFactory);
+            });
+
+        services.AddSingleton<IGpsDataProcessor>(
+            provider =>
+            {
+                var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                var gpsReceiverDevice = provider.GetRequiredService<IGpsReceiverDevice>();
+                return new GpsDataProcessor(gpsReceiverDevice, loggerFactory);
             });
 
         services.AddSingleton<IUserInterface, ConsoleUserInterface>();
