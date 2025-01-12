@@ -9,7 +9,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
     internal class NmeaMessageFactory : INmeaMessageFactory
     {
-        public static INmeaMessage? Create(string address, string[] dataVector, ILogger logger)
+        public static INmeaMessage Create(string address, string[] dataVector, ILogger logger)
         {
             switch(address)
             {
