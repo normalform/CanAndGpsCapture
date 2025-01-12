@@ -3,10 +3,9 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Processor.GpsDataProcessor
+namespace CagCap.Frameworks.Processor.GpsData
 {
     using CagCap.Frameworks.Device.UbloxGps;
-    using CagCap.Frameworks.Processor.GpsData;
     using CagCap.Frameworks.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
 
@@ -22,28 +21,28 @@ namespace CagCap.Frameworks.Processor.GpsDataProcessor
         public GpsDataProcessor(IGpsReceiverDevice gpsReceiver, ILoggerFactory loggerFactory)
         {
             this.gpsReceiver = gpsReceiver;
-            this.logger = loggerFactory.CreateLogger("GpsDataProcessor");
-            
-            this.dataQueue = new Queue<char>();
-            this.nemaProtocol = new NmeaProtocol(this.logger);
+            logger = loggerFactory.CreateLogger("GpsDataProcessor");
 
-            this.gpsReceiver.DataReceived += this.OnDataReceived;
+            dataQueue = new Queue<char>();
+            nemaProtocol = new NmeaProtocol(logger);
+
+            this.gpsReceiver.DataReceived += OnDataReceived;
         }
 
         public void Process()
         {
-            if (this.dataQueue.Count == 0)
+            if (dataQueue.Count == 0)
             {
                 return;
             }
 
-            while(this.dataQueue.Count > 0)
+            while (dataQueue.Count > 0)
             {
-                var data = this.dataQueue.Dequeue();
-                var nmeaMessage = this.nemaProtocol.Process(data);
+                var data = dataQueue.Dequeue();
+                var nmeaMessage = nemaProtocol.Process(data);
                 if (nmeaMessage != null)
                 {
-                    this.logger.LogDebug("Nmea message: {nmeaMessage}", nmeaMessage);
+                    logger.LogDebug("Nmea message: {nmeaMessage}", nmeaMessage);
                 }
             }
         }
@@ -57,10 +56,10 @@ namespace CagCap.Frameworks.Processor.GpsDataProcessor
 
             foreach (var ch in data)
             {
-                this.dataQueue.Enqueue(ch);
+                dataQueue.Enqueue(ch);
             }
 
-            this.Process();
+            Process();
         }
     }
 }

@@ -8,7 +8,6 @@ using CagCap.Application;
 using CagCap.Frameworks.Device.Canable;
 using CagCap.Frameworks.Device.UbloxGps;
 using CagCap.Frameworks.Processor.GpsData;
-using CagCap.Frameworks.Processor.GpsDataProcessor;
 using CagCap.UI;
 
 using CommandLine;
@@ -44,13 +43,15 @@ class Program
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
 
+        // TODO move to the composition root
         var gpsConfig = serviceProvider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
         if (gpsConfig.Enable)
         {
-            var gpsReceiverUblox = serviceProvider.GetRequiredService<IGpsReceiverDevice>();
-            var gpsDataProcessor = serviceProvider.GetRequiredService<IGpsDataProcessor>();
+            _ = serviceProvider.GetRequiredService<IGpsReceiverDevice>();
+            _ = serviceProvider.GetRequiredService<IGpsDataProcessor>();
         }
 
+        // TODO move to the composition root
         var canBusConfig = serviceProvider.GetRequiredService<IOptions<CanBusConfig>>().Value;
         if (canBusConfig.Enable)
         {
@@ -63,9 +64,7 @@ class Program
                     logger.LogInformation("Multiple CANable devices found. Using the first one.");
                 }
 
-                var canBus = serviceProvider.GetRequiredService<ICanableDevice>();
-                var message = new CanMessage(CanId.StandardCanId(0x114), [0x01, 0x02, 0x03, 0x04]);
-                canBus.SendMessage(message);
+                _ = serviceProvider.GetRequiredService<ICanableDevice>();
             }
             else
             {
