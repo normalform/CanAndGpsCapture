@@ -30,7 +30,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
                 default:
                     logger.LogWarning("Unsupported message {address}", address);
-                    return null;
+                    return new NmeaMessageNull();
             }
         }
     }

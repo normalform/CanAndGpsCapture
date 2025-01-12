@@ -43,7 +43,7 @@ namespace CagCap.Frameworks.Processor.GpsDataProcessor
                 var nmeaMessage = this.nemaProtocol.Process(data);
                 if (nmeaMessage != null)
                 {
-                    Console.WriteLine(nmeaMessage);
+                    this.logger.LogDebug("Nmea message: {nmeaMessage}", nmeaMessage);
                 }
             }
         }
@@ -54,7 +54,6 @@ namespace CagCap.Frameworks.Processor.GpsDataProcessor
             {
                 return;
             }
-            var stripedData = data.Trim();
 
             foreach (var ch in data)
             {
