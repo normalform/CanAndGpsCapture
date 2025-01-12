@@ -53,7 +53,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
             var satelliteViewsStr = string.Join(", ", satelliteViewStrList);
 
-            return $"SGV: NumberOfMessages: {this.NumberOfMessages}, MessageNumber: {this.MessageNumber}, NumberOfSatellitesInView: {this.NumberOfSatellitesInView}, SatelliteViews: [{satelliteViewsStr}]";
+            return $"GSV: NumberOfMessages: {this.NumberOfMessages}, MessageNumber: {this.MessageNumber}, NumberOfSatellitesInView: {this.NumberOfSatellitesInView}, SatelliteViews: [{satelliteViewsStr}]";
         }
     }
 }

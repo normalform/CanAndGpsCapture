@@ -7,11 +7,11 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
     using Microsoft.Extensions.Logging;
 
-    internal class NmeaMessageFactory : INmeaMessageFactory
+    internal class NmeaMessageFactory
     {
         public static INmeaMessage Create(string address, string[] dataVector, ILogger logger)
         {
-            switch(address)
+            switch (address)
             {
                 case "GPGGA":
                     return new NmeaMessageGga(dataVector, logger);

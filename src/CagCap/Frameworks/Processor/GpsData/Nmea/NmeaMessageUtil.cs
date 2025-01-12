@@ -24,27 +24,21 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
         internal static DateTime ParseDateTime(string inputStringHhMmSsFf, string inputStringDdMmYy, ILogger logger)
         {
-            var combinedString = inputStringDdMmYy + inputStringHhMmSsFf;
-            if (DateTime.TryParseExact(combinedString, "ddMMyyHHmmss.ff", null, System.Globalization.DateTimeStyles.None, out DateTime time))
+            if (!int.TryParse(inputStringDdMmYy.AsSpan(4, 2), out int year))
+            {
+                logger.LogError("Failed to parse time: {timeStr}", inputStringDdMmYy);
+                return DateTime.MinValue;
+            }
+
+            var fullYear = 2000 + year;
+            var combinedString = string.Concat(inputStringDdMmYy.AsSpan(0, 4), fullYear.ToString(), inputStringHhMmSsFf);
+            if (DateTime.TryParseExact(combinedString, "ddMMyyyyHHmmss.ff", null, System.Globalization.DateTimeStyles.None, out DateTime time))
             {
                 return time;
             }
             else
             {
                 logger.LogError("Failed to parse time: {timeStr}", combinedString);
-                return DateTime.MinValue;
-            }
-        }
-
-        internal static DateTime ParseDateTimeDdMmYy(string inputString, ILogger logger)
-        {
-            if (DateTime.TryParseExact(inputString, "ddMMyy", null, System.Globalization.DateTimeStyles.None, out DateTime time))
-            {
-                return time;
-            }
-            else
-            {
-                logger.LogError("Failed to parse time: {timeStr}", inputString);
                 return DateTime.MinValue;
             }
         }
@@ -61,7 +55,6 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
                 return double.NaN;
             }
         }
-
 
         internal static int ParseToInt(string inputString, ILogger logger)
         {

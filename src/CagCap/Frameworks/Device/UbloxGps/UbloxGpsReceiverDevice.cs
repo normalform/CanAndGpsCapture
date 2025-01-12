@@ -71,19 +71,14 @@ namespace CagCap.Frameworks.Device.UbloxGps
             {
                 SerialPort sp = (SerialPort)sender;
                 string data = sp.ReadExisting();
-                this.OnDataReceived(data);
+                this.logger.LogDebug("Data received: {data}", data);
+                this.DataReceived?.Invoke(this, data);
             }
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "Error reading COM port: {message}", ex.Message);
                 Console.WriteLine($"Error reading from COM port: {ex.Message}");
             }
-        }
-
-        private void OnDataReceived(string data)
-        {
-            this.logger.LogDebug("Data received: {data}", data);
-            this.DataReceived?.Invoke(this, data);
         }
 
         public void Dispose()

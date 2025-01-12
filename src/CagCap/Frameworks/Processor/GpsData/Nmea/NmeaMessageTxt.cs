@@ -7,7 +7,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
     using Microsoft.Extensions.Logging;
 
-    internal enum NmeaTextMessageType
+    public enum NmeaTextMessageType
     {
         Error,
         Warning,

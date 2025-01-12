@@ -3,9 +3,15 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Processor.GpsData.Nmea
+namespace CagCap.Frameworks.Device.Canable
 {
-    internal interface INmeaMessage
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
+    internal class NullCanableDevice : ICanableDevice
     {
+        public void SendMessage(CanMessage message)
+        {
+        }
     }
 }

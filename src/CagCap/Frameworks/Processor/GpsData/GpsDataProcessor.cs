@@ -15,34 +15,36 @@ namespace CagCap.Frameworks.Processor.GpsData
         private readonly ILogger logger;
 
         private readonly Queue<char> dataQueue;
+        private readonly NmeaProtocol nemaProtocol;
 
-        private NmeaProtocol nemaProtocol;
+        public event EventHandler<INmeaMessage>? DataReceived;
 
         public GpsDataProcessor(IGpsReceiverDevice gpsReceiver, ILoggerFactory loggerFactory)
         {
             this.gpsReceiver = gpsReceiver;
-            logger = loggerFactory.CreateLogger("GpsDataProcessor");
+            this.logger = loggerFactory.CreateLogger("GpsDataProcessor");
 
-            dataQueue = new Queue<char>();
-            nemaProtocol = new NmeaProtocol(logger);
+            this.dataQueue = new Queue<char>();
+            this.nemaProtocol = new NmeaProtocol(logger);
 
             this.gpsReceiver.DataReceived += OnDataReceived;
         }
 
-        public void Process()
+        private void Process()
         {
-            if (dataQueue.Count == 0)
+            if (this.dataQueue.Count == 0)
             {
                 return;
             }
 
-            while (dataQueue.Count > 0)
+            while (this.dataQueue.Count > 0)
             {
-                var data = dataQueue.Dequeue();
-                var nmeaMessage = nemaProtocol.Process(data);
+                var data = this.dataQueue.Dequeue();
+                var nmeaMessage = this.nemaProtocol.Process(data);
                 if (nmeaMessage != null)
                 {
-                    logger.LogDebug("Nmea message: {nmeaMessage}", nmeaMessage);
+                    this.DataReceived?.Invoke(this, nmeaMessage);
+                    this.logger.LogDebug("NMEA message {message}", nmeaMessage);
                 }
             }
         }
@@ -56,10 +58,10 @@ namespace CagCap.Frameworks.Processor.GpsData
 
             foreach (var ch in data)
             {
-                dataQueue.Enqueue(ch);
+                this.dataQueue.Enqueue(ch);
             }
 
-            Process();
+            this.Process();
         }
     }
 }

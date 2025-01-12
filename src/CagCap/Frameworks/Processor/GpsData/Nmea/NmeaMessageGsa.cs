@@ -7,13 +7,13 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
     using Microsoft.Extensions.Logging;
 
-    internal enum OperationMode
+    public enum OperationMode
     {
         Manual,
         Automatic
     };
 
-    internal enum NavMode
+    public enum NavMode
     {
         NoFix = 1,
         Fix2D = 2,
@@ -27,12 +27,17 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     {
         private const int SatelliteCount = 12;
 
-        internal OperationMode OperationMode { get; } = dataVector[0][0] == 'A' ? OperationMode.Automatic : OperationMode.Manual;
+        internal OperationMode OperationMode { get; } = ParseOperationMode(dataVector[0][0]);
         internal NavMode NavMode { get; } = ParseNavMode(dataVector[1], logger);
-        internal int[] SatelliteNumbers { get; } = ParseSatelliteNumbers(dataVector, logger);
+        internal int[] SatelliteNumbers { get; } = ParseSatelliteNumbers(dataVector[2..], logger);
         internal double PositionDilutionOfPrecision { get; } = NmeaMessageUtil.ParseToDouble(dataVector[14], logger);
         internal double HorizontalDilutionOfPrecision { get; } = NmeaMessageUtil.ParseToDouble(dataVector[15], logger);
         internal double VerticalDilutionOfPrecision { get; } = NmeaMessageUtil.ParseToDouble(dataVector[16], logger);
+
+        internal static OperationMode ParseOperationMode(char operationModeChar)
+        {
+            return operationModeChar == 'A' ? OperationMode.Automatic : OperationMode.Manual;
+        }
 
         internal static NavMode ParseNavMode(string navModeStr, ILogger logger)
         {
@@ -49,14 +54,13 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
         internal static int[] ParseSatelliteNumbers(string[] dataVector, ILogger logger)
         {
-            const int SatelliteIdBase = 2;
             var satelliteNumbers = new List<int>();
             for (int satelliteIndex = 0; satelliteIndex < SatelliteCount; satelliteIndex++)
             {
-                var satelliteNumberStr = dataVector[satelliteIndex + SatelliteIdBase];
+                var satelliteNumberStr = dataVector[satelliteIndex];
                 if (satelliteNumberStr != string.Empty)
                 {
-                    if (int.TryParse(dataVector[satelliteIndex + SatelliteIdBase], out int satelliteNumber))
+                    if (int.TryParse(dataVector[satelliteIndex], out int satelliteNumber))
                     {
                         satelliteNumbers.Add(satelliteNumber);
                     }

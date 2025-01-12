@@ -39,7 +39,7 @@ namespace CagCap.Frameworks.Device.Canable
 
         private bool disposed = false;
 
-        private readonly ILogger<UsbAccess> logger;
+        private readonly ILogger logger;
 
         private readonly UsbDevice? usbDevice;
         private readonly UsbEndpointReader? reader;
@@ -49,9 +49,9 @@ namespace CagCap.Frameworks.Device.Canable
         public event EventHandler<CanMessage>? DataReceived;
 
         [ExcludeFromCodeCoverage]
-        public UsbAccess(ILogger<UsbAccess> logger)
+        public UsbAccess(ILoggerFactory loggerFactory)
         {
-            this.logger = logger;
+            this.logger = loggerFactory.CreateLogger("UsbAccess");
             this.logger.LogInformation("Creating UsbAccess");
 
             var finder = new UsbDeviceFinder(VendorId, ProductId);

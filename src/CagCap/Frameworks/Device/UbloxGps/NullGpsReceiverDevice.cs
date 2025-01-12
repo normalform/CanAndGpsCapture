@@ -3,15 +3,20 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Processor.GpsData.Nmea
+namespace CagCap.Frameworks.Device.UbloxGps
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Threading.Tasks;
 
-    /// <summary>
-    /// Null NMEA message
-    /// </summary>
     [ExcludeFromCodeCoverage]
-    internal class NmeaMessageNull() : INmeaMessage
+    public class NullGpsReceiverDevice : IGpsReceiverDevice
     {
+        public event EventHandler<string>? DataReceived;
+
+        public async Task WriteAsync(string data)
+        {
+            await Task.CompletedTask;
+        }
     }
 }

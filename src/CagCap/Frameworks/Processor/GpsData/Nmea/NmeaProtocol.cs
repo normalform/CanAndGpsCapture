@@ -139,7 +139,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             if (dataIn == NmeaSuffix1)
             {
                 var address = new string(this.addressBuffer);
-                var message = NmeaMessageFactory.Create(address, this.dataVector.ToArray(), this.logger);
+                var message = NmeaMessageFactory.Create(address, [.. this.dataVector], this.logger);
                 ResetState();
 
                 return message;

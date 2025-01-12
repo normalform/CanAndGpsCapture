@@ -41,38 +41,13 @@ class Program
         // Set up dependency injection
         var serviceCollection = ConfigureServices(configuration);
         var serviceProvider = serviceCollection.BuildServiceProvider();
-        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
 
-        // TODO move to the composition root
-        var gpsConfig = serviceProvider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
-        if (gpsConfig.Enable)
-        {
-            _ = serviceProvider.GetRequiredService<IGpsReceiverDevice>();
-            _ = serviceProvider.GetRequiredService<IGpsDataProcessor>();
-        }
+        // TODO It's temporary for testing the low-level devices. Remove this when the high-level design is ready
+        _ = serviceProvider.GetRequiredService<IGpsDataProcessor>();
+        _ = serviceProvider.GetRequiredService<ICanableDevice>();
 
-        // TODO move to the composition root
-        var canBusConfig = serviceProvider.GetRequiredService<IOptions<CanBusConfig>>().Value;
-        if (canBusConfig.Enable)
-        {
-            var usbUtils = serviceProvider.GetRequiredService<IUsbUtils>();
-            var guids = UsbAccess.GetDeviceGuid(usbUtils);
-            if (guids.Length != 0)
-            {
-                if (guids.Length > 1)
-                {
-                    logger.LogInformation("Multiple CANable devices found. Using the first one.");
-                }
-
-                _ = serviceProvider.GetRequiredService<ICanableDevice>();
-            }
-            else
-            {
-                logger.LogWarning("No CANable device found.");
-            }
-        }
-
-        var cagCapApp = serviceProvider.GetRequiredService<CagCapApp>();
+        // create application
+        var cagCapApp = serviceProvider.GetRequiredService<ICagCapApp>();
         cagCapApp.Start();
     }
 
@@ -80,51 +55,57 @@ class Program
     {
         var services = new ServiceCollection();
 
-        services.Configure<CanBusConfig>(configuration.GetSection("CanBus").Bind);
-        services.Configure<GpsReceiverConfig>(configuration.GetSection("GpsReceiver").Bind);
-
-        services.AddSingleton<CagCapApp>();
-
-        services.AddSingleton<IUsbUtils, UsbUtils>();
-        services.AddSingleton<IUsbAccess, UsbAccess>(provider =>
-        {
-            var config = provider.GetRequiredService<IOptions<CanBusConfig>>().Value;
-            var logger = provider.GetRequiredService<ILogger<UsbAccess>>();
-            return new UsbAccess(logger);
-        });
-
-        services.AddSingleton<ICanableDevice, CanableDevice>(provider =>
-        {
-            var config = provider.GetRequiredService<IOptions<CanBusConfig>>().Value;
-            var usbAccess = provider.GetRequiredService<IUsbAccess>();
-            var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-            return new CanableDevice(usbAccess, config, loggerFactory);
-        });
-
-        services.AddSingleton<IGpsReceiverDevice>(
-            provider =>
-            {
-                var config = provider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
-                var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                return new UbloxGpsReceiverDevice(config.Port, config.BaudRate, loggerFactory);
-            });
-
-        services.AddSingleton<IGpsDataProcessor>(
-            provider =>
-            {
-                var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                var gpsReceiverDevice = provider.GetRequiredService<IGpsReceiverDevice>();
-                return new GpsDataProcessor(gpsReceiverDevice, loggerFactory);
-            });
-
-        services.AddSingleton<IUserInterface, ConsoleUserInterface>();
-
         services.AddLogging(loggingBuilder =>
         {
             loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
             loggingBuilder.AddConsole();
             loggingBuilder.AddOpenTelemetry();
         });
+
+        services.Configure<CanBusConfig>(configuration.GetSection("CanBus").Bind);
+        services.Configure<GpsReceiverConfig>(configuration.GetSection("GpsReceiver").Bind);
+        services.AddSingleton<ICagCapApp, CagCapApp>();
+        services.AddSingleton<IUsbUtils, UsbUtils>();
+        services.AddSingleton<IUsbAccess, UsbAccess>();
+        services.AddSingleton<IGpsDataProcessor, GpsDataProcessor>();
+        services.AddSingleton<IUserInterface, ConsoleUserInterface>();
+
+        services.AddSingleton<ICanableDevice>(provider =>
+        {
+            var usbUtils = provider.GetRequiredService<IUsbUtils>();
+            var guids = UsbAccess.GetDeviceGuid(usbUtils);
+            var logger = provider.GetRequiredService<ILogger<CanableDevice>>();
+            if (guids.Length != 0)
+            {
+                if (guids.Length > 1)
+                {
+                    logger.LogInformation("Multiple CANable devices found. Using the first one.");
+                    var config = provider.GetRequiredService<IOptions<CanBusConfig>>().Value;
+                    var usbAccess = provider.GetRequiredService<IUsbAccess>();
+                    var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                    return new CanableDevice(usbAccess, config, loggerFactory);
+                }
+                else
+                {
+                    logger.LogWarning("No CANable device found.");
+                }
+            }
+
+            return new NullCanableDevice();
+        });
+
+        services.AddSingleton<IGpsReceiverDevice>(
+            provider =>
+            {
+                var config = provider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
+                if (config.Enable)
+                {
+                    var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                    return new UbloxGpsReceiverDevice(config.Port, config.BaudRate, loggerFactory);
+                }
+
+                return new NullGpsReceiverDevice();
+            });
 
         return services;
     }

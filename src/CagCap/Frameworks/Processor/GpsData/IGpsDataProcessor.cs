@@ -5,7 +5,10 @@
 
 namespace CagCap.Frameworks.Processor.GpsData
 {
+    using CagCap.Frameworks.Processor.GpsData.Nmea;
+
     internal interface IGpsDataProcessor
     {
+        event EventHandler<INmeaMessage>? DataReceived;
     }
 }
