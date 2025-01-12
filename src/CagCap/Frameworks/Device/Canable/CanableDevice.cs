@@ -98,16 +98,15 @@ namespace CagCap.Frameworks.Device.Canable
         private void LogCanMessage(string message, CanMessage canMessage)
         {
             var dataString = string.Join(",", canMessage.Data.Select(b => $"0x{b:X2}"));
-            this.logger.LogInformation(message, new
-            {
-                canMessage.Id.Id,
-                canMessage.Id.Extended,
-                canMessage.Id.Rtr,
-                canMessage.Id.Error,
-                canMessage.Dlc,
-                Data = $"[{dataString}]",
-                Timestamp = canMessage.Timestamp.Ticks / 10 // microseconds
-            });
+            this.logger.LogInformation("CAN message: {Message}, Id: {Id}, Extended: {Extended}, Rtr: {Rtr}, Error: {Error}, Dlc: {Dlc}, Data: {Data}, Timestamp: {Timestamp}",
+                message, 
+                canMessage.Id.Id, 
+                canMessage.Id.Extended, 
+                canMessage.Id.Rtr, 
+                canMessage.Id.Error, 
+                canMessage.Dlc, 
+                $"[{dataString}]", 
+                canMessage.Timestamp.Ticks / 10);
         }
 
         private void SetDeviceMode(bool start)

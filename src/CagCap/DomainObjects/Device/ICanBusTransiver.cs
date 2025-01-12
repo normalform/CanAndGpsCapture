@@ -3,11 +3,9 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Device.UbloxGps
+namespace CagCap.DomainObjects.Device
 {
-    internal interface IUbloxGpsReceiverDevice
+    public interface ICanBusTransiver
     {
-        Task WriteAsync(string data);
-        event EventHandler<string> DataReceived;
     }
 }

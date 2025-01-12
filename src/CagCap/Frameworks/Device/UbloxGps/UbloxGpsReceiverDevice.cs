@@ -12,7 +12,7 @@ namespace CagCap.Frameworks.Device.UbloxGps
     using System.Threading.Tasks;
 
     [ExcludeFromCodeCoverage]
-    public class UbloxGpsReceiverDevice : IUbloxGpsReceiverDevice, IDisposable
+    public class UbloxGpsReceiverDevice : IGpsReceiverDevice, IDisposable
     {
         private readonly SerialPort serialPort;
         private readonly ILogger logger;
@@ -22,7 +22,7 @@ namespace CagCap.Frameworks.Device.UbloxGps
 
         public UbloxGpsReceiverDevice(string portName, int baudRate, ILoggerFactory loggerFactory)
         {
-            this.logger = loggerFactory.CreateLogger("GpsMessage");
+            this.logger = loggerFactory.CreateLogger("GpsDevice");
             serialPort = new SerialPort(portName, baudRate)
             {
                 Parity = Parity.None,
@@ -71,19 +71,14 @@ namespace CagCap.Frameworks.Device.UbloxGps
             {
                 SerialPort sp = (SerialPort)sender;
                 string data = sp.ReadExisting();
-                OnDataReceived(data);
+                this.logger.LogDebug("Data received: {data}", data);
+                this.DataReceived?.Invoke(this, data);
             }
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "Error reading COM port: {message}", ex.Message);
                 Console.WriteLine($"Error reading from COM port: {ex.Message}");
             }
-        }
-
-        private void OnDataReceived(string data)
-        {
-            this.logger.LogInformation("Data received: {data}", data);
-            DataReceived?.Invoke(this, data);
         }
 
         public void Dispose()
