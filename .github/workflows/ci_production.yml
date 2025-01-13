@@ -7,7 +7,7 @@ name: .NET 8 CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "basic_ci_pipeline" ]
   pull_request:
     branches: [ "main" ]
 
