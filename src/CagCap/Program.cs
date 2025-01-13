@@ -5,8 +5,10 @@
 
 using CagCap;
 using CagCap.Application;
+using CagCap.DomainObject;
+using CagCap.DomainObject.Device;
+using CagCap.Frameworks.Device.Adapter;
 using CagCap.Frameworks.Device.Canable;
-using CagCap.Frameworks.Device.UbloxGps;
 using CagCap.Frameworks.Processor.GpsData;
 using CagCap.UI;
 
@@ -43,7 +45,7 @@ class Program
         var serviceProvider = serviceCollection.BuildServiceProvider();
 
         // TODO It's temporary for testing the low-level devices. Remove this when the high-level design is ready
-        _ = serviceProvider.GetRequiredService<IGpsDataProcessor>();
+        _ = serviceProvider.GetRequiredService<IGpsReceiver>();
         _ = serviceProvider.GetRequiredService<ICanableDevice>();
 
         // create application
@@ -69,6 +71,7 @@ class Program
         services.AddSingleton<IUsbAccess, UsbAccess>();
         services.AddSingleton<IGpsDataProcessor, GpsDataProcessor>();
         services.AddSingleton<IUserInterface, ConsoleUserInterface>();
+        services.AddSingleton<IGpsReceiver, GpsReceiver>();
 
         services.AddSingleton<ICanableDevice>(provider =>
         {
@@ -80,15 +83,18 @@ class Program
                 if (guids.Length > 1)
                 {
                     logger.LogInformation("Multiple CANable devices found. Using the first one.");
+                }
+                else
+                {
                     var config = provider.GetRequiredService<IOptions<CanBusConfig>>().Value;
                     var usbAccess = provider.GetRequiredService<IUsbAccess>();
                     var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
                     return new CanableDevice(usbAccess, config, loggerFactory);
                 }
-                else
-                {
-                    logger.LogWarning("No CANable device found.");
-                }
+            }
+            else
+            {
+                logger.LogWarning("No CANable device found.");
             }
 
             return new NullCanableDevice();
@@ -101,7 +107,7 @@ class Program
                 if (config.Enable)
                 {
                     var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                    return new UbloxGpsReceiverDevice(config.Port, config.BaudRate, loggerFactory);
+                    return new GpsReceiverDeviceAdapter(config.Port, config.BaudRate, loggerFactory);
                 }
 
                 return new NullGpsReceiverDevice();

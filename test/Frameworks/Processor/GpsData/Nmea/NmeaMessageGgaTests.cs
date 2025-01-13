@@ -5,6 +5,7 @@
 
 namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using CagCap.Frameworks.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
     using Moq;
@@ -63,7 +64,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         [InlineData("4", PositionFixFlag.NoFix)]
         [InlineData("5", PositionFixFlag.NoFix)]
         [InlineData("6", PositionFixFlag.EstimatedFix)]
-        public void ParseQuality(string qualityIn, PositionFixFlag expected)
+        internal void ParseQuality(string qualityIn, PositionFixFlag expected)
         {
             // Arrange
             var loggerMock = new Mock<ILogger>().Object;
@@ -76,7 +77,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         }
 
         [Fact]
-        public void ToString_Sccess()
+        internal void ToString_Sccess()
         {
             // Arrange
             var loggerMock = new Mock<ILogger>().Object;

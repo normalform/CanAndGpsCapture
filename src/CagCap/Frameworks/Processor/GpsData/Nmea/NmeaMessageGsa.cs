@@ -5,15 +5,16 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
 
-    public enum OperationMode
+    internal enum OperationMode
     {
         Manual,
         Automatic
     };
 
-    public enum NavMode
+    internal enum NavMode
     {
         NoFix = 1,
         Fix2D = 2,
@@ -21,7 +22,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     };
 
     /// <summary>
-    /// GNSS DOP and Active Satellites
+    /// GNSS dilution of precision and active satellites
     /// </summary>
     internal class NmeaMessageGsa(string[] dataVector, ILogger logger) : INmeaMessage
     {
@@ -58,7 +59,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             for (int satelliteIndex = 0; satelliteIndex < SatelliteCount; satelliteIndex++)
             {
                 var satelliteNumberStr = dataVector[satelliteIndex];
-                if (satelliteNumberStr != string.Empty)
+                if (!string.IsNullOrEmpty(satelliteNumberStr))
                 {
                     if (int.TryParse(dataVector[satelliteIndex], out int satelliteNumber))
                     {
@@ -77,7 +78,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
         public override string ToString()
         {
             var satelliteNumbers = string.Join(", ", this.SatelliteNumbers);
-            return $"SGA: OperationMode: {this.OperationMode}, NavMode: {this.NavMode}, SatelliteNumber: {satelliteNumbers}, PositionDilutionOfPrecision: {this.PositionDilutionOfPrecision}, HorizontalDilutionOfPrecision: {this.HorizontalDilutionOfPrecision}, VerticalDilutionOfPrecision: {this.VerticalDilutionOfPrecision}";
+            return $"GSA: OperationMode: {this.OperationMode}, NavMode: {this.NavMode}, SatelliteNumber: {satelliteNumbers}, PositionDilutionOfPrecision: {this.PositionDilutionOfPrecision}, HorizontalDilutionOfPrecision: {this.HorizontalDilutionOfPrecision}, VerticalDilutionOfPrecision: {this.VerticalDilutionOfPrecision}";
         }
     }
 }

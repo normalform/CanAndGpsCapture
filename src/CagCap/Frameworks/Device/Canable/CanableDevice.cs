@@ -7,6 +7,7 @@ namespace CagCap.Frameworks.Device.Canable
 {
     using Microsoft.Extensions.Logging;
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     internal class CanableDevice : ICanableDevice
     {
@@ -95,10 +96,11 @@ namespace CagCap.Frameworks.Device.Canable
             this.LogCanMessage("Received CAN message: {CanMessage}", message);
         }
 
+        [ExcludeFromCodeCoverage]
         private void LogCanMessage(string message, CanMessage canMessage)
         {
             var dataString = string.Join(",", canMessage.Data.Select(b => $"0x{b:X2}"));
-            this.logger.LogInformation("CAN message: {Message}, Id: {Id}, Extended: {Extended}, Rtr: {Rtr}, Error: {Error}, Dlc: {Dlc}, Data: {Data}, Timestamp: {Timestamp}",
+            this.logger.LogDebug("CAN message: {Message}, Id: {Id}, Extended: {Extended}, Rtr: {Rtr}, Error: {Error}, Dlc: {Dlc}, Data: {Data}, Timestamp: {Timestamp}",
                 message, 
                 canMessage.Id.Id, 
                 canMessage.Id.Extended, 

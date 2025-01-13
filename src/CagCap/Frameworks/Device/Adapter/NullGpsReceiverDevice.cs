@@ -3,20 +3,23 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Device.UbloxGps
+namespace CagCap.Frameworks.Device.Adapter
 {
+    using CagCap.DomainObject.Device;
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     [ExcludeFromCodeCoverage]
-    public class NullGpsReceiverDevice : IGpsReceiverDevice
+    internal class NullGpsReceiverDevice : IGpsReceiverDevice
     {
+#pragma warning disable CS0067
         public event EventHandler<string>? DataReceived;
+#pragma warning restore CS0067
 
         public async Task WriteAsync(string data)
         {
-            await Task.CompletedTask;
+            await Task.CompletedTask.ConfigureAwait(false);
         }
     }
 }

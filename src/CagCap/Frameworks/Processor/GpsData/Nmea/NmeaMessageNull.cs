@@ -5,6 +5,7 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>

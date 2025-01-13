@@ -5,10 +5,17 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
 
+    internal enum DataStatus
+    {
+        Valid,
+        Invalid
+    };
+
     /// <summary>
-    ///  Latitude and longitude, with time of position fix and status
+    /// Latitude and longitude, with time of position fix and status
     /// </summary>
     internal class NmeaMessageGll(string[] dataVector, ILogger logger) : INmeaMessage
     {

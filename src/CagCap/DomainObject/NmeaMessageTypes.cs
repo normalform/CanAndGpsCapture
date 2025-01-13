@@ -3,9 +3,8 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Processor.GpsData.Nmea
+namespace CagCap.DomainObject
 {
-
     internal enum LatitudeHemisphere
     {
         North,
@@ -18,9 +17,10 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
         West
     };
 
-    internal enum DataStatus
-    {
-        Valid,
-        Invalid
-    };
+    internal record SatelliteView(
+        int Id,
+        int Elevation,
+        int Azimuth,
+        int SignalToNoiseRatio
+    );
 }

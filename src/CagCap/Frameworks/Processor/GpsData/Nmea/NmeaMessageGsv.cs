@@ -5,14 +5,8 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
-
-    internal record SatelliteView(
-        int Id,
-        int Elevation,
-        int Azimuth,
-        int SignalToNoiseRatio
-    );
 
     /// <summary>
     /// GNSS Satellites in View

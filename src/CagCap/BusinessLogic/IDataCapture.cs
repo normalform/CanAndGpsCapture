@@ -5,7 +5,7 @@
 
 namespace CagCap.BusinessLogic
 {
-    public interface IDataCapture
+    internal interface IDataCapture
     {
     }
 }

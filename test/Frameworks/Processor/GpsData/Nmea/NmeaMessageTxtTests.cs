@@ -45,7 +45,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         [InlineData("05", NmeaTextMessageType.Error)]   // Threat unsupport message type to error
         [InlineData("06", NmeaTextMessageType.Error)]   // Threat unsupport message type to error
         [InlineData("07", NmeaTextMessageType.User)]
-        public void ParseNmeaTextMessageType(string textMessageType, NmeaTextMessageType expected)
+        internal void ParseNmeaTextMessageType(string textMessageType, NmeaTextMessageType expected)
         {
             // Arrange & Act
             var actual = NmeaMessageTxt.ParseNmeaTextMessageType(textMessageType);
