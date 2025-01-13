@@ -5,7 +5,7 @@
 
 namespace CagCap.UI
 {
-    public interface IUserInterface
+    internal interface IUserInterface
     {
         void Start();
         void WaitForExit();

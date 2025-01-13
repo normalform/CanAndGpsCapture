@@ -31,7 +31,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             }
 
             var fullYear = 2000 + year;
-            var combinedString = string.Concat(inputStringDdMmYy.AsSpan(0, 4), fullYear.ToString(), inputStringHhMmSsFf);
+            var combinedString = string.Concat(inputStringDdMmYy.AsSpan(0, 4), fullYear.ToString(System.Globalization.CultureInfo.InvariantCulture), inputStringHhMmSsFf);
             if (DateTime.TryParseExact(combinedString, "ddMMyyyyHHmmss.ff", null, System.Globalization.DateTimeStyles.None, out DateTime time))
             {
                 return time;
@@ -58,7 +58,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
         internal static int ParseToInt(string inputString, ILogger logger)
         {
-            if (inputString == string.Empty)
+            if (string.IsNullOrEmpty(inputString))
             {
                 return 0;
             }

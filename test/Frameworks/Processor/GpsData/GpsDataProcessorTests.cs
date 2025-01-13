@@ -5,7 +5,8 @@
 
 namespace CagcapTests.Frameworks.Processor.GpsData
 {
-    using CagCap.Frameworks.Device.UbloxGps;
+    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device;
     using CagCap.Frameworks.Processor.GpsData;
     using CagCap.Frameworks.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
@@ -34,7 +35,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData
             gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data;
 
             // Act
-            gpsReceiverDeviceMock.Raise(device => device.DataReceived += null, [gpsReceiverDeviceMock.Object, rawData]);
+            gpsDataProcessor.Process(rawData);
 
             // Assert
             Assert.NotNull(dataReceivedCalled);
@@ -50,7 +51,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData
             gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data;
 
             // Act
-            gpsReceiverDeviceMock.Raise(device => device.DataReceived += null, [gpsReceiverDeviceMock.Object, string.Empty]);
+            gpsDataProcessor.Process(string.Empty);
 
             // Assert
             Assert.Null(dataReceivedCalled);

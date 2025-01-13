@@ -3,9 +3,9 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.DomainObjects.Device
+namespace CagCap.DomainObject.Device
 {
-    public interface IGpsReceiver
+    internal interface IDevice
     {
     }
 }

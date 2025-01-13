@@ -5,6 +5,7 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
 
     /// <summary>
@@ -18,8 +19,8 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
         internal LatitudeHemisphere LatitudeHemisphere { get; } = dataVector[3][0] == 'N' ? LatitudeHemisphere.North : LatitudeHemisphere.South;
         internal double Longitude { get; } = NmeaMessageUtil.ParseToDouble(dataVector[4], logger);
         internal LongitudeHemisphere LongitudeHemisphere { get; } = dataVector[5][0] == 'E' ? LongitudeHemisphere.East : LongitudeHemisphere.West;
-        internal double SpeedOverGroundKnots { get; } = (dataVector[6] != string.Empty) ? NmeaMessageUtil.ParseToDouble(dataVector[6], logger) : 0.0;
-        internal double CourseOverGroundDeg { get; } = (dataVector[7] != string.Empty) ? NmeaMessageUtil.ParseToDouble(dataVector[7], logger) : 0.0;
+        internal double SpeedOverGroundKnots { get; } = (!string.IsNullOrEmpty(dataVector[6])) ? NmeaMessageUtil.ParseToDouble(dataVector[6], logger) : 0.0;
+        internal double CourseOverGroundDeg { get; } = (!string.IsNullOrEmpty(dataVector[7])) ? NmeaMessageUtil.ParseToDouble(dataVector[7], logger) : 0.0;
         internal PositionFixFlag PositionMode { get; } = NmeaMessageUtil.ParsePositionMode(dataVector[11][0], logger);
 
         public override string ToString()

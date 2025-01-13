@@ -5,6 +5,7 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
 
     internal class NmeaMessageFactory

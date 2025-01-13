@@ -5,13 +5,14 @@
 
 namespace CagCap.Frameworks.Processor.GpsData
 {
-    using CagCap.Frameworks.Device.UbloxGps;
+    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device;
     using CagCap.Frameworks.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
 
     internal class GpsDataProcessor : IGpsDataProcessor
     {
-        private readonly IGpsReceiverDevice gpsReceiver;
+        private readonly IGpsReceiverDevice gpsReceiverDevice;
         private readonly ILogger logger;
 
         private readonly Queue<char> dataQueue;
@@ -21,13 +22,25 @@ namespace CagCap.Frameworks.Processor.GpsData
 
         public GpsDataProcessor(IGpsReceiverDevice gpsReceiver, ILoggerFactory loggerFactory)
         {
-            this.gpsReceiver = gpsReceiver;
+            this.gpsReceiverDevice = gpsReceiver;
             this.logger = loggerFactory.CreateLogger("GpsDataProcessor");
 
             this.dataQueue = new Queue<char>();
             this.nemaProtocol = new NmeaProtocol(logger);
+        }
 
-            this.gpsReceiver.DataReceived += OnDataReceived;
+        public void Process(string data)
+        {
+            if (data.Length == 0)
+            {
+                return;
+            }
+
+            foreach (var ch in data)
+            {
+                this.dataQueue.Enqueue(ch);
+            }
+            this.Process();
         }
 
         private void Process()
@@ -47,21 +60,6 @@ namespace CagCap.Frameworks.Processor.GpsData
                     this.logger.LogDebug("NMEA message {message}", nmeaMessage);
                 }
             }
-        }
-
-        private void OnDataReceived(object? sender, string data)
-        {
-            if (data.Length == 0)
-            {
-                return;
-            }
-
-            foreach (var ch in data)
-            {
-                this.dataQueue.Enqueue(ch);
-            }
-
-            this.Process();
         }
     }
 }

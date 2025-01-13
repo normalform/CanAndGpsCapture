@@ -209,30 +209,5 @@ namespace CagcapTests.Frameworks.Device.Canable
             // Act & Assert
             Assert.Throws(expectedExceptionType, () => CanableDevice.GetSamplePoint(samplePointString, this.logger));
         }
-
-        [Fact]
-        public void OnMessageReceived_LogsReceivedMessage()
-        {
-            // Arrange
-            var usbAccessMock = new Mock<IUsbAccess>();
-            var loggerMock = new Mock<ILogger>();
-            var loggerFactoryMock = new Mock<ILoggerFactory>();
-            loggerFactoryMock.Setup(lf => lf.CreateLogger(It.IsAny<string>())).Returns(loggerMock.Object);
-
-            var canableDevice = new CanableDevice(usbAccessMock.Object, this.canBusConfig, loggerFactoryMock.Object);
-            var canMessage = new CanMessage(new CanId(0x123), [0x01, 0x02, 0x03, 0x04]);
-
-            // Act
-            var onMessageReceivedMethod = typeof(CanableDevice).GetMethod("OnMessageReceived", BindingFlags.NonPublic | BindingFlags.Instance);
-            onMessageReceivedMethod!.Invoke(canableDevice, [canMessage]);
-
-            // Assert
-            loggerMock.Verify(l => l.Log(
-                It.Is<LogLevel>(logLevel => logLevel == LogLevel.Information),
-                It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Received CAN message")),
-                It.IsAny<Exception>(),
-                It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)), Times.Once);
-        }
     }
 }

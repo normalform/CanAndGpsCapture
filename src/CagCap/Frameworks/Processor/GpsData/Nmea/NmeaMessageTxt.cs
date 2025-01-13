@@ -5,9 +5,10 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
 
-    public enum NmeaTextMessageType
+    internal enum NmeaTextMessageType
     {
         Error,
         Warning,

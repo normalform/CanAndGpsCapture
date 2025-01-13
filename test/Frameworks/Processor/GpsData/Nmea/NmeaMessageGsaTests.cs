@@ -54,7 +54,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         [Theory]
         [InlineData('M', OperationMode.Manual)]
         [InlineData('A', OperationMode.Automatic)]
-        public void ParseOperationMode(char operationModeChar, OperationMode expectedOperationMode)
+        internal void ParseOperationMode(char operationModeChar, OperationMode expectedOperationMode)
         {
             // Arrange & Act
             var operationMode = NmeaMessageGsa.ParseOperationMode(operationModeChar);
@@ -67,7 +67,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         [InlineData("1", NavMode.NoFix)]
         [InlineData("2", NavMode.Fix2D)]
         [InlineData("3", NavMode.Fix3D)]
-        public void ParseNavMode(string navModeStr, NavMode expectedNavMode)
+        internal void ParseNavMode(string navModeStr, NavMode expectedNavMode)
         {
             // Arrange
             var loggerMock = new Mock<ILogger>().Object;
@@ -138,7 +138,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             var result = gsaMessage.ToString();
 
             // Assert
-            Assert.Equal("SGA: OperationMode: Automatic, NavMode: Fix3D, SatelliteNumber: 14, 8, 30, 27, 5, 9, 7, PositionDilutionOfPrecision: 2.06, HorizontalDilutionOfPrecision: 1.03, VerticalDilutionOfPrecision: 1.78", result);
+            Assert.Equal("GSA: OperationMode: Automatic, NavMode: Fix3D, SatelliteNumber: 14, 8, 30, 27, 5, 9, 7, PositionDilutionOfPrecision: 2.06, HorizontalDilutionOfPrecision: 1.03, VerticalDilutionOfPrecision: 1.78", result);
         }
     }
 }

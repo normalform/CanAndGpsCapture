@@ -5,7 +5,7 @@
 
 namespace CagCap.Application
 {
-    public interface ICagCapApp
+    internal interface ICagCapApp
     {
         void Start();
     }

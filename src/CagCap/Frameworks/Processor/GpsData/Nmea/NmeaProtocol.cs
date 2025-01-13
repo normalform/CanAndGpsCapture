@@ -5,6 +5,7 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
     using System.Text;
 
@@ -31,8 +32,8 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
         private readonly char[] checksumBuffer = new char[ChecksumLength];
         private readonly StringBuilder currentDataStringBuilder = new();
         private readonly List<string> dataVector = [];
-        private int index = 0;
-        private byte checksum = 0;
+        private int index;
+        private byte checksum;
 
         private NmeaState currentState = NmeaState.Start;
         private readonly ILogger logger = logger;

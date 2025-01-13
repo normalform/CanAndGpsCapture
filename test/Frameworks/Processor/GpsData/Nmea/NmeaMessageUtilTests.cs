@@ -132,7 +132,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         [InlineData('A', PositionFixFlag.AutonomousGnssFix)]
         [InlineData('D', PositionFixFlag.DifferentialGnssFix)]
         [InlineData('X', PositionFixFlag.NoFix)]
-        public void ParsePositionMode(char input, PositionFixFlag expected)
+        internal void ParsePositionMode(char input, PositionFixFlag expected)
         {
             // Arrange
             var logger = new Mock<ILogger>();

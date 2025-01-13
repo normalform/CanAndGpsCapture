@@ -5,7 +5,7 @@
 
 namespace CagCap.DomainObjects.Device
 {
-    public interface ICanBusTransiver
+    internal interface ICanBusTransiver
     {
     }
 }

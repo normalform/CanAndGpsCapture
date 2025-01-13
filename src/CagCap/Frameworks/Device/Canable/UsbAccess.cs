@@ -37,7 +37,7 @@ namespace CagCap.Frameworks.Device.Canable
         private const byte UsbTypeVendor = 0x40;
         private const byte UsbRecipInterface = 0x01;
 
-        private bool disposed = false;
+        private bool disposed;
 
         private readonly ILogger logger;
 
@@ -52,7 +52,7 @@ namespace CagCap.Frameworks.Device.Canable
         public UsbAccess(ILoggerFactory loggerFactory)
         {
             this.logger = loggerFactory.CreateLogger("UsbAccess");
-            this.logger.LogInformation("Creating UsbAccess");
+            this.logger.LogDebug("Creating UsbAccess");
 
             var finder = new UsbDeviceFinder(VendorId, ProductId);
             this.usbDevice = UsbDevice.OpenUsbDevice(finder);
@@ -114,7 +114,7 @@ namespace CagCap.Frameworks.Device.Canable
             var errorCode = this.writer?.Write(frame, 2000, out int bytesWritten);
             if (errorCode != ErrorCode.None)
             {
-                var exception = new Exception(UsbDevice.LastErrorString);
+                var exception = new InvalidOperationException(UsbDevice.LastErrorString);
                 this.logger.LogError(exception, "Failed to send frame: {errorCode}", errorCode);
                 throw exception;
             }
@@ -129,7 +129,7 @@ namespace CagCap.Frameworks.Device.Canable
         [ExcludeFromCodeCoverage]
         private void Close()
         {
-            this.logger.LogInformation("Closing UsbAccess");
+            this.logger.LogDebug("Closing UsbAccess");
 
             if (this.usbDevice != null)
             {
@@ -171,7 +171,7 @@ namespace CagCap.Frameworks.Device.Canable
                         this.DataReceived?.Invoke(this, message);
                     }
 
-                    await Task.Delay(1, cancellationToken);
+                    await Task.Delay(1, cancellationToken).ConfigureAwait(false);
                 }
             }
         }
@@ -242,7 +242,7 @@ namespace CagCap.Frameworks.Device.Canable
             bool success = this.usbDevice.ControlTransfer(ref setupPacket, data, data.Length, out int transferredLength);
             if (!success)
             {
-                var exception = new Exception($"Control transfer failed: {UsbDevice.LastErrorString}");
+                var exception = new InvalidOperationException($"Control transfer failed: {UsbDevice.LastErrorString}");
                 this.logger.LogError(exception, "Control transfer failed: {error}", UsbDevice.LastErrorString);
                 throw exception;
             }
