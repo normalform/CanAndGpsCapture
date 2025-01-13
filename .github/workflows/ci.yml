@@ -45,7 +45,10 @@ jobs:
       run: dotnet build ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }} --no-restore
 
     - name: Run tests
-      run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
+      run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/coverage.cobertura.xml /p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
+
+    - name: List coverage directory contents
+      run: dir ./coverage
 
     - name: Install reportgenerator
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
