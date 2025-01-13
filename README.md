@@ -115,6 +115,7 @@ The tool uses the following OTS items:
      
   - For test projects
     - coverlet.collector
+    - coverlet.msbuild
     - Microsoft.NET.Test.Sdk
     - Moq
     - xunit
