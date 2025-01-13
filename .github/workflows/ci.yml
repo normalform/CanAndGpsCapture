@@ -48,7 +48,7 @@ jobs:
       run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
 
     - name: Upload coverage report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: code-coverage-report
         path: ./coverage/
