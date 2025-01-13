@@ -79,7 +79,7 @@ namespace CagcapTests.DomainObject.Device
             // Check the GPS data that came through the event before it received the VTG message.
             Assert.Equal(1, numberOfdataReceivedCalled);
             Assert.NotNull(savedGpsData);
-            Assert.Equal(new DateTime(2025, 1, 12, 23, 13, 20, 00), savedGpsData.Time);
+            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 13, 20, 00), savedGpsData.Time);
             Assert.Equal(4734.99051, savedGpsData.Latitude, Tolerance);
             Assert.Equal(LatitudeHemisphere.North, savedGpsData.LatitudeHemisphere);
             Assert.Equal(12201.11923, savedGpsData.Longitude, Tolerance);
@@ -96,7 +96,7 @@ namespace CagcapTests.DomainObject.Device
             Assert.Equal(24, savedGpsData.Satellites[4].Id);
 
             // Check the static GPS data that includes the last VTG message.
-            Assert.Equal(new DateTime(2025, 1, 12, 23, 13, 20, 00), gpsData.Time);
+            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 13, 20, 00), gpsData.Time);
             Assert.Equal(4734.99051, gpsData.Latitude, Tolerance);
             Assert.Equal(LatitudeHemisphere.North, gpsData.LatitudeHemisphere);
             Assert.Equal(12201.11923, gpsData.Longitude, Tolerance);
@@ -178,7 +178,7 @@ namespace CagcapTests.DomainObject.Device
             // Assert
             Assert.Equal(2, numberOfdataReceivedCalled);
             Assert.NotNull(savedGpsData);
-            Assert.Equal(new DateTime(2025, 1, 12, 23, 13, 20, 00), savedGpsData[0].Time);
+            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 13, 20, 00), savedGpsData[0].Time);
             Assert.Equal(4734.99051, savedGpsData[0].Latitude, Tolerance);
             Assert.Equal(LatitudeHemisphere.North, savedGpsData[0].LatitudeHemisphere);
             Assert.Equal(12201.11923, savedGpsData[0].Longitude, Tolerance);
