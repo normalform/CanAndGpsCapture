@@ -34,10 +34,30 @@ class Program
             return;
         }
 
+        var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        var commonUserAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+        var userConfigFilePath = Path.Combine(userAppData, "CagCap", "CagCapSettings.json");
+        var commonUserConfigFilePath = Path.Combine(commonUserAppData, "CagCap", "CagCapSettings.json");
+        var defaultConfigFilePath = Path.Combine(AppContext.BaseDirectory, "CagCapSettings.json");
+
+        // Determine which configuration file to use
+        var configFilePath = defaultConfigFilePath;
+        if (File.Exists(userConfigFilePath))
+        {
+            configFilePath = userConfigFilePath;
+        }
+        else
+        {
+            if (File.Exists(commonUserConfigFilePath))
+            {
+                configFilePath = commonUserConfigFilePath;
+            }
+        }
+
         // Set up configuration
         var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile(configFilePath, optional: false, reloadOnChange: true)
             .Build();
 
         // Set up dependency injection

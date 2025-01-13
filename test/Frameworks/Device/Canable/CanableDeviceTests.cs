@@ -9,7 +9,6 @@ namespace CagcapTests.Frameworks.Device.Canable
     using CagCap.Frameworks.Device.Canable;
     using Microsoft.Extensions.Logging;
     using Moq;
-    using System.Reflection;
 
     public class CanableDeviceTests
     {
