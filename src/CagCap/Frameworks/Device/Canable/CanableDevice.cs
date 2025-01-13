@@ -101,13 +101,13 @@ namespace CagCap.Frameworks.Device.Canable
         {
             var dataString = string.Join(",", canMessage.Data.Select(b => $"0x{b:X2}"));
             this.logger.LogDebug("CAN message: {Message}, Id: {Id}, Extended: {Extended}, Rtr: {Rtr}, Error: {Error}, Dlc: {Dlc}, Data: {Data}, Timestamp: {Timestamp}",
-                message, 
-                canMessage.Id.Id, 
-                canMessage.Id.Extended, 
-                canMessage.Id.Rtr, 
-                canMessage.Id.Error, 
-                canMessage.Dlc, 
-                $"[{dataString}]", 
+                message,
+                canMessage.Id.Id,
+                canMessage.Id.Extended,
+                canMessage.Id.Rtr,
+                canMessage.Id.Error,
+                canMessage.Dlc,
+                $"[{dataString}]",
                 canMessage.Timestamp.Ticks / 10);
         }
 
