@@ -47,11 +47,17 @@ jobs:
     - name: Run tests
       run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
 
+    - name: Install reportgenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+    - name: Generate HTML report
+      run: reportgenerator -reports:./coverage/coverage.cobertura.xml -targetdir:./coverage/html -reporttypes:Html
+
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
       with:
         name: code-coverage-report
-        path: ./coverage/
+        path: ./coverage/html
 
     - name: Publish
       if: matrix.configuration == 'Release'
