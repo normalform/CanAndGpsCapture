@@ -67,7 +67,7 @@ jobs:
     - name: Create installer package
       if: matrix.configuration == 'Release'
       run: |
-        powershell -Command "& 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe' '.github/setup.iss' '/dSetupVersion=${{ env.MAJOR_VERSION }}.${{ env.MINOR_VERSION }}.${{ github.run_number }}'"
+        powershell -Command "& 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe' '.github/setup.iss' '/dSetupVersion=${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}'"
 
     - name: Upload installer package
       if: matrix.configuration == 'Release'
@@ -75,3 +75,26 @@ jobs:
       with:
         name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
         path: CagCapSetup.exe
+
+    - name: Create GitHub Release
+      if: matrix.configuration == 'Release'
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
+        release_name: Release v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      if: matrix.configuration == 'Release'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./CagCapSetup.exe
+        asset_name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}.exe
+        asset_content_type: application/octet-stream
