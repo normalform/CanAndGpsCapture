@@ -47,9 +47,6 @@ jobs:
     - name: Run tests
       run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
     
-    - name: List coverage directory contents
-      run: dir ./tests/coverage
-
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:

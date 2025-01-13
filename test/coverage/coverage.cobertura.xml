@@ -1,0 +1,2632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.9314" branch-rate="0.8541" version="1.9" timestamp="1736761928" lines-covered="530" lines-valid="569" branches-covered="205" branches-valid="240">
+  <sources>
+    <source>c:\work\CanAndGpsCapture\src\CagCap\</source>
+  </sources>
+  <packages>
+    <package name="CagCap" line-rate="0.9314" branch-rate="0.8541" complexity="376">
+      <classes>
+        <class name="CagCap.Frameworks.Processor.GpsData.GpsDataProcessor" filename="Frameworks\Processor\GpsData\GpsDataProcessor.cs" line-rate="0.9523" branch-rate="0.8332999999999999" complexity="13">
+          <methods>
+            <method name="Process" signature="(System.String)" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="34" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="6" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="36" hits="1" branch="False" />
+                <line number="39" hits="136" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="46" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="41" hits="67" branch="False" />
+                <line number="43" hits="1" branch="False" />
+                <line number="44" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="Process" signature="()" line-rate="0.8887999999999999" branch-rate="0.75" complexity="8">
+              <lines>
+                <line number="48" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="11" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="50" hits="0" branch="False" />
+                <line number="53" hits="68" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="99" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="55" hits="67" branch="False" />
+                <line number="56" hits="67" branch="False" />
+                <line number="57" hits="67" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="40" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="59" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="49" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="60" hits="1" branch="False" />
+                <line number="63" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(CagCap.DomainObject.Device.IGpsReceiverDevice,Microsoft.Extensions.Logging.ILoggerFactory)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="2" branch="False" />
+                <line number="25" hits="2" branch="False" />
+                <line number="26" hits="2" branch="False" />
+                <line number="28" hits="2" branch="False" />
+                <line number="29" hits="2" branch="False" />
+                <line number="30" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="6" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="36" hits="1" branch="False" />
+            <line number="39" hits="136" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="46" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="41" hits="67" branch="False" />
+            <line number="43" hits="1" branch="False" />
+            <line number="44" hits="1" branch="False" />
+            <line number="48" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="11" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="50" hits="0" branch="False" />
+            <line number="53" hits="68" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="99" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="55" hits="67" branch="False" />
+            <line number="56" hits="67" branch="False" />
+            <line number="57" hits="67" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="40" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="59" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="49" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="60" hits="1" branch="False" />
+            <line number="63" hits="1" branch="False" />
+            <line number="23" hits="2" branch="False" />
+            <line number="25" hits="2" branch="False" />
+            <line number="26" hits="2" branch="False" />
+            <line number="28" hits="2" branch="False" />
+            <line number="29" hits="2" branch="False" />
+            <line number="30" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageFactory" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageFactory.cs" line-rate="1" branch-rate="1" complexity="32">
+          <methods>
+            <method name="Create" signature="(System.String,System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="32">
+              <lines>
+                <line number="18" hits="2" branch="True" condition-coverage="100% (32/32)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="100%" />
+                    <condition number="15" type="jump" coverage="100%" />
+                    <condition number="31" type="jump" coverage="100%" />
+                    <condition number="36" type="jump" coverage="100%" />
+                    <condition number="41" type="jump" coverage="100%" />
+                    <condition number="56" type="jump" coverage="100%" />
+                    <condition number="61" type="jump" coverage="100%" />
+                    <condition number="120" type="jump" coverage="100%" />
+                    <condition number="46" type="jump" coverage="100%" />
+                    <condition number="66" type="jump" coverage="100%" />
+                    <condition number="84" type="jump" coverage="100%" />
+                    <condition number="102" type="jump" coverage="100%" />
+                    <condition number="133" type="jump" coverage="100%" />
+                    <condition number="148" type="jump" coverage="100%" />
+                    <condition number="163" type="jump" coverage="100%" />
+                    <condition number="178" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="20" hits="1" branch="False" />
+                <line number="22" hits="1" branch="False" />
+                <line number="24" hits="1" branch="False" />
+                <line number="26" hits="1" branch="False" />
+                <line number="28" hits="1" branch="False" />
+                <line number="30" hits="1" branch="False" />
+                <line number="33" hits="1" branch="False" />
+                <line number="34" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="18" hits="2" branch="True" condition-coverage="100% (32/32)">
+              <conditions>
+                <condition number="1" type="jump" coverage="100%" />
+                <condition number="15" type="jump" coverage="100%" />
+                <condition number="31" type="jump" coverage="100%" />
+                <condition number="36" type="jump" coverage="100%" />
+                <condition number="41" type="jump" coverage="100%" />
+                <condition number="56" type="jump" coverage="100%" />
+                <condition number="61" type="jump" coverage="100%" />
+                <condition number="120" type="jump" coverage="100%" />
+                <condition number="46" type="jump" coverage="100%" />
+                <condition number="66" type="jump" coverage="100%" />
+                <condition number="84" type="jump" coverage="100%" />
+                <condition number="102" type="jump" coverage="100%" />
+                <condition number="133" type="jump" coverage="100%" />
+                <condition number="148" type="jump" coverage="100%" />
+                <condition number="163" type="jump" coverage="100%" />
+                <condition number="178" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="20" hits="1" branch="False" />
+            <line number="22" hits="1" branch="False" />
+            <line number="24" hits="1" branch="False" />
+            <line number="26" hits="1" branch="False" />
+            <line number="28" hits="1" branch="False" />
+            <line number="30" hits="1" branch="False" />
+            <line number="33" hits="1" branch="False" />
+            <line number="34" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageGga" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageGga.cs" line-rate="1" branch-rate="0.875" complexity="21">
+          <methods>
+            <method name="get_Time" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Latitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="25" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LatitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Longitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LongitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Quality" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="29" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Satellites" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="30" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_HorizontalDilutionOfPrecision" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Altitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_GeoidSeparation" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="33" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_AgeOfDifferentialCorrections" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="34" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_DifferentialStationId" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="35" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseQuality" signature="(System.String,Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="39" hits="13" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="8" type="jump" coverage="100%" />
+                    <condition number="31" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="41" hits="10" branch="False" />
+                <line number="45" hits="3" branch="False" />
+                <line number="46" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="52" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="0.75" complexity="4">
+              <lines>
+                <line number="22" hits="6" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="10" branch="False" />
+            <line number="25" hits="10" branch="False" />
+            <line number="26" hits="10" branch="False" />
+            <line number="27" hits="10" branch="False" />
+            <line number="28" hits="10" branch="False" />
+            <line number="29" hits="8" branch="False" />
+            <line number="30" hits="8" branch="False" />
+            <line number="31" hits="8" branch="False" />
+            <line number="32" hits="10" branch="False" />
+            <line number="33" hits="8" branch="False" />
+            <line number="34" hits="8" branch="False" />
+            <line number="35" hits="8" branch="False" />
+            <line number="39" hits="13" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="8" type="jump" coverage="100%" />
+                <condition number="31" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="41" hits="10" branch="False" />
+            <line number="45" hits="3" branch="False" />
+            <line number="46" hits="3" branch="False" />
+            <line number="52" hits="1" branch="False" />
+            <line number="22" hits="6" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageGll" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageGll.cs" line-rate="1" branch-rate="0.5" complexity="14">
+          <methods>
+            <method name="get_Latitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="22" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LatitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Longitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LongitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="25" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Time" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_DataStatus" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PositionMode" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="0.5" complexity="6">
+              <lines>
+                <line number="20" hits="3" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="5" branch="False" />
+            <line number="23" hits="5" branch="False" />
+            <line number="24" hits="5" branch="False" />
+            <line number="25" hits="5" branch="False" />
+            <line number="26" hits="5" branch="False" />
+            <line number="27" hits="5" branch="False" />
+            <line number="28" hits="5" branch="False" />
+            <line number="32" hits="1" branch="False" />
+            <line number="20" hits="3" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageGsa" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageGsa.cs" line-rate="0.909" branch-rate="0.8332999999999999" complexity="20">
+          <methods>
+            <method name="get_OperationMode" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_NavMode" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SatelliteNumbers" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="33" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PositionDilutionOfPrecision" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="34" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_HorizontalDilutionOfPrecision" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="35" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_VerticalDilutionOfPrecision" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="36" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseOperationMode" signature="(System.Char)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="40" hits="7" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="3" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="ParseNavMode" signature="(System.String,Microsoft.Extensions.Logging.ILogger)" line-rate="0.5" branch-rate="0.5" complexity="4">
+              <lines>
+                <line number="45" hits="8" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="8" type="jump" coverage="50%" />
+                    <condition number="31" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="47" hits="8" branch="False" />
+                <line number="51" hits="0" branch="False" />
+                <line number="52" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseSatelliteNumbers" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="6">
+              <lines>
+                <line number="58" hits="7" branch="False" />
+                <line number="59" hits="182" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="71" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="61" hits="84" branch="False" />
+                <line number="62" hits="84" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="18" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="64" hits="50" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="30" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="66" hits="45" branch="False" />
+                <line number="70" hits="5" branch="False" />
+                <line number="75" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="80" hits="1" branch="False" />
+                <line number="81" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="5" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="31" hits="7" branch="False" />
+            <line number="32" hits="7" branch="False" />
+            <line number="33" hits="9" branch="False" />
+            <line number="34" hits="7" branch="False" />
+            <line number="35" hits="7" branch="False" />
+            <line number="36" hits="7" branch="False" />
+            <line number="40" hits="7" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="3" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="45" hits="8" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="8" type="jump" coverage="50%" />
+                <condition number="31" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="47" hits="8" branch="False" />
+            <line number="51" hits="0" branch="False" />
+            <line number="52" hits="0" branch="False" />
+            <line number="58" hits="7" branch="False" />
+            <line number="59" hits="182" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="71" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="61" hits="84" branch="False" />
+            <line number="62" hits="84" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="18" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="64" hits="50" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="30" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="66" hits="45" branch="False" />
+            <line number="70" hits="5" branch="False" />
+            <line number="75" hits="7" branch="False" />
+            <line number="80" hits="1" branch="False" />
+            <line number="81" hits="1" branch="False" />
+            <line number="27" hits="5" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageGsv" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageGsv.cs" line-rate="1" branch-rate="1" complexity="9">
+          <methods>
+            <method name="get_NumberOfMessages" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_MessageNumber" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_NumberOfSatellitesInView" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="23" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SatelliteViews" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="36" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseSatelliteView" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="25" hits="11" branch="False" />
+                <line number="26" hits="110" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="81" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="28" hits="44" branch="False" />
+                <line number="29" hits="44" branch="False" />
+                <line number="30" hits="44" branch="False" />
+                <line number="31" hits="44" branch="False" />
+                <line number="32" hits="44" branch="False" />
+                <line number="33" hits="44" branch="False" />
+                <line number="36" hits="11" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="41" hits="1" branch="False" />
+                <line number="42" hits="10" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="176" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="44" hits="4" branch="False" />
+                <line number="45" hits="4" branch="False" />
+                <line number="48" hits="1" branch="False" />
+                <line number="50" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="11" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="13" branch="False" />
+            <line number="17" hits="13" branch="False" />
+            <line number="18" hits="23" branch="False" />
+            <line number="19" hits="36" branch="False" />
+            <line number="25" hits="11" branch="False" />
+            <line number="26" hits="110" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="81" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="28" hits="44" branch="False" />
+            <line number="29" hits="44" branch="False" />
+            <line number="30" hits="44" branch="False" />
+            <line number="31" hits="44" branch="False" />
+            <line number="32" hits="44" branch="False" />
+            <line number="33" hits="44" branch="False" />
+            <line number="36" hits="11" branch="False" />
+            <line number="41" hits="1" branch="False" />
+            <line number="42" hits="10" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="176" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="44" hits="4" branch="False" />
+            <line number="45" hits="4" branch="False" />
+            <line number="48" hits="1" branch="False" />
+            <line number="50" hits="1" branch="False" />
+            <line number="14" hits="11" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageRmc" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageRmc.cs" line-rate="1" branch-rate="0.5" complexity="20">
+          <methods>
+            <method name="get_Time" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Status" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Latitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LatitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Longitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LongitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SpeedOverGroundKnots" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="22" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CourseOverGroundDeg" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PositionMode" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="0.5" complexity="10">
+              <lines>
+                <line number="14" hits="3" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="5" branch="False" />
+            <line number="17" hits="5" branch="False" />
+            <line number="18" hits="5" branch="False" />
+            <line number="19" hits="5" branch="False" />
+            <line number="20" hits="5" branch="False" />
+            <line number="21" hits="5" branch="False" />
+            <line number="22" hits="5" branch="False" />
+            <line number="23" hits="4" branch="False" />
+            <line number="24" hits="5" branch="False" />
+            <line number="28" hits="1" branch="False" />
+            <line number="14" hits="3" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageTxt" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageTxt.cs" line-rate="1" branch-rate="1" complexity="14">
+          <methods>
+            <method name="get_NumberOfMessages" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_MessageNumber" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="25" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_TextMessageType" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Message" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseNmeaTextMessageType" signature="(System.String)" line-rate="1" branch-rate="1" complexity="8">
+              <lines>
+                <line number="31" hits="11" branch="True" condition-coverage="100% (8/8)">
+                  <conditions>
+                    <condition number="11" type="jump" coverage="100%" />
+                    <condition number="24" type="jump" coverage="100%" />
+                    <condition number="37" type="jump" coverage="100%" />
+                    <condition number="50" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="32" hits="11" branch="False" />
+                <line number="33" hits="1" branch="False" />
+                <line number="34" hits="1" branch="False" />
+                <line number="35" hits="4" branch="False" />
+                <line number="36" hits="1" branch="False" />
+                <line number="37" hits="4" branch="False" />
+                <line number="38" hits="11" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="43" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="22" hits="3" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="5" branch="False" />
+            <line number="25" hits="5" branch="False" />
+            <line number="26" hits="5" branch="False" />
+            <line number="27" hits="5" branch="False" />
+            <line number="31" hits="11" branch="True" condition-coverage="100% (8/8)">
+              <conditions>
+                <condition number="11" type="jump" coverage="100%" />
+                <condition number="24" type="jump" coverage="100%" />
+                <condition number="37" type="jump" coverage="100%" />
+                <condition number="50" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="32" hits="11" branch="False" />
+            <line number="33" hits="1" branch="False" />
+            <line number="34" hits="1" branch="False" />
+            <line number="35" hits="4" branch="False" />
+            <line number="36" hits="1" branch="False" />
+            <line number="37" hits="4" branch="False" />
+            <line number="38" hits="11" branch="False" />
+            <line number="43" hits="1" branch="False" />
+            <line number="22" hits="3" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageUtil" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageUtil.cs" line-rate="0.9309999999999999" branch-rate="0.95" complexity="20">
+          <methods>
+            <method name="ParseDateTime" signature="(System.String,Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="14" hits="11" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="15" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="16" hits="8" branch="False" />
+                <line number="20" hits="3" branch="False" />
+                <line number="21" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseDateTime" signature="(System.String,System.String,Microsoft.Extensions.Logging.ILogger)" line-rate="0.7777" branch-rate="0.75" complexity="4">
+              <lines>
+                <line number="27" hits="5" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="15" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="29" hits="1" branch="False" />
+                <line number="30" hits="1" branch="False" />
+                <line number="33" hits="4" branch="False" />
+                <line number="34" hits="4" branch="False" />
+                <line number="35" hits="4" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="104" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="37" hits="4" branch="False" />
+                <line number="41" hits="0" branch="False" />
+                <line number="42" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseToDouble" signature="(System.String,Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="48" hits="74" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="8" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="50" hits="73" branch="False" />
+                <line number="54" hits="1" branch="False" />
+                <line number="55" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="ParseToInt" signature="(System.String,Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="61" hits="235" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="6" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="63" hits="25" branch="False" />
+                <line number="66" hits="210" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="18" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="68" hits="209" branch="False" />
+                <line number="72" hits="1" branch="False" />
+                <line number="73" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="ParsePositionMode" signature="(System.Char,Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="8">
+              <lines>
+                <line number="82" hits="1" branch="True" condition-coverage="100% (8/8)">
+                  <conditions>
+                    <condition number="4" type="switch" coverage="100%" />
+                    <condition number="32" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="84" hits="1" branch="False" />
+                <line number="86" hits="4" branch="False" />
+                <line number="88" hits="9" branch="False" />
+                <line number="90" hits="1" branch="False" />
+                <line number="91" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="11" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="15" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="16" hits="8" branch="False" />
+            <line number="20" hits="3" branch="False" />
+            <line number="21" hits="3" branch="False" />
+            <line number="27" hits="5" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="15" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="29" hits="1" branch="False" />
+            <line number="30" hits="1" branch="False" />
+            <line number="33" hits="4" branch="False" />
+            <line number="34" hits="4" branch="False" />
+            <line number="35" hits="4" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="104" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="37" hits="4" branch="False" />
+            <line number="41" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="48" hits="74" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="8" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="50" hits="73" branch="False" />
+            <line number="54" hits="1" branch="False" />
+            <line number="55" hits="1" branch="False" />
+            <line number="61" hits="235" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="6" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="63" hits="25" branch="False" />
+            <line number="66" hits="210" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="18" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="68" hits="209" branch="False" />
+            <line number="72" hits="1" branch="False" />
+            <line number="73" hits="1" branch="False" />
+            <line number="82" hits="1" branch="True" condition-coverage="100% (8/8)">
+              <conditions>
+                <condition number="4" type="switch" coverage="100%" />
+                <condition number="32" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="84" hits="1" branch="False" />
+            <line number="86" hits="4" branch="False" />
+            <line number="88" hits="9" branch="False" />
+            <line number="90" hits="1" branch="False" />
+            <line number="91" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageVtg" filename="Frameworks\Processor\GpsData\Nmea\NmeaMessageVtg.cs" line-rate="1" branch-rate="0.625" complexity="14">
+          <methods>
+            <method name="get_CourseOverGroundTrue" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CourseOverGroundMagnatic" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SpeedOverGroundKnots" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SpeedOverGroundKph" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PositionMode" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String[],Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="0.625" complexity="8">
+              <lines>
+                <line number="14" hits="5" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="9" branch="False" />
+            <line number="17" hits="9" branch="False" />
+            <line number="18" hits="7" branch="False" />
+            <line number="19" hits="9" branch="False" />
+            <line number="20" hits="7" branch="False" />
+            <line number="24" hits="1" branch="False" />
+            <line number="14" hits="5" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Processor.GpsData.Nmea.NmeaProtocol" filename="Frameworks\Processor\GpsData\Nmea\NmeaProtocol.cs" line-rate="0.9365000000000001" branch-rate="0.875" complexity="26">
+          <methods>
+            <method name="Process" signature="(System.Char)" line-rate="1" branch-rate="1" complexity="6">
+              <lines>
+                <line number="43" hits="494" branch="True" condition-coverage="100% (6/6)">
+                  <conditions>
+                    <condition number="8" type="switch" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="46" hits="9" branch="False" />
+                <line number="47" hits="9" branch="False" />
+                <line number="49" hits="45" branch="False" />
+                <line number="50" hits="45" branch="False" />
+                <line number="52" hits="404" branch="False" />
+                <line number="53" hits="404" branch="False" />
+                <line number="55" hits="27" branch="False" />
+                <line number="56" hits="27" branch="False" />
+                <line number="58" hits="9" branch="False" />
+                <line number="61" hits="485" branch="False" />
+              </lines>
+            </method>
+            <method name="HandleStartState" signature="(System.Char)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="66" hits="9" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="3" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="68" hits="9" branch="False" />
+                <line number="70" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="HandleAddressState" signature="(System.Char)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="74" hits="45" branch="False" />
+                <line number="75" hits="45" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="32" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="77" hits="9" branch="False" />
+                <line number="78" hits="9" branch="False" />
+                <line number="80" hits="45" branch="False" />
+                <line number="81" hits="45" branch="False" />
+              </lines>
+            </method>
+            <method name="HandleDataState" signature="(System.Char)" line-rate="1" branch-rate="1" complexity="6">
+              <lines>
+                <line number="85" hits="404" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="3" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="87" hits="9" branch="False" />
+                <line number="88" hits="9" branch="False" />
+                <line number="89" hits="9" branch="False" />
+                <line number="92" hits="395" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="23" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="94" hits="105" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="31" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="96" hits="96" branch="False" />
+                <line number="97" hits="96" branch="False" />
+                <line number="102" hits="290" branch="False" />
+                <line number="105" hits="395" branch="False" />
+                <line number="107" hits="395" branch="False" />
+                <line number="108" hits="395" branch="False" />
+              </lines>
+            </method>
+            <method name="HandleChecksumState" signature="(System.Char)" line-rate="0.7692" branch-rate="0.6666" complexity="6">
+              <lines>
+                <line number="112" hits="27" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="3" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="114" hits="9" branch="False" />
+                <line number="115" hits="9" branch="False" />
+                <line number="116" hits="9" branch="False" />
+                <line number="117" hits="9" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="38" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="119" hits="9" branch="False" />
+                <line number="120" hits="9" branch="False" />
+                <line number="124" hits="0" branch="False" />
+                <line number="125" hits="0" branch="False" />
+                <line number="130" hits="18" branch="False" />
+                <line number="131" hits="18" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="149" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="133" hits="0" branch="False" />
+                <line number="136" hits="18" branch="False" />
+              </lines>
+            </method>
+            <method name="HandleDoneState" signature="(System.Char)" line-rate="0.8332999999999999" branch-rate="0.5" complexity="2">
+              <lines>
+                <line number="140" hits="9" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="3" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="142" hits="9" branch="False" />
+                <line number="143" hits="9" branch="False" />
+                <line number="144" hits="9" branch="False" />
+                <line number="146" hits="9" branch="False" />
+                <line number="149" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ResetState" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="154" hits="9" branch="False" />
+                <line number="155" hits="9" branch="False" />
+                <line number="156" hits="9" branch="False" />
+                <line number="157" hits="9" branch="False" />
+                <line number="158" hits="9" branch="False" />
+                <line number="159" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="10" branch="False" />
+                <line number="31" hits="10" branch="False" />
+                <line number="32" hits="10" branch="False" />
+                <line number="33" hits="10" branch="False" />
+                <line number="34" hits="10" branch="False" />
+                <line number="39" hits="10" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="43" hits="494" branch="True" condition-coverage="100% (6/6)">
+              <conditions>
+                <condition number="8" type="switch" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="46" hits="9" branch="False" />
+            <line number="47" hits="9" branch="False" />
+            <line number="49" hits="45" branch="False" />
+            <line number="50" hits="45" branch="False" />
+            <line number="52" hits="404" branch="False" />
+            <line number="53" hits="404" branch="False" />
+            <line number="55" hits="27" branch="False" />
+            <line number="56" hits="27" branch="False" />
+            <line number="58" hits="9" branch="False" />
+            <line number="61" hits="485" branch="False" />
+            <line number="66" hits="9" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="3" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="68" hits="9" branch="False" />
+            <line number="70" hits="9" branch="False" />
+            <line number="74" hits="45" branch="False" />
+            <line number="75" hits="45" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="32" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="77" hits="9" branch="False" />
+            <line number="78" hits="9" branch="False" />
+            <line number="80" hits="45" branch="False" />
+            <line number="81" hits="45" branch="False" />
+            <line number="85" hits="404" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="3" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="87" hits="9" branch="False" />
+            <line number="88" hits="9" branch="False" />
+            <line number="89" hits="9" branch="False" />
+            <line number="92" hits="395" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="23" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="94" hits="105" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="31" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="96" hits="96" branch="False" />
+            <line number="97" hits="96" branch="False" />
+            <line number="102" hits="290" branch="False" />
+            <line number="105" hits="395" branch="False" />
+            <line number="107" hits="395" branch="False" />
+            <line number="108" hits="395" branch="False" />
+            <line number="112" hits="27" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="3" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="114" hits="9" branch="False" />
+            <line number="115" hits="9" branch="False" />
+            <line number="116" hits="9" branch="False" />
+            <line number="117" hits="9" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="38" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="119" hits="9" branch="False" />
+            <line number="120" hits="9" branch="False" />
+            <line number="124" hits="0" branch="False" />
+            <line number="125" hits="0" branch="False" />
+            <line number="130" hits="18" branch="False" />
+            <line number="131" hits="18" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="149" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="133" hits="0" branch="False" />
+            <line number="136" hits="18" branch="False" />
+            <line number="140" hits="9" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="3" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="142" hits="9" branch="False" />
+            <line number="143" hits="9" branch="False" />
+            <line number="144" hits="9" branch="False" />
+            <line number="146" hits="9" branch="False" />
+            <line number="149" hits="0" branch="False" />
+            <line number="154" hits="9" branch="False" />
+            <line number="155" hits="9" branch="False" />
+            <line number="156" hits="9" branch="False" />
+            <line number="157" hits="9" branch="False" />
+            <line number="158" hits="9" branch="False" />
+            <line number="159" hits="9" branch="False" />
+            <line number="21" hits="10" branch="False" />
+            <line number="31" hits="10" branch="False" />
+            <line number="32" hits="10" branch="False" />
+            <line number="33" hits="10" branch="False" />
+            <line number="34" hits="10" branch="False" />
+            <line number="39" hits="10" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.CanableDevice" filename="Frameworks\Device\Canable\CanableDevice.cs" line-rate="0.9756" branch-rate="1" complexity="45">
+          <methods>
+            <method name="SendMessage" signature="(CagCap.Frameworks.Device.Canable.CanMessage)" line-rate="1" branch-rate="1" complexity="16">
+              <lines>
+                <line number="44" hits="1" branch="False" />
+                <line number="46" hits="1" branch="False" />
+                <line number="47" hits="1" branch="False" />
+                <line number="48" hits="1" branch="False" />
+                <line number="49" hits="1" branch="False" />
+                <line number="50" hits="1" branch="False" />
+                <line number="51" hits="1" branch="False" />
+                <line number="52" hits="1" branch="False" />
+                <line number="53" hits="1" branch="False" />
+                <line number="54" hits="1" branch="False" />
+                <line number="57" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="93" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="58" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="119" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="59" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="145" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="60" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="171" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="61" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="197" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="62" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="223" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="63" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="249" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="64" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="275" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="66" hits="1" branch="False" />
+                <line number="67" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="GetSamplePoint" signature="(System.String,Microsoft.Extensions.Logging.ILogger)" line-rate="1" branch-rate="1" complexity="6">
+              <lines>
+                <line number="72" hits="10" branch="False" />
+                <line number="73" hits="9" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="15" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="75" hits="7" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="27" type="jump" coverage="100%" />
+                    <condition number="39" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="77" hits="2" branch="False" />
+                <line number="78" hits="2" branch="False" />
+                <line number="79" hits="2" branch="False" />
+                <line number="82" hits="5" branch="False" />
+                <line number="86" hits="2" branch="False" />
+                <line number="87" hits="2" branch="False" />
+                <line number="88" hits="2" branch="False" />
+                <line number="91" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="OnMessageReceived" signature="(CagCap.Frameworks.Device.Canable.CanMessage)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="96" hits="0" branch="False" />
+                <line number="97" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetDeviceMode" signature="(System.Boolean)" line-rate="1" branch-rate="1" complexity="12">
+              <lines>
+                <line number="116" hits="4" branch="False" />
+                <line number="118" hits="4" branch="False" />
+                <line number="119" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="36" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="121" hits="1" branch="False" />
+                <line number="124" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="60" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="126" hits="1" branch="False" />
+                <line number="129" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="84" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="131" hits="1" branch="False" />
+                <line number="134" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="109" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="136" hits="1" branch="False" />
+                <line number="139" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="134" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="141" hits="1" branch="False" />
+                <line number="144" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="158" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="146" hits="1" branch="False" />
+                <line number="149" hits="4" branch="False" />
+                <line number="150" hits="4" branch="False" />
+                <line number="151" hits="4" branch="False" />
+                <line number="152" hits="4" branch="False" />
+                <line number="153" hits="4" branch="False" />
+                <line number="155" hits="4" branch="False" />
+                <line number="156" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBitTiming" signature="(System.Int32,System.Int32)" line-rate="1" branch-rate="1" complexity="8">
+              <lines>
+                <line number="160" hits="99" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="175" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="162" hits="48" branch="True" condition-coverage="100% (6/6)">
+                  <conditions>
+                    <condition number="41" type="jump" coverage="100%" />
+                    <condition number="52" type="jump" coverage="100%" />
+                    <condition number="63" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="164" hits="1" branch="False" />
+                <line number="166" hits="1" branch="False" />
+                <line number="167" hits="1" branch="False" />
+                <line number="168" hits="1" branch="False" />
+                <line number="169" hits="1" branch="False" />
+                <line number="170" hits="1" branch="False" />
+                <line number="171" hits="1" branch="False" />
+                <line number="172" hits="1" branch="False" />
+                <line number="173" hits="1" branch="False" />
+                <line number="175" hits="1" branch="False" />
+                <line number="177" hits="1" branch="False" />
+                <line number="181" hits="1" branch="False" />
+                <line number="182" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="&lt;.ctor&gt;b__5_0" signature="(System.Object,CagCap.Frameworks.Device.Canable.CanMessage)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(CagCap.Frameworks.Device.Canable.IUsbAccess,CagCap.CanBusConfig,Microsoft.Extensions.Logging.ILoggerFactory)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="2" branch="False" />
+                <line number="23" hits="2" branch="False" />
+                <line number="24" hits="2" branch="False" />
+                <line number="25" hits="2" branch="False" />
+                <line number="29" hits="2" branch="False" />
+                <line number="31" hits="2" branch="False" />
+                <line number="32" hits="2" branch="False" />
+                <line number="34" hits="2" branch="False" />
+                <line number="35" hits="2" branch="False" />
+                <line number="37" hits="2" branch="False" />
+                <line number="39" hits="2" branch="False" />
+                <line number="40" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="44" hits="1" branch="False" />
+            <line number="46" hits="1" branch="False" />
+            <line number="47" hits="1" branch="False" />
+            <line number="48" hits="1" branch="False" />
+            <line number="49" hits="1" branch="False" />
+            <line number="50" hits="1" branch="False" />
+            <line number="51" hits="1" branch="False" />
+            <line number="52" hits="1" branch="False" />
+            <line number="53" hits="1" branch="False" />
+            <line number="54" hits="1" branch="False" />
+            <line number="57" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="93" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="58" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="119" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="59" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="145" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="60" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="171" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="61" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="197" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="62" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="223" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="63" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="249" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="64" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="275" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="66" hits="1" branch="False" />
+            <line number="67" hits="1" branch="False" />
+            <line number="72" hits="10" branch="False" />
+            <line number="73" hits="9" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="15" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="75" hits="7" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="27" type="jump" coverage="100%" />
+                <condition number="39" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="77" hits="2" branch="False" />
+            <line number="78" hits="2" branch="False" />
+            <line number="79" hits="2" branch="False" />
+            <line number="82" hits="5" branch="False" />
+            <line number="86" hits="2" branch="False" />
+            <line number="87" hits="2" branch="False" />
+            <line number="88" hits="2" branch="False" />
+            <line number="91" hits="5" branch="False" />
+            <line number="96" hits="0" branch="False" />
+            <line number="97" hits="0" branch="False" />
+            <line number="116" hits="4" branch="False" />
+            <line number="118" hits="4" branch="False" />
+            <line number="119" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="36" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="121" hits="1" branch="False" />
+            <line number="124" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="60" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="126" hits="1" branch="False" />
+            <line number="129" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="84" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="131" hits="1" branch="False" />
+            <line number="134" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="109" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="136" hits="1" branch="False" />
+            <line number="139" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="134" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="141" hits="1" branch="False" />
+            <line number="144" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="158" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="146" hits="1" branch="False" />
+            <line number="149" hits="4" branch="False" />
+            <line number="150" hits="4" branch="False" />
+            <line number="151" hits="4" branch="False" />
+            <line number="152" hits="4" branch="False" />
+            <line number="153" hits="4" branch="False" />
+            <line number="155" hits="4" branch="False" />
+            <line number="156" hits="4" branch="False" />
+            <line number="160" hits="99" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="175" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="162" hits="48" branch="True" condition-coverage="100% (6/6)">
+              <conditions>
+                <condition number="41" type="jump" coverage="100%" />
+                <condition number="52" type="jump" coverage="100%" />
+                <condition number="63" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="164" hits="1" branch="False" />
+            <line number="166" hits="1" branch="False" />
+            <line number="167" hits="1" branch="False" />
+            <line number="168" hits="1" branch="False" />
+            <line number="169" hits="1" branch="False" />
+            <line number="170" hits="1" branch="False" />
+            <line number="171" hits="1" branch="False" />
+            <line number="172" hits="1" branch="False" />
+            <line number="173" hits="1" branch="False" />
+            <line number="175" hits="1" branch="False" />
+            <line number="177" hits="1" branch="False" />
+            <line number="181" hits="1" branch="False" />
+            <line number="182" hits="1" branch="False" />
+            <line number="27" hits="2" branch="False" />
+            <line number="21" hits="2" branch="False" />
+            <line number="23" hits="2" branch="False" />
+            <line number="24" hits="2" branch="False" />
+            <line number="25" hits="2" branch="False" />
+            <line number="29" hits="2" branch="False" />
+            <line number="31" hits="2" branch="False" />
+            <line number="32" hits="2" branch="False" />
+            <line number="34" hits="2" branch="False" />
+            <line number="35" hits="2" branch="False" />
+            <line number="37" hits="2" branch="False" />
+            <line number="39" hits="2" branch="False" />
+            <line number="40" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.CanableFeature" filename="Frameworks\Device\Canable\CanableFeature.cs" line-rate="1" branch-rate="1" complexity="16">
+          <methods>
+            <method name="get_ListenOnly" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Loopback" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_TripleSample" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="29" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_OneShot" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="30" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_HwTimeStamp" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Identity" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UserId" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="33" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PadPacketsToMaxPacketSize" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="34" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Fd" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="35" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_RequestUsbQuirkLpc546XX" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="36" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_BtConstExt" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="37" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Termination" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="38" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_BerrReporting" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="39" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_GetState" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="40" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="44" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.UInt32)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="8" branch="False" />
+                <line number="25" hits="8" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="27" hits="8" branch="False" />
+            <line number="28" hits="8" branch="False" />
+            <line number="29" hits="2" branch="False" />
+            <line number="30" hits="2" branch="False" />
+            <line number="31" hits="8" branch="False" />
+            <line number="32" hits="8" branch="False" />
+            <line number="33" hits="8" branch="False" />
+            <line number="34" hits="8" branch="False" />
+            <line number="35" hits="2" branch="False" />
+            <line number="36" hits="2" branch="False" />
+            <line number="37" hits="2" branch="False" />
+            <line number="38" hits="2" branch="False" />
+            <line number="39" hits="2" branch="False" />
+            <line number="40" hits="2" branch="False" />
+            <line number="44" hits="1" branch="False" />
+            <line number="8" hits="8" branch="False" />
+            <line number="25" hits="8" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.CandleDataStructure" filename="Frameworks\Device\Canable\CandleDataStructure.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="FromByteArray" signature="(System.Byte[])" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="84" hits="6" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="8" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="86" hits="1" branch="False" />
+                <line number="89" hits="5" branch="False" />
+                <line number="92" hits="5" branch="False" />
+                <line number="96" hits="5" branch="False" />
+                <line number="97" hits="5" branch="False" />
+                <line number="98" hits="5" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="84" hits="6" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="8" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="86" hits="1" branch="False" />
+            <line number="89" hits="5" branch="False" />
+            <line number="92" hits="5" branch="False" />
+            <line number="96" hits="5" branch="False" />
+            <line number="97" hits="5" branch="False" />
+            <line number="98" hits="5" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.CandleDataStructure/BitTiming" filename="Frameworks\Device\Canable\CandleDataStructure.cs" line-rate="1" branch-rate="1" complexity="6">
+          <methods>
+            <method name="get_PropSeg" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="111" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PhaseSeg1" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="112" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PhaseSeg2" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="113" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Sjw" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="114" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Brp" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="115" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="110" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="111" hits="2" branch="False" />
+            <line number="112" hits="2" branch="False" />
+            <line number="113" hits="2" branch="False" />
+            <line number="114" hits="2" branch="False" />
+            <line number="115" hits="4" branch="False" />
+            <line number="110" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.CanId" filename="Frameworks\Device\Canable\CanId.cs" line-rate="1" branch-rate="1" complexity="20">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Extended" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="25" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Rtr" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="29" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Error" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="StandardCanId" signature="(System.UInt32,System.Boolean,System.Boolean)" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="35" hits="3" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="100%" />
+                    <condition number="14" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="ExtendedCanId" signature="(System.UInt32,System.Boolean,System.Boolean)" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="40" hits="3" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="8" type="jump" coverage="100%" />
+                    <condition number="20" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="6">
+              <lines>
+                <line number="45" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="6" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="46" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="27" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="47" hits="2" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="48" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="48" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.UInt32)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="18" hits="14" branch="False" />
+                <line number="20" hits="14" branch="False" />
+                <line number="21" hits="14" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="26" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="22" hits="14" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="14" branch="False" />
+            <line number="26" hits="25" branch="False" />
+            <line number="29" hits="9" branch="False" />
+            <line number="31" hits="9" branch="False" />
+            <line number="35" hits="3" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="2" type="jump" coverage="100%" />
+                <condition number="14" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="40" hits="3" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="8" type="jump" coverage="100%" />
+                <condition number="20" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="45" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="6" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="46" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="27" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="47" hits="2" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="48" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="48" hits="2" branch="False" />
+            <line number="18" hits="14" branch="False" />
+            <line number="20" hits="14" branch="False" />
+            <line number="21" hits="14" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="26" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="22" hits="14" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.CanMessage" filename="Frameworks\Device\Canable\CanMessage.cs" line-rate="1" branch-rate="1" complexity="6">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="12" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Dlc" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="9" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Data" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="24" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Timestamp" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(CagCap.Frameworks.Device.Canable.CanId,System.Byte[],System.DateTime)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="4" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(CagCap.Frameworks.Device.Canable.CanId,System.Byte[])" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="3" branch="False" />
+                <line number="16" hits="3" branch="False" />
+                <line number="17" hits="3" branch="False" />
+                <line number="18" hits="3" branch="False" />
+                <line number="20" hits="3" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="12" branch="False" />
+            <line number="11" hits="9" branch="False" />
+            <line number="12" hits="24" branch="False" />
+            <line number="13" hits="8" branch="False" />
+            <line number="8" hits="4" branch="False" />
+            <line number="15" hits="3" branch="False" />
+            <line number="16" hits="3" branch="False" />
+            <line number="17" hits="3" branch="False" />
+            <line number="18" hits="3" branch="False" />
+            <line number="20" hits="3" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.Timing" filename="Frameworks\Device\Canable\Timing.cs" line-rate="1" branch-rate="1" complexity="10">
+          <methods>
+            <method name="get_BaseClk" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="53" branch="False" />
+              </lines>
+            </method>
+            <method name="get_BitRate" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SamplePoint" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="6" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Brp" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PhaseSeg1" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PhaseSeg2" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="49" branch="False" />
+              </lines>
+            </method>
+            <method name="get_BitTiming" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="2" branch="False" />
+                <line number="17" hits="2" branch="False" />
+                <line number="18" hits="2" branch="False" />
+                <line number="19" hits="2" branch="False" />
+                <line number="20" hits="2" branch="False" />
+                <line number="21" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Timings" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="42" branch="False" />
+              </lines>
+            </method>
+            <method name=".cctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="1" branch="False" />
+                <line number="25" hits="1" branch="False" />
+                <line number="26" hits="1" branch="False" />
+                <line number="27" hits="1" branch="False" />
+                <line number="28" hits="1" branch="False" />
+                <line number="29" hits="1" branch="False" />
+                <line number="30" hits="1" branch="False" />
+                <line number="31" hits="1" branch="False" />
+                <line number="32" hits="1" branch="False" />
+                <line number="33" hits="1" branch="False" />
+                <line number="34" hits="1" branch="False" />
+                <line number="35" hits="1" branch="False" />
+                <line number="36" hits="1" branch="False" />
+                <line number="37" hits="1" branch="False" />
+                <line number="38" hits="1" branch="False" />
+                <line number="39" hits="1" branch="False" />
+                <line number="40" hits="1" branch="False" />
+                <line number="41" hits="1" branch="False" />
+                <line number="42" hits="1" branch="False" />
+                <line number="43" hits="1" branch="False" />
+                <line number="44" hits="1" branch="False" />
+                <line number="45" hits="1" branch="False" />
+                <line number="46" hits="1" branch="False" />
+                <line number="47" hits="1" branch="False" />
+                <line number="48" hits="1" branch="False" />
+                <line number="49" hits="1" branch="False" />
+                <line number="50" hits="1" branch="False" />
+                <line number="51" hits="1" branch="False" />
+                <line number="52" hits="1" branch="False" />
+                <line number="53" hits="1" branch="False" />
+                <line number="54" hits="1" branch="False" />
+                <line number="55" hits="1" branch="False" />
+                <line number="56" hits="1" branch="False" />
+                <line number="57" hits="1" branch="False" />
+                <line number="58" hits="1" branch="False" />
+                <line number="59" hits="1" branch="False" />
+                <line number="60" hits="1" branch="False" />
+                <line number="61" hits="1" branch="False" />
+                <line number="62" hits="1" branch="False" />
+                <line number="63" hits="1" branch="False" />
+                <line number="64" hits="1" branch="False" />
+                <line number="65" hits="1" branch="False" />
+                <line number="66" hits="1" branch="False" />
+                <line number="67" hits="1" branch="False" />
+                <line number="68" hits="1" branch="False" />
+                <line number="69" hits="1" branch="False" />
+                <line number="70" hits="1" branch="False" />
+                <line number="71" hits="1" branch="False" />
+                <line number="72" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="9" hits="53" branch="False" />
+            <line number="10" hits="13" branch="False" />
+            <line number="11" hits="6" branch="False" />
+            <line number="12" hits="7" branch="False" />
+            <line number="13" hits="7" branch="False" />
+            <line number="14" hits="49" branch="False" />
+            <line number="16" hits="2" branch="False" />
+            <line number="17" hits="2" branch="False" />
+            <line number="18" hits="2" branch="False" />
+            <line number="19" hits="2" branch="False" />
+            <line number="20" hits="2" branch="False" />
+            <line number="21" hits="2" branch="False" />
+            <line number="23" hits="3" branch="False" />
+            <line number="8" hits="42" branch="False" />
+            <line number="24" hits="1" branch="False" />
+            <line number="25" hits="1" branch="False" />
+            <line number="26" hits="1" branch="False" />
+            <line number="27" hits="1" branch="False" />
+            <line number="28" hits="1" branch="False" />
+            <line number="29" hits="1" branch="False" />
+            <line number="30" hits="1" branch="False" />
+            <line number="31" hits="1" branch="False" />
+            <line number="32" hits="1" branch="False" />
+            <line number="33" hits="1" branch="False" />
+            <line number="34" hits="1" branch="False" />
+            <line number="35" hits="1" branch="False" />
+            <line number="36" hits="1" branch="False" />
+            <line number="37" hits="1" branch="False" />
+            <line number="38" hits="1" branch="False" />
+            <line number="39" hits="1" branch="False" />
+            <line number="40" hits="1" branch="False" />
+            <line number="41" hits="1" branch="False" />
+            <line number="42" hits="1" branch="False" />
+            <line number="43" hits="1" branch="False" />
+            <line number="44" hits="1" branch="False" />
+            <line number="45" hits="1" branch="False" />
+            <line number="46" hits="1" branch="False" />
+            <line number="47" hits="1" branch="False" />
+            <line number="48" hits="1" branch="False" />
+            <line number="49" hits="1" branch="False" />
+            <line number="50" hits="1" branch="False" />
+            <line number="51" hits="1" branch="False" />
+            <line number="52" hits="1" branch="False" />
+            <line number="53" hits="1" branch="False" />
+            <line number="54" hits="1" branch="False" />
+            <line number="55" hits="1" branch="False" />
+            <line number="56" hits="1" branch="False" />
+            <line number="57" hits="1" branch="False" />
+            <line number="58" hits="1" branch="False" />
+            <line number="59" hits="1" branch="False" />
+            <line number="60" hits="1" branch="False" />
+            <line number="61" hits="1" branch="False" />
+            <line number="62" hits="1" branch="False" />
+            <line number="63" hits="1" branch="False" />
+            <line number="64" hits="1" branch="False" />
+            <line number="65" hits="1" branch="False" />
+            <line number="66" hits="1" branch="False" />
+            <line number="67" hits="1" branch="False" />
+            <line number="68" hits="1" branch="False" />
+            <line number="69" hits="1" branch="False" />
+            <line number="70" hits="1" branch="False" />
+            <line number="71" hits="1" branch="False" />
+            <line number="72" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Canable.UsbAccess" filename="Frameworks\Device\Canable\UsbAccess.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="GetDeviceGuid" signature="(CagCap.Frameworks.Device.Canable.IUsbUtils)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="105" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="105" hits="1" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Adapter.GpsReceiverDeviceAdapter" filename="Frameworks\Device\Adapter\GpsReceiverDeviceAdapter.cs" line-rate="0" branch-rate="0" complexity="10">
+          <methods>
+            <method name="Dispose" signature="(System.Boolean)" line-rate="0" branch-rate="0" complexity="6">
+              <lines>
+                <line number="38" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="6" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="40" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="9" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="42" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="18" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="45" hits="0" branch="False" />
+                <line number="47" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Dispose" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="51" hits="0" branch="False" />
+                <line number="52" hits="0" branch="False" />
+                <line number="53" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="&lt;.ctor&gt;b__5_0" signature="(System.Object,System.String)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="27" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="28" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Int32,Microsoft.Extensions.Logging.ILoggerFactory)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="False" />
+                <line number="21" hits="0" branch="False" />
+                <line number="23" hits="0" branch="False" />
+                <line number="25" hits="0" branch="False" />
+                <line number="26" hits="0" branch="False" />
+                <line number="29" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="38" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="6" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="40" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="9" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="42" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="18" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="45" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="51" hits="0" branch="False" />
+            <line number="52" hits="0" branch="False" />
+            <line number="53" hits="0" branch="False" />
+            <line number="27" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="28" hits="0" branch="False" />
+            <line number="16" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="23" hits="0" branch="False" />
+            <line number="25" hits="0" branch="False" />
+            <line number="26" hits="0" branch="False" />
+            <line number="29" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Frameworks.Device.Adapter.GpsReceiverDeviceAdapter/&lt;WriteAsync&gt;d__6" filename="Frameworks\Device\Adapter\GpsReceiverDeviceAdapter.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="33" hits="0" branch="False" />
+                <line number="34" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="33" hits="0" branch="False" />
+            <line number="34" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.DomainObject.GpsData" filename="DomainObject\GpsData.cs" line-rate="0.8461" branch-rate="1" complexity="12">
+          <methods>
+            <method name="get_Time" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Latitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LatitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Longitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_LongitudeHemisphere" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Altitude" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Speed" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CourseTrue" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CourseMagnetic" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_NumberOfSatellites" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="10" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Satellites" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="27" branch="False" />
+              </lines>
+            </method>
+            <method name="ToString" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="0" branch="False" />
+                <line number="25" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="10" branch="False" />
+            <line number="11" hits="10" branch="False" />
+            <line number="12" hits="13" branch="False" />
+            <line number="13" hits="10" branch="False" />
+            <line number="14" hits="7" branch="False" />
+            <line number="15" hits="10" branch="False" />
+            <line number="16" hits="10" branch="False" />
+            <line number="17" hits="10" branch="False" />
+            <line number="18" hits="10" branch="False" />
+            <line number="19" hits="10" branch="False" />
+            <line number="20" hits="27" branch="False" />
+            <line number="24" hits="0" branch="False" />
+            <line number="25" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.DomainObject.SatelliteView" filename="DomainObject\NmeaMessageTypes.cs" line-rate="1" branch-rate="1" complexity="5">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="55" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Elevation" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="22" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Azimuth" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SignalToNoiseRatio" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Int32,System.Int32,System.Int32,System.Int32)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="44" branch="False" />
+                <line number="25" hits="44" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="21" hits="55" branch="False" />
+            <line number="22" hits="8" branch="False" />
+            <line number="23" hits="8" branch="False" />
+            <line number="24" hits="8" branch="False" />
+            <line number="20" hits="44" branch="False" />
+            <line number="25" hits="44" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.DomainObject.Device.GpsReceiver" filename="DomainObject\Device\GpsReceiver.cs" line-rate="0.9229999999999999" branch-rate="0.75" complexity="37">
+          <methods>
+            <method name="get_GpsData" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="40" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name="SimulateTimeoutForTesting" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="63" hits="1" branch="False" />
+                <line number="64" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="CreateGpsData" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="66" hits="5" branch="False" />
+                <line number="67" hits="5" branch="False" />
+                <line number="68" hits="5" branch="False" />
+                <line number="69" hits="5" branch="False" />
+                <line number="70" hits="5" branch="False" />
+                <line number="71" hits="5" branch="False" />
+                <line number="72" hits="5" branch="False" />
+                <line number="73" hits="5" branch="False" />
+                <line number="74" hits="5" branch="False" />
+                <line number="75" hits="5" branch="False" />
+                <line number="76" hits="5" branch="False" />
+                <line number="77" hits="5" branch="False" />
+                <line number="78" hits="5" branch="False" />
+                <line number="79" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="OnTimeout" signature="(System.Object,System.Timers.ElapsedEventArgs)" line-rate="1" branch-rate="0.5" complexity="2">
+              <lines>
+                <line number="83" hits="1" branch="False" />
+                <line number="84" hits="1" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="13" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="85" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="OnDataReceived" signature="(System.Object,CagCap.DomainObject.INmeaMessage)" line-rate="1" branch-rate="0.9285" complexity="14">
+              <lines>
+                <line number="89" hits="14" branch="False" />
+                <line number="90" hits="14" branch="True" condition-coverage="100% (8/8)">
+                  <conditions>
+                    <condition number="45" type="jump" coverage="100%" />
+                    <condition number="55" type="jump" coverage="100%" />
+                    <condition number="65" type="jump" coverage="100%" />
+                    <condition number="75" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="95" hits="2" branch="False" />
+                <line number="96" hits="2" branch="False" />
+                <line number="98" hits="2" branch="False" />
+                <line number="99" hits="2" branch="False" />
+                <line number="101" hits="8" branch="False" />
+                <line number="102" hits="8" branch="False" />
+                <line number="104" hits="2" branch="False" />
+                <line number="108" hits="14" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="119" type="jump" coverage="100%" />
+                    <condition number="130" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="110" hits="2" branch="False" />
+                <line number="111" hits="2" branch="False" />
+                <line number="112" hits="2" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="154" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="113" hits="2" branch="False" />
+                <line number="116" hits="14" branch="False" />
+                <line number="117" hits="14" branch="False" />
+              </lines>
+            </method>
+            <method name="UpdateGgaData" signature="(CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageGga)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="121" hits="2" branch="False" />
+                <line number="122" hits="2" branch="False" />
+                <line number="123" hits="2" branch="False" />
+                <line number="124" hits="2" branch="False" />
+                <line number="125" hits="2" branch="False" />
+                <line number="126" hits="2" branch="False" />
+                <line number="127" hits="2" branch="False" />
+                <line number="128" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="UpdateGsaData" signature="(CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageGsa)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="132" hits="2" branch="False" />
+                <line number="133" hits="2" branch="False" />
+                <line number="134" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="UpdateGsvData" signature="(CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageGsv)" line-rate="1" branch-rate="1" complexity="6">
+              <lines>
+                <line number="138" hits="8" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="12" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="140" hits="2" branch="False" />
+                <line number="141" hits="2" branch="False" />
+                <line number="144" hits="80" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="78" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="146" hits="32" branch="False" />
+                <line number="149" hits="8" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="97" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="151" hits="2" branch="False" />
+                <line number="152" hits="10" branch="False" />
+                <line number="153" hits="10" branch="False" />
+                <line number="154" hits="2" branch="False" />
+                <line number="155" hits="2" branch="False" />
+                <line number="157" hits="8" branch="False" />
+              </lines>
+            </method>
+            <method name="UpdateVtgData" signature="(CagCap.Frameworks.Processor.GpsData.Nmea.NmeaMessageVtg)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="161" hits="2" branch="False" />
+                <line number="162" hits="2" branch="False" />
+                <line number="163" hits="2" branch="False" />
+                <line number="164" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="ResetData" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="168" hits="1" branch="False" />
+                <line number="169" hits="1" branch="False" />
+                <line number="170" hits="1" branch="False" />
+                <line number="171" hits="1" branch="False" />
+                <line number="172" hits="1" branch="False" />
+                <line number="173" hits="1" branch="False" />
+                <line number="174" hits="1" branch="False" />
+                <line number="175" hits="1" branch="False" />
+                <line number="176" hits="1" branch="False" />
+                <line number="177" hits="1" branch="False" />
+                <line number="178" hits="1" branch="False" />
+                <line number="179" hits="1" branch="False" />
+                <line number="180" hits="1" branch="False" />
+                <line number="181" hits="1" branch="False" />
+                <line number="182" hits="1" branch="False" />
+              </lines>
+            </method>
+            <method name="Dispose" signature="(System.Boolean)" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="186" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="6" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="188" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="9" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="190" hits="0" branch="False" />
+                <line number="192" hits="0" branch="False" />
+                <line number="194" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Dispose" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="198" hits="0" branch="False" />
+                <line number="199" hits="0" branch="False" />
+                <line number="200" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(CagCap.DomainObject.Device.IGpsReceiverDevice,CagCap.DomainObject.IGpsDataProcessor,Microsoft.Extensions.Logging.ILoggerFactory)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="2" branch="False" />
+                <line number="26" hits="2" branch="False" />
+                <line number="30" hits="2" branch="False" />
+                <line number="35" hits="2" branch="False" />
+                <line number="36" hits="2" branch="False" />
+                <line number="44" hits="2" branch="False" />
+                <line number="46" hits="2" branch="False" />
+                <line number="48" hits="2" branch="False" />
+                <line number="49" hits="2" branch="False" />
+                <line number="50" hits="2" branch="False" />
+                <line number="51" hits="2" branch="False" />
+                <line number="52" hits="2" branch="False" />
+                <line number="54" hits="2" branch="False" />
+                <line number="55" hits="2" branch="False" />
+                <line number="56" hits="2" branch="False" />
+                <line number="57" hits="14" branch="False" />
+                <line number="58" hits="16" branch="False" />
+                <line number="59" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="40" hits="3" branch="False" />
+            <line number="63" hits="1" branch="False" />
+            <line number="64" hits="1" branch="False" />
+            <line number="66" hits="5" branch="False" />
+            <line number="67" hits="5" branch="False" />
+            <line number="68" hits="5" branch="False" />
+            <line number="69" hits="5" branch="False" />
+            <line number="70" hits="5" branch="False" />
+            <line number="71" hits="5" branch="False" />
+            <line number="72" hits="5" branch="False" />
+            <line number="73" hits="5" branch="False" />
+            <line number="74" hits="5" branch="False" />
+            <line number="75" hits="5" branch="False" />
+            <line number="76" hits="5" branch="False" />
+            <line number="77" hits="5" branch="False" />
+            <line number="78" hits="5" branch="False" />
+            <line number="79" hits="5" branch="False" />
+            <line number="83" hits="1" branch="False" />
+            <line number="84" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="13" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="85" hits="1" branch="False" />
+            <line number="89" hits="14" branch="False" />
+            <line number="90" hits="14" branch="True" condition-coverage="100% (8/8)">
+              <conditions>
+                <condition number="45" type="jump" coverage="100%" />
+                <condition number="55" type="jump" coverage="100%" />
+                <condition number="65" type="jump" coverage="100%" />
+                <condition number="75" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="95" hits="2" branch="False" />
+            <line number="96" hits="2" branch="False" />
+            <line number="98" hits="2" branch="False" />
+            <line number="99" hits="2" branch="False" />
+            <line number="101" hits="8" branch="False" />
+            <line number="102" hits="8" branch="False" />
+            <line number="104" hits="2" branch="False" />
+            <line number="108" hits="14" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="119" type="jump" coverage="100%" />
+                <condition number="130" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="110" hits="2" branch="False" />
+            <line number="111" hits="2" branch="False" />
+            <line number="112" hits="2" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="154" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="113" hits="2" branch="False" />
+            <line number="116" hits="14" branch="False" />
+            <line number="117" hits="14" branch="False" />
+            <line number="121" hits="2" branch="False" />
+            <line number="122" hits="2" branch="False" />
+            <line number="123" hits="2" branch="False" />
+            <line number="124" hits="2" branch="False" />
+            <line number="125" hits="2" branch="False" />
+            <line number="126" hits="2" branch="False" />
+            <line number="127" hits="2" branch="False" />
+            <line number="128" hits="2" branch="False" />
+            <line number="132" hits="2" branch="False" />
+            <line number="133" hits="2" branch="False" />
+            <line number="134" hits="2" branch="False" />
+            <line number="138" hits="8" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="12" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="140" hits="2" branch="False" />
+            <line number="141" hits="2" branch="False" />
+            <line number="144" hits="80" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="78" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="146" hits="32" branch="False" />
+            <line number="149" hits="8" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="97" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="151" hits="2" branch="False" />
+            <line number="152" hits="10" branch="False" />
+            <line number="153" hits="10" branch="False" />
+            <line number="154" hits="2" branch="False" />
+            <line number="155" hits="2" branch="False" />
+            <line number="157" hits="8" branch="False" />
+            <line number="161" hits="2" branch="False" />
+            <line number="162" hits="2" branch="False" />
+            <line number="163" hits="2" branch="False" />
+            <line number="164" hits="2" branch="False" />
+            <line number="168" hits="1" branch="False" />
+            <line number="169" hits="1" branch="False" />
+            <line number="170" hits="1" branch="False" />
+            <line number="171" hits="1" branch="False" />
+            <line number="172" hits="1" branch="False" />
+            <line number="173" hits="1" branch="False" />
+            <line number="174" hits="1" branch="False" />
+            <line number="175" hits="1" branch="False" />
+            <line number="176" hits="1" branch="False" />
+            <line number="177" hits="1" branch="False" />
+            <line number="178" hits="1" branch="False" />
+            <line number="179" hits="1" branch="False" />
+            <line number="180" hits="1" branch="False" />
+            <line number="181" hits="1" branch="False" />
+            <line number="182" hits="1" branch="False" />
+            <line number="186" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="6" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="188" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="9" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="190" hits="0" branch="False" />
+            <line number="192" hits="0" branch="False" />
+            <line number="194" hits="0" branch="False" />
+            <line number="198" hits="0" branch="False" />
+            <line number="199" hits="0" branch="False" />
+            <line number="200" hits="0" branch="False" />
+            <line number="23" hits="2" branch="False" />
+            <line number="26" hits="2" branch="False" />
+            <line number="30" hits="2" branch="False" />
+            <line number="35" hits="2" branch="False" />
+            <line number="36" hits="2" branch="False" />
+            <line number="44" hits="2" branch="False" />
+            <line number="46" hits="2" branch="False" />
+            <line number="48" hits="2" branch="False" />
+            <line number="49" hits="2" branch="False" />
+            <line number="50" hits="2" branch="False" />
+            <line number="51" hits="2" branch="False" />
+            <line number="52" hits="2" branch="False" />
+            <line number="54" hits="2" branch="False" />
+            <line number="55" hits="2" branch="False" />
+            <line number="56" hits="2" branch="False" />
+            <line number="57" hits="14" branch="False" />
+            <line number="58" hits="16" branch="False" />
+            <line number="59" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="CagCap.Application.CagCapApp" filename="Application\CagCapApp.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="Start" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="2" branch="False" />
+                <line number="18" hits="2" branch="False" />
+                <line number="19" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(CagCap.UI.IUserInterface)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="2" branch="False" />
+                <line number="12" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="2" branch="False" />
+            <line number="18" hits="2" branch="False" />
+            <line number="19" hits="2" branch="False" />
+            <line number="10" hits="2" branch="False" />
+            <line number="12" hits="2" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
