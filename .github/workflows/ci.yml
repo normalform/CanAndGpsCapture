@@ -44,26 +44,17 @@ jobs:
     - name: Build
       run: dotnet build ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }} --no-restore
 
-    - name: Create coverage directory
-      run: mkdir ./coverage
-
     - name: Run tests
       run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/coverage.cobertura.xml /p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
 
-    - name: List coverage directory contents
-      run: dir ./coverage
-
-    - name: Install reportgenerator
-      run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-    - name: Generate HTML report
-      run: reportgenerator -reports:./coverage/coverage.cobertura.xml -targetdir:./coverage/html -reporttypes:Html
-
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v3
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
       with:
+        files: ./coverage/coverage.cobertura.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+        flags: unittests
         name: code-coverage-report
-        path: ./coverage/html
+        fail_ci_if_error: true
 
     - name: Publish
       if: matrix.configuration == 'Release'
