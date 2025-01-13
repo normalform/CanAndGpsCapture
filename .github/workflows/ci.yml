@@ -81,7 +81,7 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.CAGCAP_TOKEN }}
       with:
         tag_name: v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
         release_name: Release v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
@@ -92,7 +92,7 @@ jobs:
       if: matrix.configuration == 'Release'
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.CAGCAP_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./CagCapSetup.exe
