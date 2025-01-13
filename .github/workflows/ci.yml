@@ -66,7 +66,8 @@ jobs:
 
     - name: Create installer package
       if: matrix.configuration == 'Release'
-      run: cmd /c ""C:/Program Files (x86)/Inno Setup 6/ISCC.exe" ".github/setup.iss" "/dSetupVersion=${{ env.MAJOR_VERSION }}.${{ env.MINOR_VERSION }}.${{ github.run_number }}""
+      run: |
+        powershell -Command "& 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe' '.github/setup.iss' '/dSetupVersion=${{ env.MAJOR_VERSION }}.${{ env.MINOR_VERSION }}.${{ github.run_number }}'"
 
     - name: Upload installer package
       if: matrix.configuration == 'Release'
