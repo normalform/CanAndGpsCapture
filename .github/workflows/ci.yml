@@ -73,5 +73,5 @@ jobs:
       if: matrix.configuration == 'Release'
       uses: actions/upload-artifact@v3
       with:
-        name: installer-package-Release ${{ env.MAJOR_VERSION }}.${{ env.MINOR_VERSION }}.${{ github.run_number }}
+        name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
         path: CagCapSetup.exe
