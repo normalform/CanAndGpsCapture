@@ -11,6 +11,7 @@ namespace CagCap.DomainObject.Device
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Timers;
 
@@ -181,6 +182,7 @@ namespace CagCap.DomainObject.Device
             this.ggaDataIsAvailable = false;
         }
 
+        [ExcludeFromCodeCoverage]
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -193,6 +195,7 @@ namespace CagCap.DomainObject.Device
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void Dispose()
         {
             this.Dispose(disposing: true);

@@ -3,15 +3,14 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Frameworks.Device.Adapter
+namespace CagCap.Frameworks.Device.UbloxGps
 {
-    using CagCap.DomainObject.Device;
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     [ExcludeFromCodeCoverage]
-    internal class NullGpsReceiverDevice : IGpsReceiverDevice
+    internal class NullUbloxGpsReceiverDevice : IUbloxGpsReceiverDevice
     {
 #pragma warning disable CS0067
         public event EventHandler<string>? DataReceived;
