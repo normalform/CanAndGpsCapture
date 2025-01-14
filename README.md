@@ -1,3 +1,15 @@
+[![codecov](https://codecov.io/github/normalform/CanAndGpsCapture/graph/badge.svg?token=EOJE66ZYRC)](https://codecov.io/github/normalform/CanAndGpsCapture)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=bugs)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=normalform_CanAndGpsCapture&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=normalform_CanAndGpsCapture)
+
 # CAN and GPS Data capture tool
 
 ## Introduction
