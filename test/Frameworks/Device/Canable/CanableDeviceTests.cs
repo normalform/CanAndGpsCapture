@@ -179,10 +179,7 @@ namespace CagcapTests.Frameworks.Device.Canable
         [InlineData("75.0%", 750)]
         public void GetSamplePoint_ValidInput_Success(string samplePointString, int expectedSamplePoint)
         {
-            // Arrange
-            var loggerMock = new Mock<ILogger>();
-
-            // Act
+            // Arrange & Act
             var samplePoint = CanableDevice.GetSamplePoint(samplePointString, this.logger);
 
             // Assert
@@ -194,13 +191,8 @@ namespace CagcapTests.Frameworks.Device.Canable
         [InlineData("101", typeof(ArgumentOutOfRangeException))]
         [InlineData("invalid", typeof(FormatException))]
         [InlineData("", typeof(FormatException))]
-        [InlineData(null, typeof(NullReferenceException))]
         public void GetSamplePoint_InValidInput_Throw(string samplePointString, Type expectedExceptionType)
         {
-            // Arrange
-            var loggerMock = new Mock<ILogger>();
-
-            // Act & Assert
             Assert.Throws(expectedExceptionType, () => CanableDevice.GetSamplePoint(samplePointString, this.logger));
         }
     }

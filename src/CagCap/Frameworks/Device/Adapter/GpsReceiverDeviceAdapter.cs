@@ -7,20 +7,18 @@ namespace CagCap.Frameworks.Device.Adapter
 {
     using CagCap.DomainObject.Device;
     using CagCap.Frameworks.Device.UbloxGps;
-    using Microsoft.Extensions.Logging;
     using System;
     using System.Threading.Tasks;
 
-    internal class GpsReceiverDeviceAdapter : IGpsReceiverDevice, IDisposable
+    internal class GpsReceiverDeviceAdapter : IGpsReceiverDevice
     {
         public event EventHandler<string> DataReceived = delegate { };
 
-        private readonly UbloxGpsReceiverDevice ubloxGpsReceiverDevice;
-        private bool disposed;
+        private readonly IUbloxGpsReceiverDevice ubloxGpsReceiverDevice;
 
-        public GpsReceiverDeviceAdapter(string portName, int baudRate, ILoggerFactory loggerFactory)
+        public GpsReceiverDeviceAdapter(IUbloxGpsReceiverDevice ubloxGpsReceiverDevice)
         {
-            this.ubloxGpsReceiverDevice = new UbloxGpsReceiverDevice(portName, baudRate, loggerFactory);
+            this.ubloxGpsReceiverDevice = ubloxGpsReceiverDevice;
 
             this.ubloxGpsReceiverDevice.DataReceived += (sender, data) =>
             {
@@ -31,25 +29,6 @@ namespace CagCap.Frameworks.Device.Adapter
         public async Task WriteAsync(string data)
         {
             await ubloxGpsReceiverDevice.WriteAsync(data).ConfigureAwait(false);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    ubloxGpsReceiverDevice?.Dispose();
-                }
-
-                disposed = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
         }
     }
 }

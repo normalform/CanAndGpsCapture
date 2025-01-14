@@ -21,7 +21,7 @@ namespace CagCap.DomainObject
 
         public override string ToString()
         {
-            var satellites = string.Join(", ", Satellites.Select(s => $"[Id: {s.Id}, E: {s.Elevation}, A: {s.Azimuth}, SNR: {s.SignalToNoiseRatio}]"));
+            var satellites = string.Join(", ", Satellites.Select(s => $"[Id: {s.Id}, Elevation: {s.Elevation}, Azimuth: {s.Azimuth}, SNR: {s.SignalToNoiseRatio}]"));
             return $"Latitude: {Latitude} {LatitudeHemisphere}, Longitude: {Longitude} {LongitudeHemisphere}, Altitude: {Altitude}m, Speed: {Speed}km/h, Course (True): {CourseTrue}°, satellites: {satellites}";
         }
     }

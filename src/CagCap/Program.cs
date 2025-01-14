@@ -10,6 +10,7 @@ namespace CagCap
     using CagCap.DomainObject.Device;
     using CagCap.Frameworks.Device.Adapter;
     using CagCap.Frameworks.Device.Canable;
+    using CagCap.Frameworks.Device.UbloxGps;
     using CagCap.Frameworks.Processor.GpsData;
     using CagCap.UI;
 
@@ -93,6 +94,7 @@ namespace CagCap
             services.AddSingleton<IGpsDataProcessor, GpsDataProcessor>();
             services.AddSingleton<IUserInterface, ConsoleUserInterface>();
             services.AddSingleton<IGpsReceiver, GpsReceiver>();
+            services.AddSingleton<IGpsReceiverDevice, GpsReceiverDeviceAdapter>();
 
             services.AddSingleton<ICanableDevice>(provider =>
             {
@@ -121,17 +123,17 @@ namespace CagCap
                 return new NullCanableDevice();
             });
 
-            services.AddSingleton<IGpsReceiverDevice>(
+            services.AddSingleton<IUbloxGpsReceiverDevice>(
                 provider =>
                 {
                     var config = provider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
                     if (config.Enable)
                     {
                         var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                        return new GpsReceiverDeviceAdapter(config.Port, config.BaudRate, loggerFactory);
+                        return new UbloxGpsReceiverDevice(config.Port, config.BaudRate, loggerFactory);
                     }
 
-                    return new NullGpsReceiverDevice();
+                    return new NullUbloxGpsReceiverDevice();
                 });
 
             return services;

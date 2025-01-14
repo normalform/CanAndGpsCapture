@@ -12,7 +12,7 @@ namespace CagCap.Frameworks.Device.UbloxGps
     using System.Threading.Tasks;
 
     [ExcludeFromCodeCoverage]
-    internal class UbloxGpsReceiverDevice : IDisposable
+    internal class UbloxGpsReceiverDevice : IUbloxGpsReceiverDevice, IDisposable
     {
         private readonly SerialPort serialPort;
         private readonly ILogger logger;
