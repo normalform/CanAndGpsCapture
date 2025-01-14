@@ -34,7 +34,7 @@ procedure InitializeWizard;
     PageInstallationType := CreateInputOptionPage(wpWelcome, 'Installation Type', 'Select the installation type:', 'Choose whether to install for all users or just for the current user.', True, False);
     PageInstallationType.Add('Install for all users (admin only)');
     PageInstallationType.Add('Install for current user only');
-    PageInstallationType.Values[0] := False; // Default to "Install for current user only";
+    PageInstallationType.Values[1] := True; // Default to "Install for current user only";
   end;
   
   function GetInstallDir(Default: String): String;
