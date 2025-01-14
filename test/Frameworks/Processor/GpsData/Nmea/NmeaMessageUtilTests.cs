@@ -23,7 +23,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             var result = NmeaMessageUtil.ParseDateTime(inputString, logger.Object);
 
             // Assert
-            Assert.Equal(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 12, 34, 56, 780), result);
+            Assert.Equal(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 12, 34, 56, 780, DateTimeKind.Utc), result);
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             var result = NmeaMessageUtil.ParseDateTime(inputTimeString, inputDateString, logger.Object);
 
             // Assert
-            Assert.Equal(new DateTime(2003, 02, 01, 12, 34, 56, 780), result);
+            Assert.Equal(new DateTime(2003, 02, 01, 12, 34, 56, 780, DateTimeKind.Utc), result);
         }
 
         [Fact]

@@ -14,7 +14,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
         {
             if (string.IsNullOrEmpty(inputString))
             {
-                logger.LogError("Failed to parse time: {timeStr}", inputString);
+                logger.LogError("Failed to parse time for empty string");
                 return DateTime.MinValue;
             }
 
@@ -25,7 +25,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             }
             else
             {
-                logger.LogError("Failed to parse time: {timeStr}", inputString);
+                logger.LogError("Failed to parse time: {inputString}", inputString);
                 return DateTime.MinValue;
             }
         }
@@ -34,13 +34,13 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
         {
             if (string.IsNullOrEmpty(inputStringHhMmSsFf) || string.IsNullOrEmpty(inputStringDdMmYy))
             {
-                logger.LogError("Failed to parse time: {timeStr}", inputStringHhMmSsFf);
+                logger.LogError("Failed to parse time: {inputStringHhMmSsFf}", inputStringHhMmSsFf);
                 return DateTime.MinValue;
             }
 
             if (!int.TryParse(inputStringDdMmYy.AsSpan(4, 2), out int year))
             {
-                logger.LogError("Failed to parse time: {timeStr}", inputStringDdMmYy);
+                logger.LogError("Failed to parse time: {inputStringDdMmYy}", inputStringDdMmYy);
                 return DateTime.MinValue;
             }
 
@@ -53,7 +53,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             }
             else
             {
-                logger.LogError("Failed to parse time: {timeStr}", combinedString);
+                logger.LogError("Failed to parse time: {combinedString}", combinedString);
                 return DateTime.MinValue;
             }
         }

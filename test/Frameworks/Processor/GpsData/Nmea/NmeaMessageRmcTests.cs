@@ -39,7 +39,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
 
             // Assert
             const int Precision = 3;
-            var expectedTime = new DateTime(2025, 01, 12, 08, 08, 27);
+            var expectedTime = new DateTime(2025, 01, 12, 08, 08, 27, DateTimeKind.Utc);
             Assert.Equal(expectedTime, rmcMessage.Time);
             Assert.Equal(DataStatus.Valid, rmcMessage.Status);
             Assert.Equal(4734.98631, rmcMessage.Latitude, Precision);

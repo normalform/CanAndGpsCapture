@@ -15,7 +15,7 @@ namespace CagcapTests.Frameworks.Device.Canable
             // Arrange
             var id = new CanId(0x123);
             var data = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 };
-            var timestamp = new DateTime(2025, 1, 1);
+            var timestamp = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
             // Act
             var canMessage = new CanMessage(id, data, timestamp);

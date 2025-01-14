@@ -38,7 +38,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             Assert.Equal(LatitudeHemisphere.North, gllMessage.LatitudeHemisphere);
             Assert.Equal(12311.12, gllMessage.Longitude, Precision);
             Assert.Equal(LongitudeHemisphere.West, gllMessage.LongitudeHemisphere);
-            var expectedTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 22, 54, 44);
+            var expectedTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 22, 54, 44, DateTimeKind.Utc);
             Assert.Equal(expectedTime, gllMessage.Time);
             Assert.Equal(DataStatus.Valid, gllMessage.DataStatus);
             Assert.Equal(PositionFixFlag.AutonomousGnssFix, gllMessage.PositionMode);
