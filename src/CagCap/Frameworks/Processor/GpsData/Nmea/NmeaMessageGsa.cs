@@ -28,16 +28,21 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     {
         private const int SatelliteCount = 12;
 
-        internal OperationMode OperationMode { get; } = ParseOperationMode(dataVector[0][0]);
+        internal OperationMode OperationMode { get; } = ParseOperationMode(dataVector[0]);
         internal NavMode NavMode { get; } = ParseNavMode(dataVector[1], logger);
         internal int[] SatelliteNumbers { get; } = ParseSatelliteNumbers(dataVector[2..], logger);
         internal double PositionDilutionOfPrecision { get; } = NmeaMessageUtil.ParseToDouble(dataVector[14], logger);
         internal double HorizontalDilutionOfPrecision { get; } = NmeaMessageUtil.ParseToDouble(dataVector[15], logger);
         internal double VerticalDilutionOfPrecision { get; } = NmeaMessageUtil.ParseToDouble(dataVector[16], logger);
 
-        internal static OperationMode ParseOperationMode(char operationModeChar)
+        internal static OperationMode ParseOperationMode(string operationModeInput)
         {
-            return operationModeChar == 'A' ? OperationMode.Automatic : OperationMode.Manual;
+            return operationModeInput switch
+            {
+                "A" => OperationMode.Automatic,
+                "M" => OperationMode.Manual,
+                _ => OperationMode.Automatic,
+            };
         }
 
         internal static NavMode ParseNavMode(string navModeStr, ILogger logger)

@@ -23,9 +23,9 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     {
         internal DateTime Time { get; } = NmeaMessageUtil.ParseDateTime(dataVector[0], logger);
         internal double Latitude { get; } = NmeaMessageUtil.ParseToDouble(dataVector[1], logger);
-        internal LatitudeHemisphere LatitudeHemisphere { get; } = dataVector[2][0] == 'N' ? LatitudeHemisphere.North : LatitudeHemisphere.South;
+        internal LatitudeHemisphere LatitudeHemisphere { get; } = NmeaMessageUtil.ParseLatitudeHemisphere(dataVector[2], logger);
         internal double Longitude { get; } = NmeaMessageUtil.ParseToDouble(dataVector[3], logger);
-        internal LongitudeHemisphere LongitudeHemisphere { get; } = dataVector[4][0] == 'E' ? LongitudeHemisphere.East : LongitudeHemisphere.West;
+        internal LongitudeHemisphere LongitudeHemisphere { get; } = NmeaMessageUtil.ParseLongitudeHemisphere(dataVector[4], logger);
         internal PositionFixFlag Quality { get; } = ParseQuality(dataVector[5], logger);
         internal int Satellites { get; } = NmeaMessageUtil.ParseToInt(dataVector[6], logger);
         internal double HorizontalDilutionOfPrecision { get; } = NmeaMessageUtil.ParseToDouble(dataVector[7], logger);

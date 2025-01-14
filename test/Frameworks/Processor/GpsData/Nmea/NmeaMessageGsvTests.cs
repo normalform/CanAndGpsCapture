@@ -66,6 +66,60 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         }
 
         [Fact]
+        public void Construction_InvalidSignal()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+
+            var gsvData = new[]
+            {
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            };
+
+            // Act
+            var gsvMessage = new NmeaMessageGsv(gsvData, loggerMock);
+
+            // Assert
+            Assert.Equal(0, gsvMessage.NumberOfMessages);
+            Assert.Equal(0, gsvMessage.MessageNumber);
+            Assert.Equal(0, gsvMessage.NumberOfSatellitesInView);
+            Assert.Equal(0, gsvMessage.SatelliteViews[0].Id);
+            Assert.Equal(0, gsvMessage.SatelliteViews[0].Elevation);
+            Assert.Equal(0, gsvMessage.SatelliteViews[0].Azimuth);
+            Assert.Equal(0, gsvMessage.SatelliteViews[0].SignalToNoiseRatio);
+            Assert.Equal(0, gsvMessage.SatelliteViews[1].Id);
+            Assert.Equal(0, gsvMessage.SatelliteViews[1].Elevation);
+            Assert.Equal(0, gsvMessage.SatelliteViews[1].Azimuth);
+            Assert.Equal(0, gsvMessage.SatelliteViews[1].SignalToNoiseRatio);
+            Assert.Equal(0, gsvMessage.SatelliteViews[2].Id);
+            Assert.Equal(0, gsvMessage.SatelliteViews[2].Elevation);
+            Assert.Equal(0, gsvMessage.SatelliteViews[2].Azimuth);
+            Assert.Equal(0, gsvMessage.SatelliteViews[2].SignalToNoiseRatio);
+            Assert.Equal(0, gsvMessage.SatelliteViews[3].Id);
+            Assert.Equal(0, gsvMessage.SatelliteViews[3].Elevation);
+            Assert.Equal(0, gsvMessage.SatelliteViews[3].Azimuth);
+            Assert.Equal(0, gsvMessage.SatelliteViews[3].SignalToNoiseRatio);
+        }
+
+        [Fact]
         public void ToString_Success()
         {
             // Arrange

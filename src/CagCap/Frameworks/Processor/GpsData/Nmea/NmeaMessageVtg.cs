@@ -13,11 +13,11 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     /// </summary>
     internal class NmeaMessageVtg(string[] dataVector, ILogger logger) : INmeaMessage
     {
-        internal double CourseOverGroundTrue { get; } = (!string.IsNullOrEmpty(dataVector[0])) ? NmeaMessageUtil.ParseToDouble(dataVector[0], logger) : 0.0;
-        internal double CourseOverGroundMagnatic { get; } = (!string.IsNullOrEmpty(dataVector[2])) ? NmeaMessageUtil.ParseToDouble(dataVector[2], logger) : 0.0;
-        internal double SpeedOverGroundKnots { get; } = (!string.IsNullOrEmpty(dataVector[4])) ? NmeaMessageUtil.ParseToDouble(dataVector[4], logger) : 0.0;
-        internal double SpeedOverGroundKph { get; } = (!string.IsNullOrEmpty(dataVector[6])) ? NmeaMessageUtil.ParseToDouble(dataVector[6], logger) : 0.0;
-        internal PositionFixFlag PositionMode { get; } = NmeaMessageUtil.ParsePositionMode(dataVector[8][0], logger);
+        internal double CourseOverGroundTrue { get; } = NmeaMessageUtil.ParseToDouble(dataVector[0], logger);
+        internal double CourseOverGroundMagnatic { get; } = NmeaMessageUtil.ParseToDouble(dataVector[2], logger);
+        internal double SpeedOverGroundKnots { get; } = NmeaMessageUtil.ParseToDouble(dataVector[4], logger);
+        internal double SpeedOverGroundKph { get; } = NmeaMessageUtil.ParseToDouble(dataVector[6], logger);
+        internal PositionFixFlag PositionMode { get; } = NmeaMessageUtil.ParsePositionMode(dataVector[8], logger);
 
         public override string ToString()
         {

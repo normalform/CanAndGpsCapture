@@ -14,14 +14,14 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     internal class NmeaMessageRmc(string[] dataVector, ILogger logger) : INmeaMessage
     {
         internal DateTime Time { get; } = NmeaMessageUtil.ParseDateTime(dataVector[0], dataVector[8], logger);
-        internal DataStatus Status { get; } = dataVector[1][0] == 'A' ? DataStatus.Valid : DataStatus.Invalid;
+        internal DataStatus Status { get; } = NmeaMessageUtil.ParseDataStatus(dataVector[1]);
         internal double Latitude { get; } = NmeaMessageUtil.ParseToDouble(dataVector[2], logger);
-        internal LatitudeHemisphere LatitudeHemisphere { get; } = dataVector[3][0] == 'N' ? LatitudeHemisphere.North : LatitudeHemisphere.South;
+        internal LatitudeHemisphere LatitudeHemisphere { get; } = NmeaMessageUtil.ParseLatitudeHemisphere(dataVector[3], logger);
         internal double Longitude { get; } = NmeaMessageUtil.ParseToDouble(dataVector[4], logger);
-        internal LongitudeHemisphere LongitudeHemisphere { get; } = dataVector[5][0] == 'E' ? LongitudeHemisphere.East : LongitudeHemisphere.West;
+        internal LongitudeHemisphere LongitudeHemisphere { get; } = NmeaMessageUtil.ParseLongitudeHemisphere(dataVector[5], logger);
         internal double SpeedOverGroundKnots { get; } = (!string.IsNullOrEmpty(dataVector[6])) ? NmeaMessageUtil.ParseToDouble(dataVector[6], logger) : 0.0;
         internal double CourseOverGroundDeg { get; } = (!string.IsNullOrEmpty(dataVector[7])) ? NmeaMessageUtil.ParseToDouble(dataVector[7], logger) : 0.0;
-        internal PositionFixFlag PositionMode { get; } = NmeaMessageUtil.ParsePositionMode(dataVector[11][0], logger);
+        internal PositionFixFlag PositionMode { get; } = NmeaMessageUtil.ParsePositionMode(dataVector[11], logger);
 
         public override string ToString()
         {

@@ -28,6 +28,11 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
         internal static NmeaTextMessageType ParseNmeaTextMessageType(string textMessageType)
         {
+            if (string.IsNullOrEmpty(textMessageType))
+            {
+                return NmeaTextMessageType.Error;
+            }
+
             return textMessageType switch
             {
                 "00" => NmeaTextMessageType.Error,

@@ -45,6 +45,37 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         }
 
         [Fact]
+        public void Construction_InvalidSignal()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+
+            var gllData = new[]
+            {
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            };
+
+            // Act
+            var gllMessage = new NmeaMessageGll(gllData, loggerMock);
+
+            // Assert
+            const int Precision = 3;
+            Assert.Equal(0.0, gllMessage.Latitude, Precision);
+            Assert.Equal(LatitudeHemisphere.North, gllMessage.LatitudeHemisphere);
+            Assert.Equal(0.0, gllMessage.Longitude, Precision);
+            Assert.Equal(LongitudeHemisphere.West, gllMessage.LongitudeHemisphere);
+            Assert.Equal(DateTime.MinValue, gllMessage.Time);
+            Assert.Equal(DataStatus.Invalid, gllMessage.DataStatus);
+            Assert.Equal(PositionFixFlag.NoFix, gllMessage.PositionMode);
+        }
+
+        [Fact]
         public void ToString_Success()
         {
             // Arrange
