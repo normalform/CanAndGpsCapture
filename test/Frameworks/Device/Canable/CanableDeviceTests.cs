@@ -22,7 +22,13 @@ namespace CagcapTests.Frameworks.Device.Canable
             {
                 Enable = true,
                 BitRate = 500000,
-                SamplePoint = "50.0"
+                SamplePoint = "50.0",
+                EnableListenOnly = true,
+                EnableLoopback = true,
+                EnableHwTimestamp = true,
+                EnableIdentity = true,
+                EnableUserId = true,
+                EnablePadPacketsToMaxPacketSize = true
             };
             this.logger = new Mock<ILogger>().Object;
             var loggerFactoryMock = new Mock<ILoggerFactory>();
@@ -76,22 +82,12 @@ namespace CagcapTests.Frameworks.Device.Canable
                 FclkCan = 48000000
             };
 
-            var candleDeviceConfig = new CandleDataStructure.CandleDeviceConfig();
-            canBusConfig.EnableListenOnly = true;
-            canBusConfig.EnableLoopback = true;
-            canBusConfig.EnableHwTimestamp = true;
-            canBusConfig.EnableIdentity = true;
-            canBusConfig.EnableUserId = true;
-            canBusConfig.EnablePadPacketsToMaxPacketSize = true;
-
             usbAccessMock.InSequence(mockSequence).Setup(ua => ua.UsbControlMessageSet(CanRequest.Mode, 0, 0, It.Is<CandleDataStructure.CandleDeviceMode>(m =>
                 m.Mode == candleDeviceModeStop.Mode &&
                 m.Flags == candleDeviceModeStop.Flags
             )));
             usbAccessMock.InSequence(mockSequence).Setup(ua => ua.UsbControlMessageGet<CandleDataStructure.CandleCapability>(CanRequest.BitTimingConstants, 0, 0))
                 .Returns(candleCapability);
-            usbAccessMock.InSequence(mockSequence).Setup(ua => ua.UsbControlMessageGet<CandleDataStructure.CandleDeviceConfig>(CanRequest.DeviceConfig, 0, 0))
-                .Returns(candleDeviceConfig);
             usbAccessMock.InSequence(mockSequence).Setup(ua => ua.UsbControlMessageSet(CanRequest.BitTiming, 0, 0, It.Is<CandleDataStructure.BitTimingStruct>(m =>
                 m.PropSeg == bitTiming.PropSeg &&
                 m.PhaseSeg1 == bitTiming.PhaseSeg1 &&
@@ -115,7 +111,6 @@ namespace CagcapTests.Frameworks.Device.Canable
                 m.Flags == candleDeviceModeStop.Flags
             )), Times.Once);
             usbAccessMock.Verify(ua => ua.UsbControlMessageGet<CandleDataStructure.CandleCapability>(CanRequest.BitTimingConstants, 0, 0), Times.Once);
-            usbAccessMock.Verify(ua => ua.UsbControlMessageGet<CandleDataStructure.CandleDeviceConfig>(CanRequest.DeviceConfig, 0, 0), Times.Once);
             usbAccessMock.Verify(ua => ua.UsbControlMessageSet(CanRequest.BitTiming, 0, 0, It.Is<CandleDataStructure.BitTimingStruct>(m =>
                 m.PropSeg == bitTiming.PropSeg &&
                 m.PhaseSeg1 == bitTiming.PhaseSeg1 &&
@@ -195,8 +190,8 @@ namespace CagcapTests.Frameworks.Device.Canable
         }
 
         [Theory]
-        [InlineData("-50", typeof(FormatException))]
-        [InlineData("101", typeof(FormatException))]
+        [InlineData("-50", typeof(ArgumentOutOfRangeException))]
+        [InlineData("101", typeof(ArgumentOutOfRangeException))]
         [InlineData("invalid", typeof(FormatException))]
         [InlineData("", typeof(FormatException))]
         [InlineData(null, typeof(NullReferenceException))]

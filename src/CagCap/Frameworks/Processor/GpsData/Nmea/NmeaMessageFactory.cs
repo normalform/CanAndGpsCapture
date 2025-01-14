@@ -8,7 +8,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
 
-    internal class NmeaMessageFactory
+    internal static class NmeaMessageFactory
     {
         public static INmeaMessage Create(string address, string[] dataVector, ILogger logger)
         {

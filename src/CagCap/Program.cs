@@ -3,23 +3,23 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-using CagCap.Application;
-using CagCap.DomainObject;
-using CagCap.DomainObject.Device;
-using CagCap.Frameworks.Device.Adapter;
-using CagCap.Frameworks.Device.Canable;
-using CagCap.Frameworks.Processor.GpsData;
-using CagCap.UI;
-
-using CommandLine;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System.Diagnostics.CodeAnalysis;
-
 namespace CagCap
 {
+    using CagCap.Application;
+    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device;
+    using CagCap.Frameworks.Device.Adapter;
+    using CagCap.Frameworks.Device.Canable;
+    using CagCap.Frameworks.Processor.GpsData;
+    using CagCap.UI;
+
+    using CommandLine;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
+    using System.Diagnostics.CodeAnalysis;
+
     [ExcludeFromCodeCoverage]
     static class Program
     {

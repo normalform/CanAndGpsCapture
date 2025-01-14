@@ -124,16 +124,13 @@ namespace CagCap.Frameworks.Device.UbloxGps
         {
             if (!this.disposed)
             {
-                if (disposing)
+                if (disposing && this.serialPort != null)
                 {
-                    if (this.serialPort != null)
+                    if (this.serialPort.IsOpen)
                     {
-                        if (this.serialPort.IsOpen)
-                        {
-                            this.serialPort.Close();
-                        }
-                        this.serialPort.Dispose();
+                        this.serialPort.Close();
                     }
+                    this.serialPort.Dispose();
                 }
 
                 this.disposed = true;
