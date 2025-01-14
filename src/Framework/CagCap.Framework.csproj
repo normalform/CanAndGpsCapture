@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InternalsVisibleTo>CagCap.Framework.Tests</InternalsVisibleTo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OTS\src\Canable\Canable.csproj" />
+    <ProjectReference Include="..\..\OTS\src\UbloxGpsReceiver\UbloxGpsReceiver.csproj" />
+    <ProjectReference Include="..\DomainObject\CagCap.DomainObject.csproj" />
+  </ItemGroup>
+
+</Project>
