@@ -3,7 +3,7 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License or any later version.
 
-name: .NET 8 CI
+name: Production CI
 
 on:
   push:
@@ -90,7 +90,7 @@ jobs:
 
     - name: Set upload URL
       if: matrix.configuration == 'Release'
-      run: echo "upload_url=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
+      run: echo "UPLOAD_URL=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
 
     - name: Upload Release Asset
       if: matrix.configuration == 'Release'
@@ -98,7 +98,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.CAGCAP_TOKEN }}
       with:
-        upload_url: ${{ env.upload_url }}
+        upload_url: ${{ env.UPLOAD_URL }}
         asset_path: ./CagCapSetup.exe
         asset_name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}.exe
         asset_content_type: application/octet-stream
