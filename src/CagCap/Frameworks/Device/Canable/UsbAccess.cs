@@ -177,7 +177,6 @@ namespace CagCap.Frameworks.Device.Canable
         {
             var frame = CandleDataStructure.FromByteArray<CandleDataStructure.CandleDataFrame>(buffer);
             var canId = new CanId(frame.CanId);
-
             var data = ExtractData(frame);
             var timeStamp = new DateTime(frame.TimestampUs, DateTimeKind.Utc);
 
