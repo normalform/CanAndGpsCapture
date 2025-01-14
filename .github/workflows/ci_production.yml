@@ -1,0 +1,100 @@
+# Copyright (C) 2025
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License or any later version.
+
+name: Production CI
+
+on:
+  push:
+    branches: [ "main", "basic_ci_pipeline" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+        runtime: [win-x64]
+
+    environment: production
+
+    env:
+      Solution_Name: Cagcap.sln
+      Test_Project_Path: test\CagcapTests.csproj
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.Solution_Name }}
+
+    - name: Build
+      run: dotnet build ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }} --no-restore
+
+    - name: Run tests
+      run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./test/coverage/coverage.cobertura.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+        flags: unittests
+        name: code-coverage-report
+        fail_ci_if_error: true
+
+    - name: Publish
+      if: matrix.configuration == 'Release'
+      run: dotnet publish ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }} -r ${{ matrix.runtime }}
+
+    - name: Setup Inno Setup
+      if: matrix.configuration == 'Release'
+      run: choco install innosetup
+
+    - name: Create installer package
+      if: matrix.configuration == 'Release'
+      run: |
+        powershell -Command "& 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe' '.github/setup.iss' '/dSetupVersion=${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}'"
+
+    - name: Upload installer package
+      if: matrix.configuration == 'Release'
+      uses: actions/upload-artifact@v3
+      with:
+        name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
+        path: CagCapSetup.exe
+
+    - name: Create GitHub Release
+      if: matrix.configuration == 'Release'
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.CAGCAP_TOKEN }}
+      with:
+        tag_name: v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
+        release_name: Release v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      if: matrix.configuration == 'Release'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.CAGCAP_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./CagCapSetup.exe
+        asset_name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}.exe
+        asset_content_type: application/octet-stream
