@@ -88,13 +88,17 @@ jobs:
         draft: false
         prerelease: false
 
+    - name: Set upload URL
+      if: matrix.configuration == 'Release'
+      run: echo "upload_url=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
+
     - name: Upload Release Asset
       if: matrix.configuration == 'Release'
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.CAGCAP_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ env.upload_url }}
         asset_path: ./CagCapSetup.exe
         asset_name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}.exe
         asset_content_type: application/octet-stream
