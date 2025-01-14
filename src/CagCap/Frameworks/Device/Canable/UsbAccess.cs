@@ -179,7 +179,7 @@ namespace CagCap.Frameworks.Device.Canable
             var canId = new CanId(frame.CanId);
 
             var data = ExtractData(frame);
-            var timeStamp = DateTime.SpecifyKind(new DateTime(frame.TimestampUs), DateTimeKind.Utc);
+            var timeStamp = new DateTime(frame.TimestampUs, DateTimeKind.Utc);
 
             var message = new CanMessage(canId, data, timeStamp);
             this.DataReceived?.Invoke(this, message);
