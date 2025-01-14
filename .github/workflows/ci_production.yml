@@ -70,7 +70,7 @@ jobs:
         powershell -Command "& 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe' '.github/setup.iss' '/dSetupVersion=${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}'"
 
     - name: Upload installer package
-      if: matrix.configuration == 'Release'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.configuration == 'Release'
       uses: actions/upload-artifact@v3
       with:
         name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}
