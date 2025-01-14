@@ -26,9 +26,6 @@ jobs:
       Solution_Name: Cagcap.sln
       Test_Project_Path: test\CagcapTests.csproj
 
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -91,17 +88,13 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Set upload URL
-      if: matrix.configuration == 'Release'
-      run: echo "UPLOAD_URL=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
-
     - name: Upload Release Asset
       if: matrix.configuration == 'Release'
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.CAGCAP_TOKEN }}
       with:
-        upload_url: ${{ env.UPLOAD_URL }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./CagCapSetup.exe
         asset_name: CagCapSetup-${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ github.run_number }}.exe
         asset_content_type: application/octet-stream
