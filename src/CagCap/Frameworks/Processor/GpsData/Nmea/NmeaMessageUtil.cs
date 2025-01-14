@@ -58,6 +58,11 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
         internal static double ParseToDouble(string inputString, ILogger logger)
         {
+            if (string.IsNullOrEmpty(inputString))
+            {
+                return 0.0;
+            }
+
             if (double.TryParse(inputString, out double output))
             {
                 return output;
