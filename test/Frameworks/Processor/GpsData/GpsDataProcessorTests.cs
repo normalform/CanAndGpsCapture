@@ -15,14 +15,12 @@ namespace CagcapTests.Frameworks.Processor.GpsData
     public class GpsDataProcessorTests
     {
         private readonly Mock<ILoggerFactory> loggerFactoryMock;
-        private readonly Mock<IGpsReceiverDevice> gpsReceiverDeviceMock;
 
         public GpsDataProcessorTests()
         {
             var loggerMock = new Mock<ILogger>();
             this.loggerFactoryMock = new Mock<ILoggerFactory>();
             this.loggerFactoryMock.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(loggerMock.Object);
-            this.gpsReceiverDeviceMock = new Mock<IGpsReceiverDevice>();
         }
 
         [Fact]
@@ -30,7 +28,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData
         {
             // Arrange
             string rawData = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47\r\n";
-            var gpsDataProcessor = new GpsDataProcessor(gpsReceiverDeviceMock.Object, loggerFactoryMock.Object);
+            var gpsDataProcessor = new GpsDataProcessor(loggerFactoryMock.Object);
             INmeaMessage? dataReceivedCalled = null;
             gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data;
 
@@ -46,7 +44,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData
         public void Process_EmptyData()
         {
             // Arrange
-            var gpsDataProcessor = new GpsDataProcessor(gpsReceiverDeviceMock.Object, loggerFactoryMock.Object);
+            var gpsDataProcessor = new GpsDataProcessor(loggerFactoryMock.Object);
             INmeaMessage? dataReceivedCalled = null;
             gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data;
 

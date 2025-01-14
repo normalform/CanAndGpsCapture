@@ -51,13 +51,54 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             Assert.Equal(1.78, gsaMessage.VerticalDilutionOfPrecision, Precision);
         }
 
+        [Fact]
+        public void Construction_InvalidSignal()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+
+            var gsaData = new[]
+            {
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            };
+
+            // Act
+            var gsaMessage = new NmeaMessageGsa(gsaData, loggerMock);
+
+            // Assert
+            const int Precision = 3;
+            Assert.Equal(OperationMode.Automatic, gsaMessage.OperationMode);
+            Assert.Equal(NavMode.NoFix, gsaMessage.NavMode);
+            Assert.Equal([], gsaMessage.SatelliteNumbers);
+            Assert.Equal(0.0, gsaMessage.PositionDilutionOfPrecision, Precision);
+            Assert.Equal(0.0, gsaMessage.HorizontalDilutionOfPrecision, Precision);
+            Assert.Equal(0.0, gsaMessage.VerticalDilutionOfPrecision, Precision);
+        }
+
         [Theory]
-        [InlineData('M', OperationMode.Manual)]
-        [InlineData('A', OperationMode.Automatic)]
-        internal void ParseOperationMode(char operationModeChar, OperationMode expectedOperationMode)
+        [InlineData("M", OperationMode.Manual)]
+        [InlineData("A", OperationMode.Automatic)]
+        [InlineData("", OperationMode.Automatic)]
+        internal void ParseOperationMode(string operationModeStr, OperationMode expectedOperationMode)
         {
             // Arrange & Act
-            var operationMode = NmeaMessageGsa.ParseOperationMode(operationModeChar);
+            var operationMode = NmeaMessageGsa.ParseOperationMode(operationModeStr);
 
             // Assert
             Assert.Equal(expectedOperationMode, operationMode);

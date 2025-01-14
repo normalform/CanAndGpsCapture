@@ -42,8 +42,8 @@ namespace CagCap.Frameworks.Device.Canable
         private readonly ILogger logger;
 
         private readonly UsbDevice? usbDevice;
-        private readonly UsbEndpointReader? reader;
-        private readonly UsbEndpointWriter? writer;
+        private UsbEndpointReader? reader;
+        private UsbEndpointWriter? writer;
 
         private readonly CancellationTokenSource cancellationTokenSource = new();
         public event EventHandler<CanMessage>? DataReceived;
@@ -68,26 +68,7 @@ namespace CagCap.Frameworks.Device.Canable
                 // Iterate through configurations and interfaces to find bulk input and output endpoints
                 foreach (UsbConfigInfo configInfo in this.usbDevice.Configs)
                 {
-                    foreach (UsbInterfaceInfo interfaceInfo in configInfo.InterfaceInfoList)
-                    {
-                        foreach (UsbEndpointInfo endpointInfo in interfaceInfo.EndpointInfoList)
-                        {
-                            if (endpointInfo.Descriptor.Attributes == (byte)EndpointType.Bulk)
-                            {
-                                switch (endpointInfo.Descriptor.EndpointID)
-                                {
-                                    case (byte)ReadEndpointID.Ep01:
-                                        this.reader = this.usbDevice.OpenEndpointReader((ReadEndpointID)endpointInfo.Descriptor.EndpointID);
-                                        break;
-                                    case (byte)WriteEndpointID.Ep02:
-                                        this.writer = this.usbDevice.OpenEndpointWriter((WriteEndpointID)endpointInfo.Descriptor.EndpointID);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
-                    }
+                    FindBulkEndpoints(configInfo);
                 }
 
                 ResetEndPoint(this.reader);
@@ -110,8 +91,7 @@ namespace CagCap.Frameworks.Device.Canable
         {
             frame.EchoId = 0;
             frame.Channel = (byte)channel;
-
-            var errorCode = this.writer?.Write(frame, 2000, out int bytesWritten);
+            var errorCode = this.writer?.Write(frame, 2000, out _);
             if (errorCode != ErrorCode.None)
             {
                 var exception = new InvalidOperationException(UsbDevice.LastErrorString);
@@ -124,6 +104,37 @@ namespace CagCap.Frameworks.Device.Canable
         public void StartReceive()
         {
             Task.Run(() => this.ReadDataAsync(this.cancellationTokenSource.Token));
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void FindBulkEndpoints(UsbConfigInfo configInfo)
+        {
+            foreach (UsbInterfaceInfo interfaceInfo in configInfo.InterfaceInfoList)
+            {
+                var bulkEndpoints = interfaceInfo.EndpointInfoList
+                    .Where(endpointInfo => endpointInfo.Descriptor.Attributes == (byte)EndpointType.Bulk);
+
+                foreach (var endpointInfo in bulkEndpoints)
+                {
+                    AssignEndpoint(endpointInfo);
+                }
+            }
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void AssignEndpoint(UsbEndpointInfo endpointInfo)
+        {
+            switch (endpointInfo.Descriptor.EndpointID)
+            {
+                case (byte)ReadEndpointID.Ep01:
+                    this.reader = this.usbDevice?.OpenEndpointReader((ReadEndpointID)endpointInfo.Descriptor.EndpointID);
+                    break;
+                case (byte)WriteEndpointID.Ep02:
+                    this.writer = this.usbDevice?.OpenEndpointWriter((WriteEndpointID)endpointInfo.Descriptor.EndpointID);
+                    break;
+                default:
+                    break;
+            }
         }
 
         [ExcludeFromCodeCoverage]
@@ -153,27 +164,40 @@ namespace CagCap.Frameworks.Device.Canable
                     var ec = this.reader.Read(buffer, 2000, out int bytesRead);
                     if (ec == ErrorCode.None && bytesRead > 0)
                     {
-                        var frame = CandleDataStructure.FromByteArray<CandleDataStructure.CandleDataFrame>(buffer);
-                        var canId = new CanId(frame.CanId);
-
-                        var data = new byte[Math.Min(frame.CanDlc, (byte)8)];
-                        if (frame.CanDlc > 0) data[0] = frame.Data0;
-                        if (frame.CanDlc > 1) data[1] = frame.Data1;
-                        if (frame.CanDlc > 2) data[2] = frame.Data2;
-                        if (frame.CanDlc > 3) data[3] = frame.Data3;
-                        if (frame.CanDlc > 4) data[4] = frame.Data4;
-                        if (frame.CanDlc > 5) data[5] = frame.Data5;
-                        if (frame.CanDlc > 6) data[6] = frame.Data6;
-                        if (frame.CanDlc > 7) data[7] = frame.Data7;
-                        var timeStamp = new DateTime(frame.TimestampUs);
-
-                        var message = new CanMessage(canId, data, timeStamp);
-                        this.DataReceived?.Invoke(this, message);
+                        this.ProcessReceivedData(buffer);
                     }
 
                     await Task.Delay(1, cancellationToken).ConfigureAwait(false);
                 }
             }
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void ProcessReceivedData(byte[] buffer)
+        {
+            var frame = CandleDataStructure.FromByteArray<CandleDataStructure.CandleDataFrame>(buffer);
+            var canId = new CanId(frame.CanId);
+
+            var data = ExtractData(frame);
+            var timeStamp = DateTime.SpecifyKind(new DateTime(frame.TimestampUs), DateTimeKind.Utc);
+
+            var message = new CanMessage(canId, data, timeStamp);
+            this.DataReceived?.Invoke(this, message);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static byte[] ExtractData(CandleDataStructure.CandleDataFrame frame)
+        {
+            var data = new byte[Math.Min(frame.CanDlc, (byte)8)];
+            if (frame.CanDlc > 0) data[0] = frame.Data0;
+            if (frame.CanDlc > 1) data[1] = frame.Data1;
+            if (frame.CanDlc > 2) data[2] = frame.Data2;
+            if (frame.CanDlc > 3) data[3] = frame.Data3;
+            if (frame.CanDlc > 4) data[4] = frame.Data4;
+            if (frame.CanDlc > 5) data[5] = frame.Data5;
+            if (frame.CanDlc > 6) data[6] = frame.Data6;
+            if (frame.CanDlc > 7) data[7] = frame.Data7;
+            return data;
         }
 
         [ExcludeFromCodeCoverage]
@@ -238,8 +262,7 @@ namespace CagCap.Frameworks.Device.Canable
                 Index = (short)index,
                 Length = (short)data.Length
             };
-
-            bool success = this.usbDevice.ControlTransfer(ref setupPacket, data, data.Length, out int transferredLength);
+            bool success = this.usbDevice.ControlTransfer(ref setupPacket, data, data.Length, out _);
             if (!success)
             {
                 var exception = new InvalidOperationException($"Control transfer failed: {UsbDevice.LastErrorString}");

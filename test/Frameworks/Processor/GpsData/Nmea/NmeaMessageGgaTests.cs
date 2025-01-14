@@ -56,6 +56,49 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             Assert.Equal(0, ggaMessage.DifferentialStationId);
         }
 
+        [Fact]
+        public void Construction_InvliadSignal()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+
+            var ggaData = new[]
+            {
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            };
+
+            // Act
+            var ggaMessage = new NmeaMessageGga(ggaData, loggerMock);
+
+            // Assert
+            const int Precision = 3;
+            Assert.Equal(DateTime.MinValue, ggaMessage.Time);
+            Assert.Equal(0.0, ggaMessage.Latitude, Precision);
+            Assert.Equal(LatitudeHemisphere.North, ggaMessage.LatitudeHemisphere);
+            Assert.Equal(0.0, ggaMessage.Longitude, Precision);
+            Assert.Equal(LongitudeHemisphere.West, ggaMessage.LongitudeHemisphere);
+            Assert.Equal(PositionFixFlag.NoFix, ggaMessage.Quality);
+            Assert.Equal(0, ggaMessage.Satellites);
+            Assert.Equal(0.0, ggaMessage.HorizontalDilutionOfPrecision, Precision);
+            Assert.Equal(0.0, ggaMessage.Altitude, Precision);
+            Assert.Equal(0.0, ggaMessage.GeoidSeparation, Precision);
+            Assert.Equal(0, ggaMessage.AgeOfDifferentialCorrections);
+            Assert.Equal(0, ggaMessage.DifferentialStationId);
+        }
+
         [Theory]
         [InlineData("0", PositionFixFlag.NoFix)]
         [InlineData("1", PositionFixFlag.AutonomousGnssFix)]

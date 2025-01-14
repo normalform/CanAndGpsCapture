@@ -17,7 +17,6 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             // Arrange
             var loggerMock = new Mock<ILogger>().Object;
 
-            //01,01,02,HW  UBX-G70xx   00070000 
             var txtData = new[]
             {
                 "01",
@@ -36,6 +35,30 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             Assert.Equal("HW  UBX-G70xx   00070000 ", txtMessage.Message);
         }
 
+        [Fact]
+        public void Construction_InvliadSignal()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+
+            var txtData = new[]
+            {
+                "",
+                "",
+                "",
+                ""
+            };
+
+            // Act
+            var txtMessage = new NmeaMessageTxt(txtData, loggerMock);
+
+            // Assert
+            Assert.Equal(0, txtMessage.NumberOfMessages);
+            Assert.Equal(0, txtMessage.MessageNumber);
+            Assert.Equal(NmeaTextMessageType.Error, txtMessage.TextMessageType);
+            Assert.Empty(txtMessage.Message);
+        }
+
         [Theory]
         [InlineData("00", NmeaTextMessageType.Error)]
         [InlineData("01", NmeaTextMessageType.Warning)]
@@ -45,6 +68,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         [InlineData("05", NmeaTextMessageType.Error)]   // Threat unsupport message type to error
         [InlineData("06", NmeaTextMessageType.Error)]   // Threat unsupport message type to error
         [InlineData("07", NmeaTextMessageType.User)]
+        [InlineData("", NmeaTextMessageType.Error)]     // Threat empty message type to error
         internal void ParseNmeaTextMessageType(string textMessageType, NmeaTextMessageType expected)
         {
             // Arrange & Act

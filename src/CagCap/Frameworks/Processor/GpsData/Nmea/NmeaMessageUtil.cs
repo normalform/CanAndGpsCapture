@@ -5,13 +5,21 @@
 
 namespace CagCap.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using Microsoft.Extensions.Logging;
 
     internal static class NmeaMessageUtil
     {
         internal static DateTime ParseDateTime(string inputString, ILogger logger)
         {
-            if (DateTime.TryParseExact(inputString, "HHmmss.ff", null, System.Globalization.DateTimeStyles.None, out DateTime time))
+            if (string.IsNullOrEmpty(inputString))
+            {
+                logger.LogError("Failed to parse time: {timeStr}", inputString);
+                return DateTime.MinValue;
+            }
+
+            var formatProvider = System.Globalization.CultureInfo.InvariantCulture;
+            if (DateTime.TryParseExact(inputString, "HHmmss.ff", formatProvider, System.Globalization.DateTimeStyles.None, out DateTime time))
             {
                 return time;
             }
@@ -24,6 +32,12 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
         internal static DateTime ParseDateTime(string inputStringHhMmSsFf, string inputStringDdMmYy, ILogger logger)
         {
+            if (string.IsNullOrEmpty(inputStringHhMmSsFf) || string.IsNullOrEmpty(inputStringDdMmYy))
+            {
+                logger.LogError("Failed to parse time: {timeStr}", inputStringHhMmSsFf);
+                return DateTime.MinValue;
+            }
+
             if (!int.TryParse(inputStringDdMmYy.AsSpan(4, 2), out int year))
             {
                 logger.LogError("Failed to parse time: {timeStr}", inputStringDdMmYy);
@@ -32,7 +46,8 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
             var fullYear = 2000 + year;
             var combinedString = string.Concat(inputStringDdMmYy.AsSpan(0, 4), fullYear.ToString(System.Globalization.CultureInfo.InvariantCulture), inputStringHhMmSsFf);
-            if (DateTime.TryParseExact(combinedString, "ddMMyyyyHHmmss.ff", null, System.Globalization.DateTimeStyles.None, out DateTime time))
+            var formatProvider = System.Globalization.CultureInfo.InvariantCulture;
+            if (DateTime.TryParseExact(combinedString, "ddMMyyyyHHmmss.ff", formatProvider, System.Globalization.DateTimeStyles.None, out DateTime time))
             {
                 return time;
             }
@@ -45,6 +60,11 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
 
         internal static double ParseToDouble(string inputString, ILogger logger)
         {
+            if (string.IsNullOrEmpty(inputString))
+            {
+                return 0.0;
+            }
+
             if (double.TryParse(inputString, out double output))
             {
                 return output;
@@ -52,7 +72,7 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             else
             {
                 logger.LogError("Failed to parse to double: {inputString}", inputString);
-                return double.NaN;
+                return 0.0;
             }
         }
 
@@ -74,22 +94,48 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             }
         }
 
-        internal static PositionFixFlag ParsePositionMode(char positionModeChar, ILogger logger)
+        internal static PositionFixFlag ParsePositionMode(string positionModeInput, ILogger logger)
         {
-            switch (positionModeChar)
+            return positionModeInput switch
+            { 
+                "N" => PositionFixFlag.NoFix,
+                "E" => PositionFixFlag.EstimatedFix,
+                "A" => PositionFixFlag.AutonomousGnssFix,
+                "D" => PositionFixFlag.DifferentialGnssFix,
+                _ => PositionFixFlag.NoFix
+            };
+        }
+
+        internal static LatitudeHemisphere ParseLatitudeHemisphere(string inputString, ILogger logger)
+        {
+            if (string.IsNullOrEmpty(inputString))
             {
-                case 'N':
-                    return PositionFixFlag.NoFix;
-                case 'E':
-                    return PositionFixFlag.EstimatedFix;
-                case 'A':
-                    return PositionFixFlag.AutonomousGnssFix;
-                case 'D':
-                    return PositionFixFlag.DifferentialGnssFix;
-                default:
-                    logger.LogError("Failed to parse position mode: {positionModeChar}", positionModeChar);
-                    return PositionFixFlag.NoFix;
+                logger.LogWarning("Invalid intput string for LatitudeHemispher: {inputString}", inputString);
+                return LatitudeHemisphere.North;
             }
+
+            return inputString[0] == 'N' ? LatitudeHemisphere.North : LatitudeHemisphere.South;
+        }
+
+        internal static LongitudeHemisphere ParseLongitudeHemisphere(string inputString, ILogger logger)
+        {
+            if (string.IsNullOrEmpty(inputString))
+            {
+                logger.LogWarning("Invalid intput string for LatitudeHemispher: {inputString}", inputString);
+                return LongitudeHemisphere.West;
+            }
+
+            return inputString[0] == 'E' ? LongitudeHemisphere.East : LongitudeHemisphere.West;
+        }
+
+        internal static DataStatus ParseDataStatus(string dataStatusStr)
+        {
+            return dataStatusStr switch
+            {
+                "A" => DataStatus.Valid,
+                "V" => DataStatus.Invalid,
+                _ => DataStatus.Invalid
+            };
         }
     }
 }

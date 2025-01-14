@@ -113,15 +113,15 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
             {
                 index = 0;
                 var checksumStr = new string(checksumBuffer);
-                var checksum = Convert.ToInt32(checksumStr, 16);
-                if (checksum == this.checksum)
+                var localChecksum = Convert.ToInt32(checksumStr, 16);
+                if (localChecksum == this.checksum)
                 {
                     dataVector.Add(currentDataStringBuilder.ToString());
                     currentState = NmeaState.Done;
                 }
                 else
                 {
-                    logger.LogError("Checksum error: {checksumStr} != {checksum}", checksumStr, this.checksum);
+                    logger.LogError("Checksum error: {checksumStr} != {checksum}", localChecksum, this.checksum);
                     ResetState();
                 }
             }

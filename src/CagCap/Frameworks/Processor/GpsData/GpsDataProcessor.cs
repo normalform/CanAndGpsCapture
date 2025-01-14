@@ -12,7 +12,6 @@ namespace CagCap.Frameworks.Processor.GpsData
 
     internal class GpsDataProcessor : IGpsDataProcessor
     {
-        private readonly IGpsReceiverDevice gpsReceiverDevice;
         private readonly ILogger logger;
 
         private readonly Queue<char> dataQueue;
@@ -20,9 +19,8 @@ namespace CagCap.Frameworks.Processor.GpsData
 
         public event EventHandler<INmeaMessage>? DataReceived;
 
-        public GpsDataProcessor(IGpsReceiverDevice gpsReceiver, ILoggerFactory loggerFactory)
+        public GpsDataProcessor(ILoggerFactory loggerFactory)
         {
-            this.gpsReceiverDevice = gpsReceiver;
             this.logger = loggerFactory.CreateLogger("GpsDataProcessor");
 
             this.dataQueue = new Queue<char>();

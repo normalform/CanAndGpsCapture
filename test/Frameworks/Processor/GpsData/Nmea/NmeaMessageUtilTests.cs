@@ -5,6 +5,7 @@
 
 namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
 {
+    using CagCap.DomainObject;
     using CagCap.Frameworks.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
     using Moq;
@@ -85,7 +86,7 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         }
 
         [Fact]
-        public void ParseToDouble_InvalidInput_ReturnsNan()
+        public void ParseToDouble_InvalidInput_ReturnsZero()
         {
             // Arrange
             var logger = new Mock<ILogger>();
@@ -95,7 +96,21 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             var result = NmeaMessageUtil.ParseToDouble(inputString, logger.Object);
 
             // Assert
-            Assert.Equal(double.NaN, result);
+            Assert.Equal(0.0, result);
+        }
+
+        [Fact]
+        public void ParseToDouble_EmptyInput_ReturnsZero()
+        {
+            // Arrange
+            var logger = new Mock<ILogger>();
+            var inputString = "";
+
+            // Act
+            var result = NmeaMessageUtil.ParseToDouble(inputString, logger.Object);
+
+            // Assert
+            Assert.Equal(0.0, result);
         }
 
         [Fact]
@@ -127,12 +142,12 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         }
 
         [Theory]
-        [InlineData('N', PositionFixFlag.NoFix)]
-        [InlineData('E', PositionFixFlag.EstimatedFix)]
-        [InlineData('A', PositionFixFlag.AutonomousGnssFix)]
-        [InlineData('D', PositionFixFlag.DifferentialGnssFix)]
-        [InlineData('X', PositionFixFlag.NoFix)]
-        internal void ParsePositionMode(char input, PositionFixFlag expected)
+        [InlineData("N", PositionFixFlag.NoFix)]
+        [InlineData("E", PositionFixFlag.EstimatedFix)]
+        [InlineData("A", PositionFixFlag.AutonomousGnssFix)]
+        [InlineData("D", PositionFixFlag.DifferentialGnssFix)]
+        [InlineData("", PositionFixFlag.NoFix)]
+        internal void ParsePositionMode(string input, PositionFixFlag expected)
         {
             // Arrange
             var logger = new Mock<ILogger>();
@@ -143,5 +158,47 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
             // Assert
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData("N", LatitudeHemisphere.North)]
+        [InlineData("S", LatitudeHemisphere.South)]
+        [InlineData("", LatitudeHemisphere.North)]
+        internal void ParseLatitudeHemisphere(string input, LatitudeHemisphere expected)
+        {
+            // Arrange
+            var logger = new Mock<ILogger>();
+            // Act
+            var result = NmeaMessageUtil.ParseLatitudeHemisphere(input, logger.Object);
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("E", LongitudeHemisphere.East)]
+        [InlineData("W", LongitudeHemisphere.West)]
+        [InlineData("", LongitudeHemisphere.West)]
+        internal void ParseLongitudeHemisphere(string input, LongitudeHemisphere expected)
+        {
+            // Arrange
+            var logger = new Mock<ILogger>();
+            // Act
+            var result = NmeaMessageUtil.ParseLongitudeHemisphere(input, logger.Object);
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("A", DataStatus.Valid)]
+        [InlineData("V", DataStatus.Invalid)]
+        [InlineData("", DataStatus.Invalid)]
+        internal void ParseDataStatus(string input, DataStatus expected)
+        {
+            // Arrange & Act
+            var result = NmeaMessageUtil.ParseDataStatus(input);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
     }
 }

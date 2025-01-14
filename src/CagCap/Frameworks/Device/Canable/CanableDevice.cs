@@ -16,7 +16,6 @@ namespace CagCap.Frameworks.Device.Canable
         private readonly ILogger logger;
 
         private readonly CandleDataStructure.CandleCapability candleCapability;
-        private readonly CandleDataStructure.CandleDeviceConfig candleDeviceConfig;
 
         public CanableDevice(IUsbAccess usbAccess, CanBusConfig canBusConfig, ILoggerFactory loggerFactory)
         {
@@ -29,7 +28,6 @@ namespace CagCap.Frameworks.Device.Canable
             this.SetDeviceMode(start: false);
 
             this.candleCapability = this.usbAccess.UsbControlMessageGet<CandleDataStructure.CandleCapability>(CanRequest.BitTimingConstants, 0, 0);
-            this.candleDeviceConfig = this.usbAccess.UsbControlMessageGet<CandleDataStructure.CandleDeviceConfig>(CanRequest.DeviceConfig, 0, 0);
 
             int samplePoint = GetSamplePoint(this.canBusConfig.SamplePoint, this.logger);
             this.SetBitTiming(canBusConfig.BitRate, samplePoint);
@@ -74,8 +72,8 @@ namespace CagCap.Frameworks.Device.Canable
             {
                 if (samplePoint < 0 || samplePoint > 100)
                 {
-                    var exception = new FormatException("Invalid sample point format.");
-                    logger.LogError(exception, "Invalid sample point format.");
+                    var exception = new ArgumentOutOfRangeException(nameof(samplePointConfig), "The input sample point format is out of range.");
+                    logger.LogError(exception, "The input sample point format is out of range. {samplePoint}", samplePoint);
                     throw exception;
                 }
 
@@ -84,7 +82,7 @@ namespace CagCap.Frameworks.Device.Canable
             else
             {
                 var exception = new FormatException("Invalid sample point format.");
-                logger.LogError(exception, "Invalid sample point format.");
+                logger.LogError(exception, "Invalid sample point format. {samplePointString}", samplePointString);
                 throw exception;
             }
 
@@ -116,32 +114,32 @@ namespace CagCap.Frameworks.Device.Canable
             var avaliableFeature = new CanableFeature(this.candleCapability.Feature);
 
             uint flags = 0;
-            if (avaliableFeature.ListenOnly & this.canBusConfig.EnableListenOnly)
+            if (avaliableFeature.ListenOnly && this.canBusConfig.EnableListenOnly)
             {
                 flags |= CanableFeature.ListenOnlyBit;
             }
 
-            if (avaliableFeature.Loopback & this.canBusConfig.EnableLoopback)
+            if (avaliableFeature.Loopback && this.canBusConfig.EnableLoopback)
             {
                 flags |= CanableFeature.LoopbackBit;
             }
 
-            if (avaliableFeature.HwTimeStamp & this.canBusConfig.EnableHwTimestamp)
+            if (avaliableFeature.HwTimeStamp && this.canBusConfig.EnableHwTimestamp)
             {
                 flags |= CanableFeature.HwTimeStampBit;
             }
 
-            if (avaliableFeature.Identity & this.canBusConfig.EnableIdentity)
+            if (avaliableFeature.Identity && this.canBusConfig.EnableIdentity)
             {
                 flags |= CanableFeature.IdentityBit;
             }
 
-            if (avaliableFeature.UserId & this.canBusConfig.EnableUserId)
+            if (avaliableFeature.UserId && this.canBusConfig.EnableUserId)
             {
                 flags |= CanableFeature.UserIdBit;
             }
 
-            if (avaliableFeature.PadPacketsToMaxPacketSize & this.canBusConfig.EnablePadPacketsToMaxPacketSize)
+            if (avaliableFeature.PadPacketsToMaxPacketSize && this.canBusConfig.EnablePadPacketsToMaxPacketSize)
             {
                 flags |= CanableFeature.PadPacketsToMaxPacketSizeBit;
             }
@@ -155,7 +153,7 @@ namespace CagCap.Frameworks.Device.Canable
             this.usbAccess.UsbControlMessageSet(CanRequest.Mode, 0, 0, candleDeviceMode);
         }
 
-        private bool SetBitTiming(int bitRate, int samplePoint)
+        private void SetBitTiming(int bitRate, int samplePoint)
         {
             foreach (var timing in Timing.Timings)
             {
@@ -173,12 +171,8 @@ namespace CagCap.Frameworks.Device.Canable
                     };
 
                     this.usbAccess.UsbControlMessageSet(CanRequest.BitTiming, 0, 0, bitTimingStruct);
-
-                    return true;
                 }
             }
-
-            return false;
         }
     }
 }

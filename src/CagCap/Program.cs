@@ -3,143 +3,145 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-using CagCap;
-using CagCap.Application;
-using CagCap.DomainObject;
-using CagCap.DomainObject.Device;
-using CagCap.Frameworks.Device.Adapter;
-using CagCap.Frameworks.Device.Canable;
-using CagCap.Frameworks.Processor.GpsData;
-using CagCap.UI;
-
-using CommandLine;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System.Diagnostics.CodeAnalysis;
-
-[ExcludeFromCodeCoverage]
-class Program
+namespace CagCap
 {
-    static void Main(string[] args)
-    {
-        Parser.Default.ParseArguments<Options>(args).WithParsed(RunApplication);
-    }
+    using CagCap.Application;
+    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device;
+    using CagCap.Frameworks.Device.Adapter;
+    using CagCap.Frameworks.Device.Canable;
+    using CagCap.Frameworks.Processor.GpsData;
+    using CagCap.UI;
 
-    private static void RunApplication(Options opts)
+    using CommandLine;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
+    static class Program
     {
-        if (opts.Help)
+        static void Main(string[] args)
         {
-            return;
+            Parser.Default.ParseArguments<Options>(args).WithParsed(RunApplication);
         }
 
-        var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        var commonUserAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-        var userConfigFilePath = Path.Combine(userAppData, "CagCap", "CagCapSettings.json");
-        var commonUserConfigFilePath = Path.Combine(commonUserAppData, "CagCap", "CagCapSettings.json");
-        var defaultConfigFilePath = Path.Combine(AppContext.BaseDirectory, "CagCapSettings.json");
-
-        // Determine which configuration file to use
-        var configFilePath = defaultConfigFilePath;
-        if (File.Exists(userConfigFilePath))
+        private static void RunApplication(Options opts)
         {
-            configFilePath = userConfigFilePath;
-        }
-        else
-        {
-            if (File.Exists(commonUserConfigFilePath))
+            if (opts.Help)
             {
-                configFilePath = commonUserConfigFilePath;
+                return;
             }
-        }
 
-        // Set up configuration
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile(configFilePath, optional: false, reloadOnChange: true)
-            .Build();
+            var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var commonUserAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            var userConfigFilePath = Path.Combine(userAppData, "CagCap", "CagCapSettings.json");
+            var commonUserConfigFilePath = Path.Combine(commonUserAppData, "CagCap", "CagCapSettings.json");
+            var defaultConfigFilePath = Path.Combine(AppContext.BaseDirectory, "CagCapSettings.json");
 
-        // Set up dependency injection
-        var serviceCollection = ConfigureServices(configuration);
-        var serviceProvider = serviceCollection.BuildServiceProvider();
-
-        // TODO It's temporary for testing the low-level devices. Remove this when the high-level design is ready
-        _ = serviceProvider.GetRequiredService<IGpsReceiver>();
-        _ = serviceProvider.GetRequiredService<ICanableDevice>();
-
-        // create application
-        var cagCapApp = serviceProvider.GetRequiredService<ICagCapApp>();
-        cagCapApp.Start();
-    }
-
-    private static ServiceCollection ConfigureServices(IConfiguration configuration)
-    {
-        var services = new ServiceCollection();
-
-        services.AddLogging(loggingBuilder =>
-        {
-            loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
-            loggingBuilder.AddConsole();
-            loggingBuilder.AddOpenTelemetry();
-        });
-
-        services.Configure<CanBusConfig>(configuration.GetSection("CanBus").Bind);
-        services.Configure<GpsReceiverConfig>(configuration.GetSection("GpsReceiver").Bind);
-        services.AddSingleton<ICagCapApp, CagCapApp>();
-        services.AddSingleton<IUsbUtils, UsbUtils>();
-        services.AddSingleton<IUsbAccess, UsbAccess>();
-        services.AddSingleton<IGpsDataProcessor, GpsDataProcessor>();
-        services.AddSingleton<IUserInterface, ConsoleUserInterface>();
-        services.AddSingleton<IGpsReceiver, GpsReceiver>();
-
-        services.AddSingleton<ICanableDevice>(provider =>
-        {
-            var usbUtils = provider.GetRequiredService<IUsbUtils>();
-            var guids = UsbAccess.GetDeviceGuid(usbUtils);
-            var logger = provider.GetRequiredService<ILogger<CanableDevice>>();
-            if (guids.Length != 0)
+            // Determine which configuration file to use
+            var configFilePath = defaultConfigFilePath;
+            if (File.Exists(userConfigFilePath))
             {
-                if (guids.Length > 1)
-                {
-                    logger.LogInformation("Multiple CANable devices found. Using the first one.");
-                }
-                else
-                {
-                    var config = provider.GetRequiredService<IOptions<CanBusConfig>>().Value;
-                    var usbAccess = provider.GetRequiredService<IUsbAccess>();
-                    var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                    return new CanableDevice(usbAccess, config, loggerFactory);
-                }
+                configFilePath = userConfigFilePath;
             }
             else
             {
-                logger.LogWarning("No CANable device found.");
+                if (File.Exists(commonUserConfigFilePath))
+                {
+                    configFilePath = commonUserConfigFilePath;
+                }
             }
 
-            return new NullCanableDevice();
-        });
+            // Set up configuration
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile(configFilePath, optional: false, reloadOnChange: true)
+                .Build();
 
-        services.AddSingleton<IGpsReceiverDevice>(
-            provider =>
+            // Set up dependency injection
+            var serviceCollection = ConfigureServices(configuration);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            // TODO It's temporary for testing the low-level devices. Remove this when the high-level design is ready
+            _ = serviceProvider.GetRequiredService<IGpsReceiver>();
+            _ = serviceProvider.GetRequiredService<ICanableDevice>();
+
+            // create application
+            var cagCapApp = serviceProvider.GetRequiredService<ICagCapApp>();
+            cagCapApp.Start();
+        }
+
+        private static ServiceCollection ConfigureServices(IConfiguration configuration)
+        {
+            var services = new ServiceCollection();
+
+            services.AddLogging(loggingBuilder =>
             {
-                var config = provider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
-                if (config.Enable)
-                {
-                    var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                    return new GpsReceiverDeviceAdapter(config.Port, config.BaudRate, loggerFactory);
-                }
-
-                return new NullGpsReceiverDevice();
+                loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
+                loggingBuilder.AddConsole();
+                loggingBuilder.AddOpenTelemetry();
             });
 
-        return services;
-    }
-}
+            services.Configure<CanBusConfig>(configuration.GetSection("CanBus").Bind);
+            services.Configure<GpsReceiverConfig>(configuration.GetSection("GpsReceiver").Bind);
+            services.AddSingleton<ICagCapApp, CagCapApp>();
+            services.AddSingleton<IUsbUtils, UsbUtils>();
+            services.AddSingleton<IUsbAccess, UsbAccess>();
+            services.AddSingleton<IGpsDataProcessor, GpsDataProcessor>();
+            services.AddSingleton<IUserInterface, ConsoleUserInterface>();
+            services.AddSingleton<IGpsReceiver, GpsReceiver>();
 
-class Options
-{
-    [ExcludeFromCodeCoverage]
-    [Option('h', "help", Required = false, HelpText = "Show help information.")]
-    public bool Help { get; set; }
+            services.AddSingleton<ICanableDevice>(provider =>
+            {
+                var usbUtils = provider.GetRequiredService<IUsbUtils>();
+                var guids = UsbAccess.GetDeviceGuid(usbUtils);
+                var logger = provider.GetRequiredService<ILogger<CanableDevice>>();
+                if (guids.Length != 0)
+                {
+                    if (guids.Length > 1)
+                    {
+                        logger.LogInformation("Multiple CANable devices found. Using the first one.");
+                    }
+                    else
+                    {
+                        var config = provider.GetRequiredService<IOptions<CanBusConfig>>().Value;
+                        var usbAccess = provider.GetRequiredService<IUsbAccess>();
+                        var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                        return new CanableDevice(usbAccess, config, loggerFactory);
+                    }
+                }
+                else
+                {
+                    logger.LogWarning("No CANable device found.");
+                }
+
+                return new NullCanableDevice();
+            });
+
+            services.AddSingleton<IGpsReceiverDevice>(
+                provider =>
+                {
+                    var config = provider.GetRequiredService<IOptions<GpsReceiverConfig>>().Value;
+                    if (config.Enable)
+                    {
+                        var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                        return new GpsReceiverDeviceAdapter(config.Port, config.BaudRate, loggerFactory);
+                    }
+
+                    return new NullGpsReceiverDevice();
+                });
+
+            return services;
+        }
+    }
+
+    class Options
+    {
+        [ExcludeFromCodeCoverage]
+        [Option('h', "help", Required = false, HelpText = "Show help information.")]
+        public bool Help { get; set; }
+    }
 }

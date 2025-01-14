@@ -20,12 +20,12 @@ namespace CagCap.Frameworks.Processor.GpsData.Nmea
     internal class NmeaMessageGll(string[] dataVector, ILogger logger) : INmeaMessage
     {
         internal double Latitude { get; } = NmeaMessageUtil.ParseToDouble(dataVector[0], logger);
-        internal LatitudeHemisphere LatitudeHemisphere { get; } = dataVector[1][0] == 'N' ? LatitudeHemisphere.North : LatitudeHemisphere.South;
+        internal LatitudeHemisphere LatitudeHemisphere { get; } = NmeaMessageUtil.ParseLatitudeHemisphere(dataVector[1], logger);
         internal double Longitude { get; } = NmeaMessageUtil.ParseToDouble(dataVector[2], logger);
-        internal LongitudeHemisphere LongitudeHemisphere { get; } = dataVector[3][0] == 'E' ? LongitudeHemisphere.East : LongitudeHemisphere.West;
+        internal LongitudeHemisphere LongitudeHemisphere { get; } = NmeaMessageUtil.ParseLongitudeHemisphere(dataVector[3], logger);
         internal DateTime Time { get; } = NmeaMessageUtil.ParseDateTime(dataVector[4], logger);
-        internal DataStatus DataStatus { get; } = dataVector[5][0] == 'A' ? DataStatus.Valid : DataStatus.Invalid;
-        internal PositionFixFlag PositionMode { get; } = NmeaMessageUtil.ParsePositionMode(dataVector[6][0], logger);
+        internal DataStatus DataStatus { get; } = NmeaMessageUtil.ParseDataStatus(dataVector[5]);
+        internal PositionFixFlag PositionMode { get; } = NmeaMessageUtil.ParsePositionMode(dataVector[6], logger);
 
         public override string ToString()
         {

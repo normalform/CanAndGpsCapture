@@ -43,6 +43,37 @@ namespace CagcapTests.Frameworks.Processor.GpsData.Nmea
         }
 
         [Fact]
+        public void Construction_InvalidSignal()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+
+            var vtgData = new[]
+            {
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            };
+
+            // Act
+            var vtgMessage = new NmeaMessageVtg(vtgData, loggerMock);
+
+            // Assert
+            const int Precision = 3;
+            Assert.Equal(0.0, vtgMessage.CourseOverGroundTrue, Precision);
+            Assert.Equal(0.0, vtgMessage.CourseOverGroundMagnatic, Precision);
+            Assert.Equal(0.0, vtgMessage.SpeedOverGroundKnots, Precision);
+            Assert.Equal(0.0, vtgMessage.SpeedOverGroundKph, Precision);
+            Assert.Equal(PositionFixFlag.NoFix, vtgMessage.PositionMode);
+        }
+
+        [Fact]
         public void ToString_Success()
         {
             // Arrange
