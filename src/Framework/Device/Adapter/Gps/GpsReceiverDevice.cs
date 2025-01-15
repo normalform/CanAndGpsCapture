@@ -12,7 +12,7 @@ namespace CagCap.Framework.Device.Adapter.Gps
 
     public class GpsReceiverDevice : IGpsReceiverDevice
     {
-        public event EventHandler<string> DataReceived = delegate { };
+        public event EventHandler<GpsDataReceivedEventArgs> DataReceived = delegate { };
 
         private readonly IUbloxGpsReceiverDevice ubloxGpsReceiverDevice;
 
@@ -22,7 +22,7 @@ namespace CagCap.Framework.Device.Adapter.Gps
 
             this.ubloxGpsReceiverDevice.DataReceived += (sender, data) =>
             {
-                DataReceived?.Invoke(sender, data);
+                this.DataReceived.Invoke(sender, new GpsDataReceivedEventArgs(data.Data));
             };
         }
 

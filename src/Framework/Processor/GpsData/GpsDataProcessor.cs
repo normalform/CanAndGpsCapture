@@ -16,14 +16,13 @@ namespace CagCap.Framework.Processor.GpsData
         private readonly Queue<char> dataQueue;
         private readonly NmeaProtocol nemaProtocol;
 
-        public event EventHandler<INmeaMessage>? DataReceived;
+        public event EventHandler<NmeaMessageEventArgs> DataReceived = delegate { };
 
         public GpsDataProcessor(ILoggerFactory loggerFactory)
         {
-            logger = loggerFactory.CreateLogger("GpsDataProcessor");
-
-            dataQueue = new Queue<char>();
-            nemaProtocol = new NmeaProtocol(logger);
+            this.logger = loggerFactory.CreateLogger("GpsDataProcessor");
+            this.dataQueue = new Queue<char>();
+            this.nemaProtocol = new NmeaProtocol(logger);
         }
 
         public void Process(string data)
@@ -48,8 +47,8 @@ namespace CagCap.Framework.Processor.GpsData
                 var nmeaMessage = nemaProtocol.Process(data);
                 if (nmeaMessage != null)
                 {
-                    DataReceived?.Invoke(this, nmeaMessage);
-                    logger.LogDebug("NMEA message {message}", nmeaMessage);
+                    this.DataReceived.Invoke(this, new NmeaMessageEventArgs(nmeaMessage));
+                    this.logger.LogDebug("NMEA message {message}", nmeaMessage);
                 }
             }
         }

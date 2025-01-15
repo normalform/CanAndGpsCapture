@@ -41,7 +41,7 @@ namespace CagCap.Framework.Device.Gps
 
         public GpsData GpsData => CreateGpsData();
 
-        public event EventHandler<GpsData>? DataReceived;
+        public event EventHandler<GpsDataEventArgs> DataReceived = delegate { };
 
         public GpsReceiver(IGpsReceiverDevice gpsReceiverDevice, IGpsDataProcessor gpsReceiverProcessor, ILoggerFactory loggerFactory)
         {
@@ -56,7 +56,7 @@ namespace CagCap.Framework.Device.Gps
             gpsReceiverProcessor.DataReceived += OnDataReceived;
             gpsReceiverDevice.DataReceived += (sender, data) =>
             {
-                gpsReceiverProcessor.Process(data);
+                gpsReceiverProcessor.Process(data.Data);
             };
         }
 
@@ -64,8 +64,6 @@ namespace CagCap.Framework.Device.Gps
         {
             OnTimeout(this, null);
         }
-
-        // ... other code ...
 
         private GpsData CreateGpsData() => new()
         {
@@ -85,15 +83,15 @@ namespace CagCap.Framework.Device.Gps
         private void OnTimeout(object? sender, ElapsedEventArgs? e)
         {
             ResetData();
-            DataReceived?.Invoke(this, GpsData);
+            this.DataReceived.Invoke(this, new GpsDataEventArgs(GpsData));
         }
 
-        private void OnDataReceived(object? sender, INmeaMessage message)
+        private void OnDataReceived(object? sender, NmeaMessageEventArgs message)
         {
             logger.LogDebug("Data received: {message}", message);
             timeoutTimer.Stop(); // Stop the timer if data is received
 
-            switch (message)
+            switch (message.Message)
             {
                 case NmeaMessageGga gga:
                     UpdateGgaData(gga);
@@ -113,7 +111,7 @@ namespace CagCap.Framework.Device.Gps
             {
                 ggaDataIsAvailable = false;
                 var gpsData = CreateGpsData();
-                DataReceived?.Invoke(this, gpsData);
+                DataReceived.Invoke(this, new GpsDataEventArgs(gpsData));
                 logger.LogDebug("GPS data: {gpsData}", gpsData);
             }
 

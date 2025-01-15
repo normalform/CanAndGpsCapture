@@ -32,7 +32,7 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
         }
 
         [Fact]
-        public void CanId_Equality()
+        public void CanId_Equality_Case0()
         {
             // Arrange
             var canId1 = new CanId(new DeviceCanId(0x123));
@@ -42,6 +42,29 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
             // Act & Assert
             Assert.Equal(canId1, canId2);
             Assert.NotEqual(canId1, canId3);
+        }
+
+        [Fact]
+        public void CanId_Equality_Case1()
+        {
+            // Arrange
+            var canId1 = new CanId(new DeviceCanId(0x123));
+
+            // Act & Assert
+            Assert.NotEqual(canId1, new object());
+        }
+
+        [Fact]
+        public void CanId_HashCode()
+        {
+            // Arrange
+            var canId1 = new CanId(new DeviceCanId(0x123));
+            var canId2 = new CanId(new DeviceCanId(0x123));
+            var canId3 = new CanId(new DeviceCanId(0x456));
+
+            // Act & Assert
+            Assert.Equal(canId1.GetHashCode(), canId2.GetHashCode());
+            Assert.NotEqual(canId1.GetHashCode(), canId3.GetHashCode());
         }
     }
 }

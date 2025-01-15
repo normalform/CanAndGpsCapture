@@ -8,10 +8,10 @@ namespace Canable
     public interface IUsbAccess
     {
         void StartReceive();
-        void UsbControlMessageSet<T>(CanRequest request, ushort value, ushort index, T structure) where T : struct;
+        void UsbControlMessageSet<T>(CanRequest request, ushort value, ushort index, T type) where T : struct;
         T UsbControlMessageGet<T>(CanRequest request, ushort value, ushort index) where T : struct;
 
         void SendFrame(int channel, CandleDataStructure.CandleDataFrame frame);
-        public event EventHandler<DeviceCanMessage>? DataReceived;
+        public event EventHandler<DeviceCanMessageEventArgs> DataReceived;
     }
 }

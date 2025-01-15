@@ -38,11 +38,11 @@ namespace CagCap.Framework.Tests.Device.Adapter.Gps
             adapter.DataReceived += (sender, e) =>
             {
                 eventRaised = true;
-                Assert.Equal(data, e); // Ensure the received data is correct
+                Assert.Equal(data, e.Data);
             };
 
             // Act
-            mockUbloxGpsReceiverDevice.Raise(x => x.DataReceived += null, new object(), data);
+            mockUbloxGpsReceiverDevice.Raise(x => x.DataReceived += null, new object(), new DataReceivedEventArgs(data));
 
             // Assert
             Assert.True(eventRaised);

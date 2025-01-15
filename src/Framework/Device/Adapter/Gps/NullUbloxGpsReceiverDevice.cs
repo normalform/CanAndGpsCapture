@@ -14,7 +14,7 @@ namespace CagCap.Framework.Device.Adapter.Gps
     public class NullUbloxGpsReceiverDevice : IUbloxGpsReceiverDevice
     {
 #pragma warning disable CS0067
-        public event EventHandler<string>? DataReceived;
+        public event EventHandler<DataReceivedEventArgs> DataReceived = delegate { };
 #pragma warning restore CS0067
 
         public async Task WriteAsync(string data)

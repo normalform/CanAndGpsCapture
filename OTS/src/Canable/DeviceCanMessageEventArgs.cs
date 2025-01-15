@@ -3,13 +3,10 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Framework.Device.Gps
+namespace Canable
 {
-    using System;
-
-    public interface IGpsReceiverDevice
+    public class DeviceCanMessageEventArgs(DeviceCanMessage message) : EventArgs
     {
-        Task WriteAsync(string data);
-        event EventHandler<GpsDataReceivedEventArgs> DataReceived;
+        public DeviceCanMessage Message { get; } = message;
     }
 }

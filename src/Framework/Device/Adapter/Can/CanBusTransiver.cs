@@ -15,7 +15,7 @@ namespace CagCap.Framework.Device.Adapter.Can
         private readonly ICanableDevice canableDevice;
         private readonly ILogger logger;
 
-        public event EventHandler<ICanMessage> DataReceived;
+        public event EventHandler<CanMessageEventArgs> DataReceived =  delegate { };
 
         public CanBusTransiver(ICanableDevice canableDevice, ILoggerFactory loggerFactory)
         {
@@ -24,8 +24,8 @@ namespace CagCap.Framework.Device.Adapter.Can
 
             this.canableDevice.DataReceived += (sender, data) =>
             {
-                var message = new CanMessage(data);
-                DataReceived?.Invoke(this, message);
+                var message = new CanMessage(data.Message);
+                this.DataReceived.Invoke(this, new CanMessageEventArgs(message));
 
                 this.logger.LogDebug("Received message: {Message}", message);
             };

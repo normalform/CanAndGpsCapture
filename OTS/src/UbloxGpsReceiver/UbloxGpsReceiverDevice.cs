@@ -18,7 +18,7 @@ namespace UbloxGpsReceiver
         private readonly ILogger logger;
         private bool disposed;
 
-        public event EventHandler<string>? DataReceived;
+        public event EventHandler<DataReceivedEventArgs> DataReceived = delegate { };
 
         public UbloxGpsReceiverDevice(string portName, int baudRate, ILoggerFactory loggerFactory)
         {
@@ -95,7 +95,7 @@ namespace UbloxGpsReceiver
                 var sp = (SerialPort)sender;
                 var data = sp.ReadExisting();
                 logger.LogDebug("Data received: {data}", data);
-                DataReceived?.Invoke(this, data);
+                this.DataReceived.Invoke(this, new DataReceivedEventArgs(data));
             }
             catch (InvalidOperationException ex)
             {

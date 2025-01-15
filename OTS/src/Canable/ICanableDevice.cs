@@ -8,6 +8,6 @@ namespace Canable
     public interface ICanableDevice
     {
         void SendMessage(DeviceCanMessage message);
-        event EventHandler<DeviceCanMessage>? DataReceived;
+        event EventHandler<DeviceCanMessageEventArgs> DataReceived;
     }
 }

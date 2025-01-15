@@ -64,12 +64,12 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
             canBusTransiver.DataReceived += (sender, args) =>
             {
                 eventRaised = true;
-                Assert.Equal(message.Id, args.Id);
-                Assert.Equal(message.Data, args.Data);
+                Assert.Equal(message.Id, args.Message.Id);
+                Assert.Equal(message.Data, args.Message.Data);
             };
 
             // Act
-            mockCanableDevice.Raise(x => x.DataReceived += null, new object(), deviceMessage);
+            mockCanableDevice.Raise(x => x.DataReceived += null, new object(), new DeviceCanMessageEventArgs(deviceMessage));
 
             // Assert
             Assert.True(eventRaised);

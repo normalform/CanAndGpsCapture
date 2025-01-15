@@ -7,7 +7,7 @@ namespace CagCap.DomainObject.Device.Gps
 {
     public interface IGpsDataProcessor
     {
-        event EventHandler<INmeaMessage>? DataReceived;
+        event EventHandler<NmeaMessageEventArgs> DataReceived;
         void Process(string data);
     }
 }

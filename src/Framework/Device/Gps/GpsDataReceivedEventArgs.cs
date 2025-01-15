@@ -5,11 +5,8 @@
 
 namespace CagCap.Framework.Device.Gps
 {
-    using System;
-
-    public interface IGpsReceiverDevice
+    public class GpsDataReceivedEventArgs(string data) : EventArgs
     {
-        Task WriteAsync(string data);
-        event EventHandler<GpsDataReceivedEventArgs> DataReceived;
+        public string Data { get; } = data;
     }
 }

@@ -5,9 +5,11 @@
 
 namespace CagCap.DomainObject.Device.Gps
 {
+    using System;
+
     public interface IGpsReceiver
     {
-        event EventHandler<GpsData> DataReceived;
+        event EventHandler<GpsDataEventArgs> DataReceived;
 
         GpsData GpsData { get; }
     }

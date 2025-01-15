@@ -46,7 +46,7 @@ namespace Canable
         private UsbEndpointWriter? writer;
 
         private readonly CancellationTokenSource cancellationTokenSource = new();
-        public event EventHandler<DeviceCanMessage>? DataReceived;
+        public event EventHandler<DeviceCanMessageEventArgs> DataReceived = delegate { };
 
         [ExcludeFromCodeCoverage]
         public UsbAccess(ILoggerFactory loggerFactory)
@@ -181,7 +181,7 @@ namespace Canable
             var timeStamp = new DateTime(frame.TimestampUs, DateTimeKind.Utc);
 
             var message = new DeviceCanMessage(canId, data, timeStamp);
-            DataReceived?.Invoke(this, message);
+            DataReceived.Invoke(this, new DeviceCanMessageEventArgs(message));
         }
 
         [ExcludeFromCodeCoverage]
@@ -210,23 +210,23 @@ namespace Canable
         }
 
         [ExcludeFromCodeCoverage]
-        public void UsbControlMessageSet<T>(CanRequest request, ushort value, ushort index, T structure) where T : struct
+        public void UsbControlMessageSet<T>(CanRequest request, ushort value, ushort index, T type) where T : struct
         {
             byte requestType = UsbDirOut | UsbTypeVendor | UsbRecipInterface;
-            UsbControlMessage(request, requestType, value, index, ref structure);
+            UsbControlMessage(request, requestType, value, index, ref type);
         }
 
         [ExcludeFromCodeCoverage]
         public T UsbControlMessageGet<T>(CanRequest request, ushort value, ushort index) where T : struct
         {
-            T structure = default;
+            T type = default;
             byte requestType = UsbDirIn | UsbTypeVendor | UsbRecipInterface;
-            UsbControlMessage(request, requestType, value, index, ref structure);
-            return structure;
+            UsbControlMessage(request, requestType, value, index, ref type);
+            return type;
         }
 
         [ExcludeFromCodeCoverage]
-        private void UsbControlMessage<T>(CanRequest request, byte requestType, ushort value, ushort index, ref T structure) where T : struct
+        private void UsbControlMessage<T>(CanRequest request, byte requestType, ushort value, ushort index, ref T type) where T : struct
         {
             if (usbDevice == null)
             {
@@ -244,7 +244,7 @@ namespace Canable
                 var ptr = Marshal.AllocHGlobal(size);
                 try
                 {
-                    Marshal.StructureToPtr(structure, ptr, true);
+                    Marshal.StructureToPtr(type, ptr, true);
                     Marshal.Copy(ptr, data, 0, size);
                 }
                 finally
@@ -273,7 +273,7 @@ namespace Canable
             GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
-                structure = Marshal.PtrToStructure<T>(handle.AddrOfPinnedObject());
+                type = Marshal.PtrToStructure<T>(handle.AddrOfPinnedObject());
             }
             finally
             {

@@ -5,9 +5,11 @@
 
 namespace CagCap.DomainObject.Device.Can
 {
+    using System;
+
     public interface ICanBusTransiver
     {
         void SendMessage(ICanMessage message);
-        event EventHandler<ICanMessage> DataReceived;
+        event EventHandler<CanMessageEventArgs> DataReceived;
     }
 }

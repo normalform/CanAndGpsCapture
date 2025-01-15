@@ -16,7 +16,7 @@ namespace Canable
         private readonly CanBusConfig canBusConfig;
         private readonly ILogger logger;
 
-        public event EventHandler<DeviceCanMessage>? DataReceived;
+        public event EventHandler<DeviceCanMessageEventArgs> DataReceived = delegate { };
 
         private readonly CandleDataStructure.CandleCapability candleCapability;
 
@@ -42,7 +42,7 @@ namespace Canable
 
         public void SendMessage(DeviceCanMessage message)
         {
-            LogCanMessage("Send CAN message: {CanMessage}", message);
+            this.LogCanMessage("Send CAN message: {CanMessage}", message);
 
             var frame = new CandleDataStructure.CandleDataFrame
             {
@@ -92,9 +92,10 @@ namespace Canable
             return samplePointInt;
         }
 
-        private void OnMessageReceived(DeviceCanMessage message)
+        private void OnMessageReceived(DeviceCanMessageEventArgs message)
         {
-            LogCanMessage("Received CAN message: {CanMessage}", message);
+            this.LogCanMessage("Received CAN message: {CanMessage}", message.Message);
+            this.DataReceived.Invoke(this, message);
         }
 
         [ExcludeFromCodeCoverage]

@@ -30,7 +30,7 @@ namespace CagCap.Framework.Tests.Processor.GpsData
             var gpsDataProcessor = new GpsDataProcessor(loggerFactoryMock.Object);
 
             INmeaMessage? dataReceivedCalled = null;
-            gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data;
+            gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data.Message;
 
             // Act
             gpsDataProcessor.Process(rawData);
@@ -46,7 +46,7 @@ namespace CagCap.Framework.Tests.Processor.GpsData
             // Arrange
             var gpsDataProcessor = new GpsDataProcessor(loggerFactoryMock.Object);
             INmeaMessage? dataReceivedCalled = null;
-            gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data;
+            gpsDataProcessor.DataReceived += (sender, data) => dataReceivedCalled = data.Message;
 
             // Act
             gpsDataProcessor.Process(string.Empty);

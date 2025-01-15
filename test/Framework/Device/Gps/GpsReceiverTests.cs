@@ -32,46 +32,46 @@ namespace CagCap.Framework.Tests.Device.Gps
             gpsReceiver.DataReceived += (sender, e) =>
             {
                 numberOfdataReceivedCalled++;
-                savedGpsData = e;
+                savedGpsData = e.GpsData;
             };
 
             mockGpsDataProcessor.Setup(p => p.Process("GGA mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGga(mockLogger.Object));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGga(mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSA mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsa(mockLogger.Object));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsa(mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV0 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(0, mockLogger.Object));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(0, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV1 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(1, mockLogger.Object));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(1, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV2 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(2, mockLogger.Object));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(2, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV3 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(3, mockLogger.Object));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(3, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("VTG mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageVtg(mockLogger.Object));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageVtg(mockLogger.Object)));
             });
 
             // Act
-            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GGA mock event");
-            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSA mock event");
-            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV0 mock event");
-            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV1 mock event");
-            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV2 mock event");
-            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV3 mock event");
-            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "VTG mock event");
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GGA mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSA mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV0 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV1 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV2 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV3 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("VTG mock event"));
 
             var gpsData = gpsReceiver.GpsData;
 
@@ -131,46 +131,46 @@ namespace CagCap.Framework.Tests.Device.Gps
                 gpsReceiver.DataReceived += (sender, e) =>
                 {
                     numberOfdataReceivedCalled++;
-                    savedGpsData.Add(e);
+                    savedGpsData.Add(e.GpsData);
                 };
 
                 mockGpsDataProcessor.Setup(p => p.Process("GGA mock event")).Callback(() =>
                 {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGga(mockLogger.Object));
+                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGga(mockLogger.Object)));
                 });
                 mockGpsDataProcessor.Setup(p => p.Process("GSA mock event")).Callback(() =>
                 {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsa(mockLogger.Object));
+                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsa(mockLogger.Object)));
                 });
                 mockGpsDataProcessor.Setup(p => p.Process("GSV0 mock event")).Callback(() =>
                 {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(0, mockLogger.Object));
+                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(0, mockLogger.Object)));
                 });
                 mockGpsDataProcessor.Setup(p => p.Process("GSV1 mock event")).Callback(() =>
                 {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(1, mockLogger.Object));
+                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(1, mockLogger.Object)));
                 });
                 mockGpsDataProcessor.Setup(p => p.Process("GSV2 mock event")).Callback(() =>
                 {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(2, mockLogger.Object));
+                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(2, mockLogger.Object)));
                 });
                 mockGpsDataProcessor.Setup(p => p.Process("GSV3 mock event")).Callback(() =>
                 {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageGsv(3, mockLogger.Object));
+                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(3, mockLogger.Object)));
                 });
                 mockGpsDataProcessor.Setup(p => p.Process("VTG mock event")).Callback(() =>
                 {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), CreateNmeaMessageVtg(mockLogger.Object));
+                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageVtg(mockLogger.Object)));
                 });
 
                 // Act
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GGA mock event");
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSA mock event");
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV0 mock event");
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV1 mock event");
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV2 mock event");
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "GSV3 mock event");
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), "VTG mock event");
+                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GGA mock event"));
+                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSA mock event"));
+                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV0 mock event"));
+                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV1 mock event"));
+                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV2 mock event"));
+                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV3 mock event"));
+                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("VTG mock event"));
 
                 // Act
                 gpsReceiver.SimulateTimeoutForTesting();

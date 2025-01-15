@@ -195,5 +195,27 @@ namespace Canable.Tests
         {
             Assert.Throws(expectedExceptionType, () => CanableDevice.GetSamplePoint(samplePointString, logger));
         }
+
+        [Fact]
+        public void CanableDevice_DataReceived_EventTriggered()
+        {
+            // Arrange
+            var usbAccessMock = new Mock<IUsbAccess>();
+            var canableDevice = new CanableDevice(usbAccessMock.Object, canBusConfig, loggerFactory);
+            var dataReceivedEventTriggered = false;
+            var deviceCanMessage = new DeviceCanMessage(new DeviceCanId(0x123), [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]);
+            canableDevice.DataReceived += (sender, e) =>
+            {
+
+                dataReceivedEventTriggered = true;
+                Assert.Equal(deviceCanMessage, e.Message);
+            };
+
+            // Act
+            usbAccessMock.Raise(ua => ua.DataReceived += null, new object(), new DeviceCanMessageEventArgs(deviceCanMessage));
+
+            // Assert
+            Assert.True(dataReceivedEventTriggered);
+        }
     }
 }

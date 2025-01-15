@@ -8,6 +8,6 @@ namespace UbloxGpsReceiver
     public interface IUbloxGpsReceiverDevice
     {
         Task WriteAsync(string data);
-        event EventHandler<string> DataReceived;
+        event EventHandler<DataReceivedEventArgs> DataReceived;
     }
 }
