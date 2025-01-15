@@ -5,14 +5,10 @@
 *.exe
 
 /.vs
-/test/report
-/test/coverage-report
-/test/test-results
 
 # Ignore all bin and obj directories
 **/bin/
 **/obj/
 
-# Ignore test reports
-/coveragereport
-**/coverage.cobertura.xml
+# Ignore test coverage results
+**/coverage/
