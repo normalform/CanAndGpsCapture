@@ -5,7 +5,7 @@
 
 namespace CagCap.Framework.Processor.GpsData
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using CagCap.Framework.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
 
@@ -42,11 +42,6 @@ namespace CagCap.Framework.Processor.GpsData
 
         private void Process()
         {
-            if (dataQueue.Count == 0)
-            {
-                return;
-            }
-
             while (dataQueue.Count > 0)
             {
                 var data = dataQueue.Dequeue();

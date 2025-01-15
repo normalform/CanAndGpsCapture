@@ -3,8 +3,10 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.DomainObject
+namespace CagCap.DomainObject.Device.Gps
 {
+    using System.Collections.ObjectModel;
+
     public record GpsData
     {
         public DateTime Time { get; init; }
@@ -17,7 +19,7 @@ namespace CagCap.DomainObject
         public double CourseTrue { get; init; }
         public double CourseMagnetic { get; init; }
         public int NumberOfSatellites { get; init; }
-        public SatelliteView[] Satellites { get; init; } = [];
+        public ReadOnlyCollection<SatelliteView> Satellites { get; init; } = new List<SatelliteView>().AsReadOnly();
 
         public override string ToString()
         {

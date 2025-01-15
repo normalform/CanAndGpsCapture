@@ -3,11 +3,12 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace Canable.Tests
+namespace CagCap.Framework.Tests.Device.Adapter.Can
 {
+    using CagCap.Framework.Device.Adapter.Can;
     using Canable;
 
-    public class DeviceCanMessageTests
+    public class CanMessageTests
     {
         [Fact]
         public void CanMessage_Constructor_SetsProperties()
@@ -16,15 +17,17 @@ namespace Canable.Tests
             var id = new DeviceCanId(0x123);
             var data = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 };
             var timestamp = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var deviceCanMessage = new DeviceCanMessage(id, data, timestamp);
 
             // Act
-            var canMessage = new DeviceCanMessage(id, data, timestamp);
+            var canMessage = new CanMessage(deviceCanMessage);
 
             // Assert
-            Assert.Equal(id, canMessage.Id);
+            Assert.Equal(new CanId(id), canMessage.Id);
             Assert.Equal(data.Length, canMessage.Dlc);
             Assert.Equal(data, canMessage.Data);
             Assert.Equal(timestamp, canMessage.Timestamp);
+            Assert.Equal(deviceCanMessage.ToString(), canMessage.ToString());
         }
 
         [Fact]
@@ -59,23 +62,6 @@ namespace Canable.Tests
             Assert.Equal(0, canMessage.Dlc);
             Assert.Equal(data, canMessage.Data);
             Assert.True((DateTime.Now - canMessage.Timestamp).TotalSeconds < 1);
-        }
-
-        [Fact]
-        public void CanMessage_ToString_ReturnsExpectedFormat()
-        {
-            // Arrange
-            var id = new DeviceCanId(0x123);
-            var data = new byte[] { 0x01, 0x02, 0x03, 0x04 };
-            var timestamp = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var canMessage = new DeviceCanMessage(id, data, timestamp);
-            var expectedString = $"ID: {id}, DLC: {data.Length}, Data: {BitConverter.ToString(data)}, Timestamp: {timestamp}";
-
-            // Act
-            var result = canMessage.ToString();
-
-            // Assert
-            Assert.Equal(expectedString, result);
         }
     }
 }

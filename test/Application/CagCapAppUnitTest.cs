@@ -6,7 +6,7 @@
 namespace CagCap.Application.Tests
 {
     using CagCap.Application;
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using Moq;
 
     public class CagCapAppUnitTest

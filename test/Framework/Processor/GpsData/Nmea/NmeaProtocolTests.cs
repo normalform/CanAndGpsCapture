@@ -5,7 +5,7 @@
 
 namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using CagCap.Framework.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
     using Moq;
@@ -21,7 +21,7 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
         [InlineData("$GPTXT,01,01,02,HW  UBX-G70xx   00070000 *77\r\n", typeof(NmeaMessageTxt))]
         [InlineData("$GPVTG,,T,,M,0.088,N,0.163,K,D*22\r\n", typeof(NmeaMessageVtg))]
         [InlineData("$GPNOP,,T,,M,0.088,N,0.163,K,D*36\r\n", typeof(NmeaMessageNull))]
-        public void Process_Gsa(string inputNmeaString, Type expectedType)
+        public void Process(string inputNmeaString, Type expectedType)
         {
             // Arrange
             var loggerMock = new Mock<ILogger>().Object;
@@ -37,6 +37,46 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             // Assert
             Assert.NotNull(nmeaMessage);
             Assert.IsType(expectedType, nmeaMessage);
+        }
+
+        [Theory]
+        [InlineData("$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*471\r\n")]
+        [InlineData("$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*48\r\n")]
+        public void Process_InvalidChecksum(string inputNmeaString)
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+            var nmeaProtocol = new NmeaProtocol(loggerMock);
+
+            // Act
+            INmeaMessage? nmeaMessage = null;
+            foreach (var messageChar in inputNmeaString)
+            {
+                nmeaMessage = nmeaProtocol.Process(messageChar);
+            }
+
+            // Assert
+            Assert.Null(nmeaMessage);
+        }
+
+        [Fact]
+        public void Process_InvalidLineFeed()
+        {
+            // Arrange
+            var loggerMock = new Mock<ILogger>().Object;
+            var nmeaProtocol = new NmeaProtocol(loggerMock);
+
+            var inputNmeaString = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*471\rInvalid";
+
+            // Act
+            INmeaMessage? nmeaMessage = null;
+            foreach (var messageChar in inputNmeaString)
+            {
+                nmeaMessage = nmeaProtocol.Process(messageChar);
+            }
+
+            // Assert
+            Assert.Null(nmeaMessage);
         }
     }
 }

@@ -5,11 +5,12 @@
 
 namespace CagCap.Framework.Device.Gps
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using CagCap.Framework.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -33,7 +34,7 @@ namespace CagCap.Framework.Device.Gps
         private double speed;
         private double courseTrue;
         private double courseMagnetic;
-        private SatelliteView[] satellites = [];
+        private ReadOnlyCollection<SatelliteView> satellites = new List<SatelliteView>().AsReadOnly();
         private int[] satelliteNumbers = [];
         private int numberOfSatellitesInView;
         private bool ggaDataIsAvailable;
@@ -64,6 +65,8 @@ namespace CagCap.Framework.Device.Gps
             OnTimeout(this, null);
         }
 
+        // ... other code ...
+
         private GpsData CreateGpsData() => new()
         {
             Time = time,
@@ -75,7 +78,7 @@ namespace CagCap.Framework.Device.Gps
             Speed = speed,
             CourseTrue = courseTrue,
             CourseMagnetic = courseMagnetic,
-            NumberOfSatellites = satellites.Length,
+            NumberOfSatellites = satellites.Count,
             Satellites = satellites
         };
 
@@ -106,7 +109,7 @@ namespace CagCap.Framework.Device.Gps
                     break;
             }
 
-            if (ggaDataIsAvailable && satellites.Length > 1)
+            if (ggaDataIsAvailable && satellites.Count > 1)
             {
                 ggaDataIsAvailable = false;
                 var gpsData = CreateGpsData();
@@ -152,7 +155,9 @@ namespace CagCap.Framework.Device.Gps
                 satellites = satelliteNumbers
                     .Select(id => satelliteViews.TryGetValue(id, out var view) ? view : null)
                     .Where(view => view != null)
-                    .ToArray()!;
+                    .Cast<SatelliteView>()
+                    .ToList()
+                    .AsReadOnly();
                 satelliteViews.Clear();
             }
         }
@@ -163,6 +168,8 @@ namespace CagCap.Framework.Device.Gps
             courseTrue = vtg.CourseOverGroundTrue;
             courseMagnetic = vtg.CourseOverGroundMagnatic;
         }
+
+        // ... other code ...
 
         private void ResetData()
         {
@@ -175,9 +182,9 @@ namespace CagCap.Framework.Device.Gps
             speed = 0.0;
             courseTrue = 0.0;
             courseMagnetic = 0.0;
-            satellites = [];
+            satellites = new List<SatelliteView>().AsReadOnly();
             satelliteViews.Clear();
-            satelliteNumbers = [];
+            satelliteNumbers = Array.Empty<int>();
             numberOfSatellitesInView = 0;
             ggaDataIsAvailable = false;
         }

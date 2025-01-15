@@ -5,7 +5,7 @@
 
 namespace CagCap.Framework.Processor.GpsData.Nmea
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using Microsoft.Extensions.Logging;
     using System.Text;
 
@@ -127,10 +127,13 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
             }
             else
             {
-                checksumBuffer[index++] = dataIn;
-                if (index > ChecksumLength)
+                if (index >= ChecksumLength)
                 {
                     ResetState();
+                }
+                else
+                {
+                    checksumBuffer[index++] = dataIn;
                 }
             }
         }

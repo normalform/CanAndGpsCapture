@@ -5,18 +5,23 @@
 
 namespace Canable
 {
-    public class DeviceCanMessage(DeviceCanId id, byte[] data, DateTime timestamp)
+    public class DeviceCanMessage(DeviceCanId id, IReadOnlyList<byte> data, DateTime timestamp)
     {
         public DeviceCanId Id { get; } = id;
-        public int Dlc { get; } = data.Length;
-        public byte[] Data { get; } = data;
+        public int Dlc { get; } = data.Count;
+        public IReadOnlyList<byte> Data { get; } = data;
         public DateTime Timestamp { get; } = timestamp;
 
-        public DeviceCanMessage(DeviceCanId id, byte[] data) : this(
+        public DeviceCanMessage(DeviceCanId id, IReadOnlyList<byte> data) : this(
             id,
             data,
             DateTime.Now)
         {
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}, DLC: {Dlc}, Data: {BitConverter.ToString([.. Data])}, Timestamp: {Timestamp}";
         }
     }
 }

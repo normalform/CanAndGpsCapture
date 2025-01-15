@@ -23,7 +23,7 @@ namespace Canable.Tests
             Assert.Equal(expectedId, canId.Id);
             Assert.Equal(exteded, canId.Extended);
             Assert.Equal(rtr, canId.Rtr);
-            Assert.Equal(error, canId.Error);
+            Assert.Equal(error, canId.HasError);
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace Canable.Tests
             Assert.Equal(id, canId.Id);
             Assert.False(canId.Extended);
             Assert.True(canId.Rtr);
-            Assert.True(canId.Error);
+            Assert.True(canId.HasError);
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace Canable.Tests
             Assert.Equal(id, canId.Id);
             Assert.True(canId.Extended);
             Assert.True(canId.Rtr);
-            Assert.True(canId.Error);
+            Assert.True(canId.HasError);
         }
 
         [Fact]

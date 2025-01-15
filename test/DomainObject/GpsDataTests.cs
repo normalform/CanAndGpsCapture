@@ -5,7 +5,8 @@
 
 namespace CagCap.DomainObject.Tests
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
+    using System.Collections.ObjectModel;
 
     public class GpsDataTests
     {
@@ -23,7 +24,7 @@ namespace CagCap.DomainObject.Tests
                 Speed = 0,
                 CourseTrue = 0,
                 NumberOfSatellites = 0,
-                Satellites = [new SatelliteView(1, 0, 0, 0)]
+                Satellites = new ReadOnlyCollection<SatelliteView>(new List<SatelliteView> { new SatelliteView(1, 0, 0, 0) })
             };
 
             // Act

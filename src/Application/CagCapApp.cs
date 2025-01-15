@@ -5,7 +5,7 @@
 
 namespace CagCap.Application
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
 
     public class CagCapApp(IUserInterface userInterface) : ICagCapApp
     {

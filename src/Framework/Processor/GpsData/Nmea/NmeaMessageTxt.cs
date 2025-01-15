@@ -5,7 +5,7 @@
 
 namespace CagCap.Framework.Processor.GpsData.Nmea
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using Microsoft.Extensions.Logging;
 
     internal enum NmeaTextMessageType

@@ -3,11 +3,12 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.DomainObject
+namespace CagCap.DomainObject.Device.Gps
 {
-    public interface IUserInterface
+    public interface IGpsReceiver
     {
-        void Start();
-        void WaitForExit();
+        event EventHandler<GpsData> DataReceived;
+
+        GpsData GpsData { get; }
     }
 }

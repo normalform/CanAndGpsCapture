@@ -5,7 +5,7 @@
 
 namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using CagCap.Framework.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
     using Moq;
@@ -62,6 +62,21 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var logger = new Mock<ILogger>();
             var inputTimeString = "xxxxxx.yy";
             var inputDateString = "kkkkkk";
+
+            // Act
+            var result = NmeaMessageUtil.ParseDateTime(inputTimeString, inputDateString, logger.Object);
+
+            // Assert
+            Assert.Equal(DateTime.MinValue, result);
+        }
+
+        [Fact]
+        public void ParseDateTime_InvalidHalfDateTimeInput_ReturnsMinDateTime()
+        {
+            // Arrange
+            var logger = new Mock<ILogger>();
+            var inputTimeString = "xxxxxx.yy";
+            var inputDateString = "010203";
 
             // Act
             var result = NmeaMessageUtil.ParseDateTime(inputTimeString, inputDateString, logger.Object);

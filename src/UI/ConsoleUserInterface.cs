@@ -5,7 +5,7 @@
 
 namespace CagCap.UI
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]

@@ -6,8 +6,10 @@
 namespace CagCap
 {
     using CagCap.Application;
-    using CagCap.DomainObject;
-    using CagCap.Framework.Device.Adapter;
+    using CagCap.DomainObject.Device.Can;
+    using CagCap.DomainObject.Device.Gps;
+    using CagCap.Framework.Device.Adapter.Can;
+    using CagCap.Framework.Device.Adapter.Gps;
     using CagCap.Framework.Device.Gps;
     using CagCap.Framework.Processor.GpsData;
     using CagCap.UI;
@@ -69,7 +71,7 @@ namespace CagCap
 
             // TODO It's temporary for testing the low-level devices. Remove this when the high-level design is ready
             _ = serviceProvider.GetRequiredService<IGpsReceiver>();
-            _ = serviceProvider.GetRequiredService<ICanableDevice>();
+            _ = serviceProvider.GetRequiredService<ICanBusTransiver>();
 
             // create application
             var cagCapApp = serviceProvider.GetRequiredService<ICagCapApp>();
@@ -95,7 +97,8 @@ namespace CagCap
             services.AddSingleton<IGpsDataProcessor, GpsDataProcessor>();
             services.AddSingleton<IUserInterface, ConsoleUserInterface>();
             services.AddSingleton<IGpsReceiver, GpsReceiver>();
-            services.AddSingleton<IGpsReceiverDevice, GpsReceiverDeviceAdapter>();
+            services.AddSingleton<IGpsReceiverDevice, GpsReceiverDevice>();
+            services.AddSingleton<ICanBusTransiver, CanBusTransiver>();
 
             services.AddSingleton<ICanableDevice>(provider =>
             {

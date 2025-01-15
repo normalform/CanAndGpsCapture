@@ -5,7 +5,7 @@
 
 namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
 {
-    using CagCap.DomainObject;
+    using CagCap.DomainObject.Device.Gps;
     using CagCap.Framework.Processor.GpsData.Nmea;
     using Microsoft.Extensions.Logging;
     using Moq;

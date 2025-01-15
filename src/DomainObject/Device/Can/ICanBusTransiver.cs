@@ -3,12 +3,11 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.DomainObject
+namespace CagCap.DomainObject.Device.Can
 {
-    public interface IGpsReceiver
+    public interface ICanBusTransiver
     {
-        event EventHandler<GpsData> DataReceived;
-
-        GpsData GpsData { get; }
+        void SendMessage(ICanMessage message);
+        event EventHandler<ICanMessage> DataReceived;
     }
 }

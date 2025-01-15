@@ -16,6 +16,8 @@ namespace Canable
         private readonly CanBusConfig canBusConfig;
         private readonly ILogger logger;
 
+        public event EventHandler<DeviceCanMessage>? DataReceived;
+
         private readonly CandleDataStructure.CandleCapability candleCapability;
 
         public CanableDevice(IUsbAccess usbAccess, CanBusConfig canBusConfig, ILoggerFactory loggerFactory)
@@ -53,14 +55,14 @@ namespace Canable
             };
 
             // Set Data0 to Data7 based on the size of message.Data
-            if (message.Data.Length > 0) frame.Data0 = message.Data[0];
-            if (message.Data.Length > 1) frame.Data1 = message.Data[1];
-            if (message.Data.Length > 2) frame.Data2 = message.Data[2];
-            if (message.Data.Length > 3) frame.Data3 = message.Data[3];
-            if (message.Data.Length > 4) frame.Data4 = message.Data[4];
-            if (message.Data.Length > 5) frame.Data5 = message.Data[5];
-            if (message.Data.Length > 6) frame.Data6 = message.Data[6];
-            if (message.Data.Length > 7) frame.Data7 = message.Data[7];
+            if (message.Data.Count > 0) frame.Data0 = message.Data[0];
+            if (message.Data.Count > 1) frame.Data1 = message.Data[1];
+            if (message.Data.Count > 2) frame.Data2 = message.Data[2];
+            if (message.Data.Count > 3) frame.Data3 = message.Data[3];
+            if (message.Data.Count > 4) frame.Data4 = message.Data[4];
+            if (message.Data.Count > 5) frame.Data5 = message.Data[5];
+            if (message.Data.Count > 6) frame.Data6 = message.Data[6];
+            if (message.Data.Count > 7) frame.Data7 = message.Data[7];
 
             usbAccess.SendFrame(0, frame);
         }
@@ -104,7 +106,7 @@ namespace Canable
                 canMessage.Id.Id,
                 canMessage.Id.Extended,
                 canMessage.Id.Rtr,
-                canMessage.Id.Error,
+                canMessage.Id.HasError,
                 canMessage.Dlc,
                 $"[{dataString}]",
                 canMessage.Timestamp.Ticks / 10);

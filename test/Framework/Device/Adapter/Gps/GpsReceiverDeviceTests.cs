@@ -3,20 +3,20 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.Framework.Tests.Device.Adapter
+namespace CagCap.Framework.Tests.Device.Adapter.Gps
 {
-    using CagCap.Framework.Device.Adapter;
+    using CagCap.Framework.Device.Adapter.Gps;
     using Moq;
     using UbloxGpsReceiver;
 
-    public class GpsReceiverDeviceAdapterTests
+    public class GpsReceiverDeviceTests
     {
         [Fact]
         public async Task WriteAsync()
         {
             // Arrange
             var mockUbloxGpsReceiverDevice = new Mock<IUbloxGpsReceiverDevice>();
-            var adapter = new GpsReceiverDeviceAdapter(mockUbloxGpsReceiverDevice.Object);
+            var adapter = new GpsReceiverDevice(mockUbloxGpsReceiverDevice.Object);
             var data = "test data";
 
             // Act
@@ -31,7 +31,7 @@ namespace CagCap.Framework.Tests.Device.Adapter
         {
             // Arrange
             var mockUbloxGpsReceiverDevice = new Mock<IUbloxGpsReceiverDevice>();
-            var adapter = new GpsReceiverDeviceAdapter(mockUbloxGpsReceiverDevice.Object);
+            var adapter = new GpsReceiverDevice(mockUbloxGpsReceiverDevice.Object);
             var data = "received data";
             var eventRaised = false;
 

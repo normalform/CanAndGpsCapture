@@ -3,9 +3,11 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License or any later version.
 
-namespace CagCap.DomainObject
+namespace CagCap.DomainObject.Device.Gps
 {
-    public interface INmeaMessage
+    public interface IGpsDataProcessor
     {
+        event EventHandler<INmeaMessage>? DataReceived;
+        void Process(string data);
     }
 }

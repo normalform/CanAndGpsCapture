@@ -28,7 +28,7 @@ namespace Canable
         // Remote Transmission Reuqest
         public bool Rtr => (rawId & IdFlagRtr) != 0;
 
-        public bool Error => (rawId & IdFlagError) != 0;
+        public bool HasError => (rawId & IdFlagError) != 0;
 
         public static DeviceCanId StandardCanId(uint id, bool rtr = false, bool error = false)
         {
@@ -43,7 +43,7 @@ namespace Canable
         public override string ToString()
         {
             var extendedText = Extended ? ", Extended" : string.Empty;
-            var errorText = Error ? ", Error" : string.Empty;
+            var errorText = HasError ? ", Error" : string.Empty;
             var rtrText = Rtr ? ", RTR" : string.Empty;
             return $"Id: {Id}(0x{Id:x}){rtrText}{extendedText}{errorText}, raw ID: 0x{rawId:x}";
         }
