@@ -12,3 +12,7 @@
 # Ignore all bin and obj directories
 **/bin/
 **/obj/
+
+# Ignore test reports
+/coveragereport
+**/coverage.cobertura.xml
