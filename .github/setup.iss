@@ -17,8 +17,8 @@ Compression=lzma2
 SolidCompression=yes
 
 [Files]
-Source: "..\src\CagCap\bin\Release\net8.0\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\CagCap\CagCapSettings.json"; DestDir: "{code:GetConfigDir}"; Flags: ignoreversion
+Source: "..\src\main\bin\Release\net8.0\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\src\main\CagCapSettings.json"; DestDir: "{code:GetConfigDir}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\CagCap"; Filename: "{app}\CagCap.exe"
