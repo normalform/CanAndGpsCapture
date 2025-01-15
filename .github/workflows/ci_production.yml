@@ -7,7 +7,7 @@ name: Production CI
 
 on:
   push:
-    branches: [ "main" , "8-improve-dependency-for-the-can-interface-device"]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -47,16 +47,20 @@ jobs:
       run: dotnet test ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/
 
     - name: Install ReportGenerator
+      if: matrix.configuration == 'Release'
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Add .NET tools to PATH
+      if: matrix.configuration == 'Release'
       run: |
         echo "${{ github.env.HOME }}/.dotnet/tools" >> $GITHUB_PATH
 
     - name: Merge coverage reports
+      if: matrix.configuration == 'Release'
       run: reportgenerator -reports:./**/coverage/*.xml -targetdir:./coverage -reporttypes:Cobertura
 
     - name: Upload coverage to Codecov
+      if: matrix.configuration == 'Release'
       uses: codecov/codecov-action@v3
       with:
         files: ./coverage/Cobertura.xml
