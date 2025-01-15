@@ -50,7 +50,8 @@ jobs:
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Add .NET tools to PATH
-      run: echo "::add-path::${{ github.env.HOME }}/.dotnet/tools"
+      run: |
+        echo "${{ github.env.HOME }}/.dotnet/tools" >> $GITHUB_PATH
 
     - name: Merge coverage reports
       run: reportgenerator -reports:./test/**/coverage/*.xml -targetdir:./test/coverage -reporttypes:Cobertura
