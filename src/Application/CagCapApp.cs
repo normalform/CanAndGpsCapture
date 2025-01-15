@@ -6,9 +6,7 @@
 namespace CagCap.Application
 {
     using CagCap.DomainObject;
-    using System.Diagnostics.CodeAnalysis;
 
-    [ExcludeFromCodeCoverage]
     public class CagCapApp(IUserInterface userInterface) : ICagCapApp
     {
         private readonly IUserInterface userInterface = userInterface;

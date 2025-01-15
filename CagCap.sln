@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CagCap", "src\main\CagCap.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canable.Tests", "OTS\test\Canable\Canable.Tests.csproj", "{9F3827BC-3657-4DDB-A1C7-1EAD8F538ACC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CagCap.Application.Tests", "test\Application\CagCap.Application.Tests.csproj", "{64B416B1-830B-4884-B235-777D82EF7D52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{9F3827BC-3657-4DDB-A1C7-1EAD8F538ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F3827BC-3657-4DDB-A1C7-1EAD8F538ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F3827BC-3657-4DDB-A1C7-1EAD8F538ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64B416B1-830B-4884-B235-777D82EF7D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B416B1-830B-4884-B235-777D82EF7D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B416B1-830B-4884-B235-777D82EF7D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B416B1-830B-4884-B235-777D82EF7D52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
