@@ -24,10 +24,5 @@ namespace CagCap.Framework.Device.Adapter.Can
         {
             return deviceCanMessage.ToString();
         }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Id, Dlc, Data, Timestamp);
-        }
     }
 }

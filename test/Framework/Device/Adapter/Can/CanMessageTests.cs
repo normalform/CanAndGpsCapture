@@ -63,24 +63,5 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
             Assert.Equal(data, canMessage.Data);
             Assert.True((DateTime.Now - canMessage.Timestamp).TotalSeconds < 1);
         }
-
-        [Fact]
-        public void CanMessage_HashCode_IsConsistent()
-        {
-            // Arrange
-            var id = new DeviceCanId(0x123);
-            var data = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 };
-            var timestamp = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var deviceCanMessage = new DeviceCanMessage(id, data, timestamp);
-            var canMessage1 = new CanMessage(deviceCanMessage);
-            var canMessage2 = new CanMessage(deviceCanMessage);
-
-            // Act
-            var hashCode1 = canMessage1.GetHashCode();
-            var hashCode2 = canMessage2.GetHashCode();
-
-            // Assert
-            Assert.Equal(hashCode1, hashCode2);
-        }
     }
 }

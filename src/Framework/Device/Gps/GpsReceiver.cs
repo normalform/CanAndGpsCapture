@@ -150,12 +150,13 @@ namespace CagCap.Framework.Device.Gps
 
             if (satelliteViews.Count == numberOfSatellitesInView)
             {
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
                 satellites = satelliteNumbers
                     .Select(id => satelliteViews.TryGetValue(id, out var view) ? view : null)
                     .Where(view => view != null)
-                    .Cast<SatelliteView>()
                     .ToList()
                     .AsReadOnly();
+#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
                 satelliteViews.Clear();
             }
         }
