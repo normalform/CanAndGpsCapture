@@ -39,21 +39,21 @@ namespace CagCap.Framework.Device.Gps
         private int numberOfSatellitesInView;
         private bool ggaDataIsAvailable;
 
-        public GpsData GpsData => CreateGpsData();
+        public GpsData GpsData => this.CreateGpsData();
 
         public event EventHandler<GpsDataEventArgs> DataReceived = delegate { };
 
         public GpsReceiver(IGpsReceiverDevice gpsReceiverDevice, IGpsDataProcessor gpsReceiverProcessor, ILoggerFactory loggerFactory)
         {
-            logger = loggerFactory.CreateLogger("GpsReceiver");
+            this.logger = loggerFactory.CreateLogger("GpsReceiver");
 
-            timeoutTimer = new Timer(Timeout)
+            this.timeoutTimer = new Timer(Timeout)
             {
                 AutoReset = false
             };
-            timeoutTimer.Elapsed += OnTimeout;
+            this.timeoutTimer.Elapsed += this.OnTimeout;
 
-            gpsReceiverProcessor.DataReceived += OnDataReceived;
+            gpsReceiverProcessor.DataReceived += this.OnDataReceived;
             gpsReceiverDevice.DataReceived += (sender, data) =>
             {
                 gpsReceiverProcessor.Process(data.Data);
@@ -62,149 +62,147 @@ namespace CagCap.Framework.Device.Gps
 
         internal void SimulateTimeoutForTesting()
         {
-            OnTimeout(this, null);
+            this.OnTimeout(this, null);
         }
 
         private GpsData CreateGpsData() => new()
         {
-            Time = time,
-            Latitude = latitude,
-            LatitudeHemisphere = latitudeHemisphere,
-            Longitude = longitude,
-            LongitudeHemisphere = longitudeHemisphere,
-            Altitude = altitude,
-            Speed = speed,
-            CourseTrue = courseTrue,
-            CourseMagnetic = courseMagnetic,
-            NumberOfSatellites = satellites.Count,
-            Satellites = satellites
+            Time = this.time,
+            Latitude = this.latitude,
+            LatitudeHemisphere = this.latitudeHemisphere,
+            Longitude = this.longitude,
+            LongitudeHemisphere = this.longitudeHemisphere,
+            Altitude = this.altitude,
+            Speed = this.speed,
+            CourseTrue = this.courseTrue,
+            CourseMagnetic = this.courseMagnetic,
+            NumberOfSatellites = this.satellites.Count,
+            Satellites = this.satellites
         };
 
         private void OnTimeout(object? sender, ElapsedEventArgs? e)
         {
-            ResetData();
-            this.DataReceived.Invoke(this, new GpsDataEventArgs(GpsData));
+            this.ResetData();
+            this.DataReceived.Invoke(this, new GpsDataEventArgs(this.GpsData));
         }
 
         private void OnDataReceived(object? sender, NmeaMessageEventArgs message)
         {
-            logger.LogDebug("Data received: {message}", message);
-            timeoutTimer.Stop(); // Stop the timer if data is received
+            this.logger.LogDebug("Data received: {message}", message);
+            this.timeoutTimer.Stop(); // Stop the timer if data is received
 
             switch (message.Message)
             {
                 case NmeaMessageGga gga:
-                    UpdateGgaData(gga);
+                    this.UpdateGgaData(gga);
                     break;
                 case NmeaMessageGsa gsa:
-                    UpdateGsaData(gsa);
+                    this.UpdateGsaData(gsa);
                     break;
                 case NmeaMessageGsv gsv:
-                    UpdateGsvData(gsv);
+                    this.UpdateGsvData(gsv);
                     break;
                 case NmeaMessageVtg vtg:
-                    UpdateVtgData(vtg);
+                    this.UpdateVtgData(vtg);
                     break;
             }
 
-            if (ggaDataIsAvailable && satellites.Count > 1)
+            if (ggaDataIsAvailable && this.satellites.Count > 1)
             {
                 ggaDataIsAvailable = false;
-                var gpsData = CreateGpsData();
+                var gpsData = this.CreateGpsData();
                 DataReceived.Invoke(this, new GpsDataEventArgs(gpsData));
-                logger.LogDebug("GPS data: {gpsData}", gpsData);
+                this.logger.LogDebug("GPS data: {gpsData}", gpsData);
             }
 
-            timeoutTimer.Start();
+            this.timeoutTimer.Start();
         }
 
         private void UpdateGgaData(NmeaMessageGga gga)
         {
-            time = gga.Time;
-            latitude = gga.Latitude;
-            latitudeHemisphere = gga.LatitudeHemisphere;
-            longitude = gga.Longitude;
-            longitudeHemisphere = gga.LongitudeHemisphere;
-            altitude = gga.Altitude;
-            ggaDataIsAvailable = true;
+            this.time = gga.Time;
+            this.latitude = gga.Latitude;
+            this.latitudeHemisphere = gga.LatitudeHemisphere;
+            this.longitude = gga.Longitude;
+            this.longitudeHemisphere = gga.LongitudeHemisphere;
+            this.altitude = gga.Altitude;
+            this.ggaDataIsAvailable = true;
         }
 
         private void UpdateGsaData(NmeaMessageGsa gsa)
         {
-            satelliteNumbers = gsa.SatelliteNumbers;
-            satelliteViews.Clear();
+            this.satelliteNumbers = gsa.SatelliteNumbers;
+            this.satelliteViews.Clear();
         }
 
         private void UpdateGsvData(NmeaMessageGsv gsv)
         {
-            if (numberOfSatellitesInView != gsv.NumberOfSatellitesInView)
+            if (this.numberOfSatellitesInView != gsv.NumberOfSatellitesInView)
             {
-                numberOfSatellitesInView = gsv.NumberOfSatellitesInView;
-                satelliteViews.Clear();
+                this.numberOfSatellitesInView = gsv.NumberOfSatellitesInView;
+                this.satelliteViews.Clear();
             }
 
             foreach (var satellite in gsv.SatelliteViews)
             {
-                satelliteViews[satellite.Id] = satellite;
+                this.satelliteViews[satellite.Id] = satellite;
             }
 
-            if (satelliteViews.Count == numberOfSatellitesInView)
+            if (this.satelliteViews.Count == this.numberOfSatellitesInView)
             {
 #pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
-                satellites = satelliteNumbers
-                    .Select(id => satelliteViews.TryGetValue(id, out var view) ? view : null)
+                this.satellites = this.satelliteNumbers
+                    .Select(id => this.satelliteViews.TryGetValue(id, out var view) ? view : null)
                     .Where(view => view != null)
                     .ToList()
                     .AsReadOnly();
 #pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
-                satelliteViews.Clear();
+                this.satelliteViews.Clear();
             }
         }
 
         private void UpdateVtgData(NmeaMessageVtg vtg)
         {
-            speed = vtg.SpeedOverGroundKph;
-            courseTrue = vtg.CourseOverGroundTrue;
-            courseMagnetic = vtg.CourseOverGroundMagnatic;
+            this.speed = vtg.SpeedOverGroundKph;
+            this.courseTrue = vtg.CourseOverGroundTrue;
+            this.courseMagnetic = vtg.CourseOverGroundMagnatic;
         }
-
-        // ... other code ...
 
         private void ResetData()
         {
-            time = DateTime.MinValue;
-            latitude = 0.0;
-            latitudeHemisphere = LatitudeHemisphere.North;
-            longitude = 0.0;
-            longitudeHemisphere = LongitudeHemisphere.West;
-            altitude = 0.0;
-            speed = 0.0;
-            courseTrue = 0.0;
-            courseMagnetic = 0.0;
-            satellites = new List<SatelliteView>().AsReadOnly();
-            satelliteViews.Clear();
-            satelliteNumbers = Array.Empty<int>();
-            numberOfSatellitesInView = 0;
-            ggaDataIsAvailable = false;
+            this.time = DateTime.MinValue;
+            this.latitude = 0.0;
+            this.latitudeHemisphere = LatitudeHemisphere.North;
+            this.longitude = 0.0;
+            this.longitudeHemisphere = LongitudeHemisphere.West;
+            this.altitude = 0.0;
+            this.speed = 0.0;
+            this.courseTrue = 0.0;
+            this.courseMagnetic = 0.0;
+            this.satellites = new List<SatelliteView>().AsReadOnly();
+            this.satelliteViews.Clear();
+            this.satelliteNumbers = [];
+            this.numberOfSatellitesInView = 0;
+            this.ggaDataIsAvailable = false;
         }
 
         [ExcludeFromCodeCoverage]
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!this.disposed)
             {
                 if (disposing)
                 {
-                    timeoutTimer.Dispose();
+                    this.timeoutTimer.Dispose();
                 }
-                disposed = true;
+                this.disposed = true;
             }
         }
 
         [ExcludeFromCodeCoverage]
         public void Dispose()
         {
-            Dispose(disposing: true);
+            this.Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
     }

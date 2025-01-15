@@ -150,7 +150,21 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var currentYear = DateTime.Today.Year;
             var currentMonth = DateTime.Today.Month;
             var currentDay = DateTime.Today.Day;
-            Assert.Equal($"GGA: Time: {currentMonth}/{currentDay}/{currentYear} 12:35:19 PM, Latitude: 4807.038, LatitudeHemisphere: North, Longitude: 1131, LongitudeHemisphere: East, Quality: AutonomousGnssFix, Satellites: 8, HorizontalDilutionOfPrecision: 0.9, Altitude: 545.4, GeoidSeparation: 46.9, AgeOfDifferentialCorrections: 0, DifferentialStationId: 0", result);
+            Assert.Equal(
+                $"GGA: Time: {currentMonth}/{currentDay}/{currentYear} 12:35:19 PM, " +
+                "Latitude: 4807.038, " +
+                "LatitudeHemisphere: North, " +
+                "Longitude: 1131, " +
+                "LongitudeHemisphere: East, " +
+                "Quality: AutonomousGnssFix, " +
+                "Satellites: 8, " +
+                "HorizontalDilutionOfPrecision: 0.9, " +
+                "Altitude: 545.4, " +
+                "GeoidSeparation: 46.9, " +
+                "AgeOfDifferentialCorrections: 0, " +
+                "DifferentialStationId: 0",
+                result
+            );
         }
     }
 }

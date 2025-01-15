@@ -95,7 +95,11 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var txtMessage = new NmeaMessageTxt(txtData, loggerMock);
 
             // Assert
-            Assert.Equal("TXT: NumberOfMessages: 1, MessageNumber: 1, TextMessageType: Notice, Message: HW  UBX-G70xx   00070000 ", txtMessage.ToString());
+            Assert.Equal(
+                "TXT: NumberOfMessages: 1, MessageNumber: 1, TextMessageType: Notice, " +
+                "Message: HW  UBX-G70xx   00070000 ",
+                txtMessage.ToString()
+            );
         }
     }
 }

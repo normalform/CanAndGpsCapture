@@ -22,8 +22,8 @@ namespace UbloxGpsReceiver
 
         public UbloxGpsReceiverDevice(string portName, int baudRate, ILoggerFactory loggerFactory)
         {
-            logger = loggerFactory.CreateLogger("GpsDevice");
-            serialPort = new SerialPort(portName, baudRate)
+            this.logger = loggerFactory.CreateLogger("GpsDevice");
+            this.serialPort = new SerialPort(portName, baudRate)
             {
                 Parity = Parity.None,
                 DataBits = 8,
@@ -33,31 +33,31 @@ namespace UbloxGpsReceiver
                 WriteTimeout = 500
             };
 
-            serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+            this.serialPort.DataReceived += new SerialDataReceivedEventHandler(this.DataReceivedHandler);
 
             try
             {
-                if (!serialPort.IsOpen)
+                if (!this.serialPort.IsOpen)
                 {
-                    serialPort.Open();
+                    this.serialPort.Open();
                 }
             }
             catch (UnauthorizedAccessException ex)
             {
-                logger.LogError(ex, "Unauthorized access error opening COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "Unauthorized access error opening COM port: {message}", ex.Message);
             }
             catch (IOException ex)
             {
-                logger.LogError(ex, "I/O error opening COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "I/O error opening COM port: {message}", ex.Message);
             }
             catch (InvalidOperationException ex)
             {
-                logger.LogError(ex, "Invalid operation error opening COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "Invalid operation error opening COM port: {message}", ex.Message);
                 Console.WriteLine($"Invalid operation error opening COM port: {ex.Message}");
             }
             catch (Exception ex) when (ex is ArgumentException || ex is ArgumentOutOfRangeException || ex is ArgumentNullException)
             {
-                logger.LogError(ex, "Argument error opening COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "Argument error opening COM port: {message}", ex.Message);
                 Console.WriteLine($"Argument error opening COM port: {ex.Message}");
             }
         }
@@ -66,24 +66,24 @@ namespace UbloxGpsReceiver
         {
             try
             {
-                if (serialPort.IsOpen)
+                if (this.serialPort.IsOpen)
                 {
-                    await Task.Run(() => serialPort.WriteLine(data)).ConfigureAwait(false);
+                    await Task.Run(() => this.serialPort.WriteLine(data)).ConfigureAwait(false);
                 }
             }
             catch (InvalidOperationException ex)
             {
-                logger.LogError(ex, "Invalid operation error writing to COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "Invalid operation error writing to COM port: {message}", ex.Message);
                 Console.WriteLine($"Invalid operation error writing to COM port: {ex.Message}");
             }
             catch (TimeoutException ex)
             {
-                logger.LogError(ex, "Timeout error writing to COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "Timeout error writing to COM port: {message}", ex.Message);
                 Console.WriteLine($"Timeout error writing to COM port: {ex.Message}");
             }
             catch (IOException ex)
             {
-                logger.LogError(ex, "I/O error writing to COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "I/O error writing to COM port: {message}", ex.Message);
                 Console.WriteLine($"I/O error writing to COM port: {ex.Message}");
             }
         }
@@ -94,22 +94,22 @@ namespace UbloxGpsReceiver
             {
                 var sp = (SerialPort)sender;
                 var data = sp.ReadExisting();
-                logger.LogDebug("Data received: {data}", data);
+                this.logger.LogDebug("Data received: {data}", data);
                 this.DataReceived.Invoke(this, new DataReceivedEventArgs(data));
             }
             catch (InvalidOperationException ex)
             {
-                logger.LogError(ex, "Invalid operation error reading COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "Invalid operation error reading COM port: {message}", ex.Message);
                 Console.WriteLine($"Invalid operation error reading from COM port: {ex.Message}");
             }
             catch (TimeoutException ex)
             {
-                logger.LogError(ex, "Timeout error reading COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "Timeout error reading COM port: {message}", ex.Message);
                 Console.WriteLine($"Timeout error reading from COM port: {ex.Message}");
             }
             catch (IOException ex)
             {
-                logger.LogError(ex, "I/O error reading COM port: {message}", ex.Message);
+                this.logger.LogError(ex, "I/O error reading COM port: {message}", ex.Message);
                 Console.WriteLine($"I/O error reading from COM port: {ex.Message}");
             }
         }

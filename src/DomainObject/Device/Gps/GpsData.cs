@@ -23,8 +23,13 @@ namespace CagCap.DomainObject.Device.Gps
 
         public override string ToString()
         {
-            var satellites = string.Join(", ", Satellites.Select(s => $"[Id: {s.Id}, Elevation: {s.Elevation}, Azimuth: {s.Azimuth}, SNR: {s.SignalToNoiseRatio}]"));
-            return $"Latitude: {Latitude} {LatitudeHemisphere}, Longitude: {Longitude} {LongitudeHemisphere}, Altitude: {Altitude}m, Speed: {Speed}km/h, Course (True): {CourseTrue}°, satellites: {satellites}";
+            var satellites = string.Join(", ", this.Satellites.Select(s => $"[Id: {s.Id}, Elevation: {s.Elevation}, Azimuth: {s.Azimuth}, SNR: {s.SignalToNoiseRatio}]"));
+            return $"Latitude: {this.Latitude} {this.LatitudeHemisphere}, " +
+                   $"Longitude: {this.Longitude} {this.LongitudeHemisphere}, " +
+                   $"Altitude: {this.Altitude}m, " +
+                   $"Speed: {this.Speed}km/h, " +
+                   $"Course (True): {this.CourseTrue}°, " +
+                   $"satellites: {satellites}";
         }
     }
 }

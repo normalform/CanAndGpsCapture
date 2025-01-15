@@ -26,7 +26,10 @@
         "Default": "Information",
         "GpsDevice": "Information",
         "GpsDataProcessor": "Information",
-        "GpsReceiver": "Information"
+        "GpsReceiver": "Information",
+        "UsbAccess": "Information",
+        "CanMessage": "Information",
+        "CanBusTransiver": "Information"
       }
     },
     "OpenTelemetry": {

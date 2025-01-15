@@ -24,18 +24,18 @@ namespace Canable
         {
             this.usbAccess = usbAccess;
             this.canBusConfig = canBusConfig;
-            logger = loggerFactory.CreateLogger("CanMessage");
+            this.logger = loggerFactory.CreateLogger("CanMessage");
 
-            this.usbAccess.DataReceived += (sender, message) => OnMessageReceived(message);
+            this.usbAccess.DataReceived += (sender, message) => this.OnMessageReceived(message);
 
-            SetDeviceMode(start: false);
+            this.SetDeviceMode(start: false);
 
-            candleCapability = this.usbAccess.UsbControlMessageGet<CandleDataStructure.CandleCapability>(CanRequest.BitTimingConstants, 0, 0);
+            this.candleCapability = this.usbAccess.UsbControlMessageGet<CandleDataStructure.CandleCapability>(CanRequest.BitTimingConstants, 0, 0);
 
             int samplePoint = GetSamplePoint(this.canBusConfig.SamplePoint, logger);
             this.SetBitTiming(canBusConfig.BitRate, samplePoint);
 
-            SetDeviceMode(start: true);
+            this.SetDeviceMode(start: true);
 
             this.usbAccess.StartReceive();
         }
@@ -55,16 +55,16 @@ namespace Canable
             };
 
             // Set Data0 to Data7 based on the size of message.Data
-            if (message.Data.Count > 0) frame.Data0 = message.Data[0];
-            if (message.Data.Count > 1) frame.Data1 = message.Data[1];
-            if (message.Data.Count > 2) frame.Data2 = message.Data[2];
-            if (message.Data.Count > 3) frame.Data3 = message.Data[3];
-            if (message.Data.Count > 4) frame.Data4 = message.Data[4];
-            if (message.Data.Count > 5) frame.Data5 = message.Data[5];
-            if (message.Data.Count > 6) frame.Data6 = message.Data[6];
-            if (message.Data.Count > 7) frame.Data7 = message.Data[7];
+            if (message.Data.Count > 0) { frame.Data0 = message.Data[0]; }
+            if (message.Data.Count > 1) { frame.Data1 = message.Data[1]; }
+            if (message.Data.Count > 2) { frame.Data2 = message.Data[2]; }
+            if (message.Data.Count > 3) { frame.Data3 = message.Data[3]; }
+            if (message.Data.Count > 4) { frame.Data4 = message.Data[4]; }
+            if (message.Data.Count > 5) { frame.Data5 = message.Data[5]; }
+            if (message.Data.Count > 6) { frame.Data6 = message.Data[6]; }
+            if (message.Data.Count > 7) { frame.Data7 = message.Data[7]; }
 
-            usbAccess.SendFrame(0, frame);
+            this.usbAccess.SendFrame(0, frame);
         }
 
         public static int GetSamplePoint(string samplePointConfig, ILogger logger)
@@ -102,7 +102,7 @@ namespace Canable
         private void LogCanMessage(string message, DeviceCanMessage canMessage)
         {
             var dataString = string.Join(",", canMessage.Data.Select(b => $"0x{b:X2}"));
-            logger.LogDebug("CAN message: {Message}, Id: {Id}, Extended: {Extended}, Rtr: {Rtr}, Error: {Error}, Dlc: {Dlc}, Data: {Data}, Timestamp: {Timestamp}",
+            this.logger.LogDebug("CAN message: {Message}, Id: {Id}, Extended: {Extended}, Rtr: {Rtr}, Error: {Error}, Dlc: {Dlc}, Data: {Data}, Timestamp: {Timestamp}",
                 message,
                 canMessage.Id.Id,
                 canMessage.Id.Extended,
@@ -115,35 +115,35 @@ namespace Canable
 
         private void SetDeviceMode(bool start)
         {
-            var avaliableFeature = new CanableFeature(candleCapability.Feature);
+            var avaliableFeature = new CanableFeature(this.candleCapability.Feature);
 
             uint flags = 0;
-            if (avaliableFeature.ListenOnly && canBusConfig.EnableListenOnly)
+            if (avaliableFeature.ListenOnly && this.canBusConfig.EnableListenOnly)
             {
                 flags |= CanableFeature.ListenOnlyBit;
             }
 
-            if (avaliableFeature.Loopback && canBusConfig.EnableLoopback)
+            if (avaliableFeature.Loopback && this.canBusConfig.EnableLoopback)
             {
                 flags |= CanableFeature.LoopbackBit;
             }
 
-            if (avaliableFeature.HwTimeStamp && canBusConfig.EnableHwTimestamp)
+            if (avaliableFeature.HwTimeStamp && this.canBusConfig.EnableHwTimestamp)
             {
                 flags |= CanableFeature.HwTimeStampBit;
             }
 
-            if (avaliableFeature.Identity && canBusConfig.EnableIdentity)
+            if (avaliableFeature.Identity && this.canBusConfig.EnableIdentity)
             {
                 flags |= CanableFeature.IdentityBit;
             }
 
-            if (avaliableFeature.UserId && canBusConfig.EnableUserId)
+            if (avaliableFeature.UserId && this.canBusConfig.EnableUserId)
             {
                 flags |= CanableFeature.UserIdBit;
             }
 
-            if (avaliableFeature.PadPacketsToMaxPacketSize && canBusConfig.EnablePadPacketsToMaxPacketSize)
+            if (avaliableFeature.PadPacketsToMaxPacketSize && this.canBusConfig.EnablePadPacketsToMaxPacketSize)
             {
                 flags |= CanableFeature.PadPacketsToMaxPacketSizeBit;
             }
@@ -154,14 +154,14 @@ namespace Canable
                 Flags = flags
             };
 
-            usbAccess.UsbControlMessageSet(CanRequest.Mode, 0, 0, candleDeviceMode);
+            this.usbAccess.UsbControlMessageSet(CanRequest.Mode, 0, 0, candleDeviceMode);
         }
 
         private void SetBitTiming(int bitRate, int samplePoint)
         {
             foreach (var timing in Timing.Timings)
             {
-                if (timing.BaseClk == candleCapability.FclkCan && timing.BitRate == bitRate && timing.SamplePoint == samplePoint)
+                if (timing.BaseClk == this.candleCapability.FclkCan && timing.BitRate == bitRate && timing.SamplePoint == samplePoint)
                 {
                     var bitTiming = timing.BitTiming;
 

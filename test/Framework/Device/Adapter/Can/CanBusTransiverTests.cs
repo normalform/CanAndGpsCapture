@@ -23,12 +23,12 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
         public CanBusTransiverTests()
         {
             this.mockCanableDevice = new Mock<ICanableDevice>();
-            this.canableDevice = mockCanableDevice.Object;
+            this.canableDevice = this.mockCanableDevice.Object;
 
             this.mockLoggerFactory = new Mock<ILoggerFactory>();
-            this.loggerFactory = mockLoggerFactory.Object;
+            this.loggerFactory = this.mockLoggerFactory.Object;
             this.mockLogger = new Mock<ILogger<CanBusTransiver>>();
-            this.mockLoggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(mockLogger.Object);
+            this.mockLoggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(this.mockLogger.Object);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
         {
             // Arrange
             var deviceCanId = DeviceCanId.StandardCanId(123u);
-            var canBusTransiver = new CanBusTransiver(canableDevice, loggerFactory);
+            var canBusTransiver = new CanBusTransiver(this.canableDevice, this.loggerFactory);
             var deviceMessage = new DeviceCanMessage(deviceCanId, [0x01, 0x02, 0x03, 0x04]);
             var message = new CanMessage(deviceMessage);
 
@@ -52,7 +52,7 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
         {
             // Arrange
             var deviceCanId = DeviceCanId.ExtendedCanId(123u);
-            var canBusTransiver = new CanBusTransiver(canableDevice, loggerFactory);
+            var canBusTransiver = new CanBusTransiver(this.canableDevice, this.loggerFactory);
             var deviceMessage = new DeviceCanMessage(deviceCanId, [0x01, 0x02, 0x03, 0x04]);
             var message = new CanMessage(deviceMessage);
 
@@ -68,7 +68,7 @@ namespace CagCap.Framework.Tests.Device.Adapter.Can
         {
             // Arrange
             var deviceCanId = new DeviceCanId(123u);
-            var canBusTransiver = new CanBusTransiver(canableDevice, loggerFactory);
+            var canBusTransiver = new CanBusTransiver(this.canableDevice, this.loggerFactory);
             var deviceMessage = new DeviceCanMessage(deviceCanId, [0x01, 0x02, 0x03, 0x04]);
             var message = new CanMessage(deviceMessage);
 

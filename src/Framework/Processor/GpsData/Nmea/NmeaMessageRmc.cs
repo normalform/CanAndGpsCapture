@@ -25,7 +25,15 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         public override string ToString()
         {
-            return $"RMC: Time: {Time}, Status: {Status}, Latitude: {Latitude}, LatitudeHemisphere: {LatitudeHemisphere}, Longitude: {Longitude}, LongitudeHemisphere: {LongitudeHemisphere}, SpeedOverGroundKnots: {SpeedOverGroundKnots}, CourseOverGroundDeg: {CourseOverGroundDeg}, PositionMode: {PositionMode}";
+            return $"RMC: Time: {this.Time}, " +
+                   $"Status: {this.Status}, " +
+                   $"Latitude: {this.Latitude}, " +
+                   $"LatitudeHemisphere: {this.LatitudeHemisphere}, " +
+                   $"Longitude: {this.Longitude}, " +
+                   $"LongitudeHemisphere: {this.LongitudeHemisphere}, " +
+                   $"SpeedOverGroundKnots: {this.SpeedOverGroundKnots}, " +
+                   $"CourseOverGroundDeg: {this.CourseOverGroundDeg}, " +
+                   $"PositionMode: {this.PositionMode}";
         }
     }
 }

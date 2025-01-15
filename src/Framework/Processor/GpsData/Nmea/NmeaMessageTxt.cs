@@ -45,7 +45,10 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         public override string ToString()
         {
-            return $"TXT: NumberOfMessages: {NumberOfMessages}, MessageNumber: {MessageNumber}, TextMessageType: {TextMessageType}, Message: {Message}";
+            return $"TXT: NumberOfMessages: {this.NumberOfMessages}, " +
+                   $"MessageNumber: {this.MessageNumber}, " +
+                   $"TextMessageType: {this.TextMessageType}, " +
+                   $"Message: {this.Message}";
         }
     }
 }

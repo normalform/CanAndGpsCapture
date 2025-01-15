@@ -37,31 +37,38 @@ namespace CagCap.Framework.Tests.Device.Gps
 
             mockGpsDataProcessor.Setup(p => p.Process("GGA mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGga(mockLogger.Object)));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGga(mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSA mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsa(mockLogger.Object)));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsa(mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV0 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(0, mockLogger.Object)));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(0, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV1 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(1, mockLogger.Object)));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(1, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV2 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(2, mockLogger.Object)));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(2, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("GSV3 mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(3, mockLogger.Object)));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(3, mockLogger.Object)));
             });
             mockGpsDataProcessor.Setup(p => p.Process("VTG mock event")).Callback(() =>
             {
-                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageVtg(mockLogger.Object)));
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageVtg(mockLogger.Object)));
             });
 
             // Act
@@ -126,99 +133,104 @@ namespace CagCap.Framework.Tests.Device.Gps
             int numberOfdataReceivedCalled = 0;
             var savedGpsData = new List<GpsData>();
 
-            using (var gpsReceiver = new GpsReceiver(mockGpsReceiverDevice.Object, mockGpsDataProcessor.Object, mockLoggerFactory.Object))
+            using var gpsReceiver = new GpsReceiver(mockGpsReceiverDevice.Object, mockGpsDataProcessor.Object, mockLoggerFactory.Object);
+            gpsReceiver.DataReceived += (sender, e) =>
             {
-                gpsReceiver.DataReceived += (sender, e) =>
-                {
-                    numberOfdataReceivedCalled++;
-                    savedGpsData.Add(e.GpsData);
-                };
+                numberOfdataReceivedCalled++;
+                savedGpsData.Add(e.GpsData);
+            };
 
-                mockGpsDataProcessor.Setup(p => p.Process("GGA mock event")).Callback(() =>
-                {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGga(mockLogger.Object)));
-                });
-                mockGpsDataProcessor.Setup(p => p.Process("GSA mock event")).Callback(() =>
-                {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsa(mockLogger.Object)));
-                });
-                mockGpsDataProcessor.Setup(p => p.Process("GSV0 mock event")).Callback(() =>
-                {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(0, mockLogger.Object)));
-                });
-                mockGpsDataProcessor.Setup(p => p.Process("GSV1 mock event")).Callback(() =>
-                {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(1, mockLogger.Object)));
-                });
-                mockGpsDataProcessor.Setup(p => p.Process("GSV2 mock event")).Callback(() =>
-                {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(2, mockLogger.Object)));
-                });
-                mockGpsDataProcessor.Setup(p => p.Process("GSV3 mock event")).Callback(() =>
-                {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageGsv(3, mockLogger.Object)));
-                });
-                mockGpsDataProcessor.Setup(p => p.Process("VTG mock event")).Callback(() =>
-                {
-                    mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(), new NmeaMessageEventArgs(CreateNmeaMessageVtg(mockLogger.Object)));
-                });
+            mockGpsDataProcessor.Setup(p => p.Process("GGA mock event")).Callback(() =>
+            {
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGga(mockLogger.Object)));
+            });
+            mockGpsDataProcessor.Setup(p => p.Process("GSA mock event")).Callback(() =>
+            {
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsa(mockLogger.Object)));
+            });
+            mockGpsDataProcessor.Setup(p => p.Process("GSV0 mock event")).Callback(() =>
+            {
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(0, mockLogger.Object)));
+            });
+            mockGpsDataProcessor.Setup(p => p.Process("GSV1 mock event")).Callback(() =>
+            {
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(1, mockLogger.Object)));
+            });
+            mockGpsDataProcessor.Setup(p => p.Process("GSV2 mock event")).Callback(() =>
+            {
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(2, mockLogger.Object)));
+            });
+            mockGpsDataProcessor.Setup(p => p.Process("GSV3 mock event")).Callback(() =>
+            {
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageGsv(3, mockLogger.Object)));
+            });
+            mockGpsDataProcessor.Setup(p => p.Process("VTG mock event")).Callback(() =>
+            {
+                mockGpsDataProcessor.Raise(processor => processor.DataReceived += null, new object(),
+                    new NmeaMessageEventArgs(CreateNmeaMessageVtg(mockLogger.Object)));
+            });
 
-                // Act
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GGA mock event"));
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSA mock event"));
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV0 mock event"));
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV1 mock event"));
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV2 mock event"));
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV3 mock event"));
-                mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("VTG mock event"));
+            // Act
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GGA mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSA mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV0 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV1 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV2 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("GSV3 mock event"));
+            mockGpsReceiverDevice.Raise(device => device.DataReceived += null, new object(), new GpsDataReceivedEventArgs("VTG mock event"));
 
-                // Act
-                gpsReceiver.SimulateTimeoutForTesting();
-                var gpsData = gpsReceiver.GpsData;
+            // Act
+            gpsReceiver.SimulateTimeoutForTesting();
+            var gpsData = gpsReceiver.GpsData;
 
-                // Assert
-                Assert.Equal(2, numberOfdataReceivedCalled);
-                Assert.NotNull(savedGpsData);
-                Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 13, 20, 00, DateTimeKind.Utc), savedGpsData[0].Time);
-                Assert.Equal(4734.99051, savedGpsData[0].Latitude, Tolerance);
-                Assert.Equal(LatitudeHemisphere.North, savedGpsData[0].LatitudeHemisphere);
-                Assert.Equal(12201.11923, savedGpsData[0].Longitude, Tolerance);
-                Assert.Equal(LatitudeHemisphere.North, savedGpsData[0].LatitudeHemisphere);
-                Assert.Equal(145.3, savedGpsData[0].Altitude, Tolerance);
-                Assert.Equal(0, savedGpsData[0].Speed, Tolerance);
-                Assert.Equal(0, savedGpsData[0].CourseTrue);
-                Assert.Equal(0, savedGpsData[0].CourseMagnetic);
-                Assert.Equal(5, savedGpsData[0].NumberOfSatellites);
-                Assert.Equal(17, savedGpsData[0].Satellites[0].Id);
-                Assert.Equal(11, savedGpsData[0].Satellites[1].Id);
-                Assert.Equal(48, savedGpsData[0].Satellites[2].Id);
-                Assert.Equal(6, savedGpsData[0].Satellites[3].Id);
-                Assert.Equal(24, savedGpsData[0].Satellites[4].Id);
+            // Assert
+            Assert.Equal(2, numberOfdataReceivedCalled);
+            Assert.NotNull(savedGpsData);
+            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 13, 20, 00, DateTimeKind.Utc), savedGpsData[0].Time);
+            Assert.Equal(4734.99051, savedGpsData[0].Latitude, Tolerance);
+            Assert.Equal(LatitudeHemisphere.North, savedGpsData[0].LatitudeHemisphere);
+            Assert.Equal(12201.11923, savedGpsData[0].Longitude, Tolerance);
+            Assert.Equal(LatitudeHemisphere.North, savedGpsData[0].LatitudeHemisphere);
+            Assert.Equal(145.3, savedGpsData[0].Altitude, Tolerance);
+            Assert.Equal(0, savedGpsData[0].Speed, Tolerance);
+            Assert.Equal(0, savedGpsData[0].CourseTrue);
+            Assert.Equal(0, savedGpsData[0].CourseMagnetic);
+            Assert.Equal(5, savedGpsData[0].NumberOfSatellites);
+            Assert.Equal(17, savedGpsData[0].Satellites[0].Id);
+            Assert.Equal(11, savedGpsData[0].Satellites[1].Id);
+            Assert.Equal(48, savedGpsData[0].Satellites[2].Id);
+            Assert.Equal(6, savedGpsData[0].Satellites[3].Id);
+            Assert.Equal(24, savedGpsData[0].Satellites[4].Id);
 
-                Assert.Equal(DateTime.MinValue, savedGpsData[1].Time);
-                Assert.Equal(0.0, savedGpsData[1].Latitude, Tolerance);
-                Assert.Equal(LatitudeHemisphere.North, savedGpsData[1].LatitudeHemisphere);
-                Assert.Equal(0.0, savedGpsData[1].Longitude, Tolerance);
-                Assert.Equal(LongitudeHemisphere.West, savedGpsData[1].LongitudeHemisphere);
-                Assert.Equal(0.0, savedGpsData[1].Altitude, Tolerance);
-                Assert.Equal(0.0, savedGpsData[1].Speed, Tolerance);
-                Assert.Equal(0.0, savedGpsData[1].CourseTrue, Tolerance);
-                Assert.Equal(0.0, savedGpsData[1].CourseMagnetic, Tolerance);
-                Assert.Equal(0, savedGpsData[1].NumberOfSatellites);
-                Assert.Empty(savedGpsData[1].Satellites);
+            Assert.Equal(DateTime.MinValue, savedGpsData[1].Time);
+            Assert.Equal(0.0, savedGpsData[1].Latitude, Tolerance);
+            Assert.Equal(LatitudeHemisphere.North, savedGpsData[1].LatitudeHemisphere);
+            Assert.Equal(0.0, savedGpsData[1].Longitude, Tolerance);
+            Assert.Equal(LongitudeHemisphere.West, savedGpsData[1].LongitudeHemisphere);
+            Assert.Equal(0.0, savedGpsData[1].Altitude, Tolerance);
+            Assert.Equal(0.0, savedGpsData[1].Speed, Tolerance);
+            Assert.Equal(0.0, savedGpsData[1].CourseTrue, Tolerance);
+            Assert.Equal(0.0, savedGpsData[1].CourseMagnetic, Tolerance);
+            Assert.Equal(0, savedGpsData[1].NumberOfSatellites);
+            Assert.Empty(savedGpsData[1].Satellites);
 
-                Assert.Equal(DateTime.MinValue, gpsData.Time);
-                Assert.Equal(0.0, gpsData.Latitude, Tolerance);
-                Assert.Equal(LatitudeHemisphere.North, gpsData.LatitudeHemisphere);
-                Assert.Equal(0.0, gpsData.Longitude, Tolerance);
-                Assert.Equal(LongitudeHemisphere.West, gpsData.LongitudeHemisphere);
-                Assert.Equal(0.0, gpsData.Altitude, Tolerance);
-                Assert.Equal(0.0, gpsData.Speed, Tolerance);
-                Assert.Equal(0.0, gpsData.CourseTrue, Tolerance);
-                Assert.Equal(0.0, gpsData.CourseMagnetic, Tolerance);
-                Assert.Equal(0, gpsData.NumberOfSatellites);
-                Assert.Empty(gpsData.Satellites);
-            }
+            Assert.Equal(DateTime.MinValue, gpsData.Time);
+            Assert.Equal(0.0, gpsData.Latitude, Tolerance);
+            Assert.Equal(LatitudeHemisphere.North, gpsData.LatitudeHemisphere);
+            Assert.Equal(0.0, gpsData.Longitude, Tolerance);
+            Assert.Equal(LongitudeHemisphere.West, gpsData.LongitudeHemisphere);
+            Assert.Equal(0.0, gpsData.Altitude, Tolerance);
+            Assert.Equal(0.0, gpsData.Speed, Tolerance);
+            Assert.Equal(0.0, gpsData.CourseTrue, Tolerance);
+            Assert.Equal(0.0, gpsData.CourseMagnetic, Tolerance);
+            Assert.Equal(0, gpsData.NumberOfSatellites);
+            Assert.Empty(gpsData.Satellites);
         }
 
         private static NmeaMessageGga CreateNmeaMessageGga(ILogger logger)
@@ -274,8 +286,7 @@ namespace CagCap.Framework.Tests.Device.Gps
         {
             var gsvData = new string[][]
             {
-                    new[]
-                    {
+                    [
                         "4",
                         "1",
                         "16",
@@ -295,9 +306,8 @@ namespace CagCap.Framework.Tests.Device.Gps
                         "39",
                         "147",
                         "07",
-                    },
-                    new[]
-                    {
+                    ],
+                    [
                         "4",
                         "2",
                         "16",
@@ -317,9 +327,8 @@ namespace CagCap.Framework.Tests.Device.Gps
                         "24",
                         "100",
                         "16",
-                    },
-                    new[]
-                    {
+                    ],
+                    [
                         "4",
                         "3",
                         "16",
@@ -339,9 +348,8 @@ namespace CagCap.Framework.Tests.Device.Gps
                         "46",
                         "091",
                         "18"
-                    },
-                    new[]
-                    {
+                    ],
+                    [
                         "4",
                         "4",
                         "16",
@@ -361,7 +369,7 @@ namespace CagCap.Framework.Tests.Device.Gps
                         "35",
                         "184",
                         "30"
-                    }
+                    ]
             };
 
             return new NmeaMessageGsv(gsvData[index], logger);

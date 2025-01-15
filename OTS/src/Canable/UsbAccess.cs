@@ -15,7 +15,7 @@ namespace Canable
     using System.Threading;
     using System.Threading.Tasks;
 
-    public enum CanRequest : byte
+    public enum CanRequest
     {
         HostFormat = 0,
         BitTiming = 1,
@@ -41,7 +41,10 @@ namespace Canable
 
         private readonly ILogger logger;
 
+#pragma warning disable CA2213 // Disposable fields should be disposed
         private readonly UsbDevice? usbDevice;
+#pragma warning restore CA2213 // Disposable fields should be disposed
+
         private UsbEndpointReader? reader;
         private UsbEndpointWriter? writer;
 
@@ -53,24 +56,24 @@ namespace Canable
         [ExcludeFromCodeCoverage]
         public UsbAccess(ILoggerFactory loggerFactory)
         {
-            logger = loggerFactory.CreateLogger("UsbAccess");
-            logger.LogDebug("Creating UsbAccess");
+            this.logger = loggerFactory.CreateLogger("UsbAccess");
+            this.logger.LogDebug("Creating UsbAccess");
 
             var finder = new UsbDeviceFinder(VendorId, ProductId);
-            usbDevice = UsbDevice.OpenUsbDevice(finder);
-            if (usbDevice == null)
+            this.usbDevice = UsbDevice.OpenUsbDevice(finder);
+            if (this.usbDevice == null)
             {
                 var exception = new InvalidOperationException("Canable device not found.");
-                logger.LogError(exception, "Canable device not found.");
+                this.logger.LogError(exception, "Canable device not found.");
                 throw exception;
             }
 
             try
             {
                 // Iterate through configurations and interfaces to find bulk input and output endpoints
-                foreach (UsbConfigInfo configInfo in usbDevice.Configs)
+                foreach (UsbConfigInfo configInfo in this.usbDevice.Configs)
                 {
-                    FindBulkEndpoints(configInfo);
+                    this.FindBulkEndpoints(configInfo);
                 }
 
                 ResetEndPoint(reader);
@@ -78,7 +81,7 @@ namespace Canable
             }
             catch
             {
-                Close();
+                this.Close();
                 throw;
             }
         }
@@ -97,7 +100,7 @@ namespace Canable
             if (errorCode != ErrorCode.None)
             {
                 var exception = new InvalidOperationException(UsbDevice.LastErrorString);
-                logger.LogError(exception, "Failed to send frame: {errorCode}", errorCode);
+                this.logger.LogError(exception, "Failed to send frame: {errorCode}", errorCode);
                 throw exception;
             }
         }
@@ -105,7 +108,7 @@ namespace Canable
         [ExcludeFromCodeCoverage]
         public void StartReceive()
         {
-            Task.Run(() => ReadDataAsync(cancellationTokenSource.Token));
+            Task.Run(() => this.ReadDataAsync(this.cancellationTokenSource.Token));
         }
 
         [ExcludeFromCodeCoverage]
@@ -118,7 +121,7 @@ namespace Canable
 
                 foreach (var endpointInfo in bulkEndpoints)
                 {
-                    AssignEndpoint(endpointInfo);
+                    this.AssignEndpoint(endpointInfo);
                 }
             }
         }
@@ -129,10 +132,10 @@ namespace Canable
             switch (endpointInfo.Descriptor.EndpointID)
             {
                 case (byte)ReadEndpointID.Ep01:
-                    reader = usbDevice?.OpenEndpointReader((ReadEndpointID)endpointInfo.Descriptor.EndpointID);
+                    this.reader = usbDevice?.OpenEndpointReader((ReadEndpointID)endpointInfo.Descriptor.EndpointID);
                     break;
                 case (byte)WriteEndpointID.Ep02:
-                    writer = usbDevice?.OpenEndpointWriter((WriteEndpointID)endpointInfo.Descriptor.EndpointID);
+                    this.writer = usbDevice?.OpenEndpointWriter((WriteEndpointID)endpointInfo.Descriptor.EndpointID);
                     break;
                 default:
                     break;
@@ -142,31 +145,31 @@ namespace Canable
         [ExcludeFromCodeCoverage]
         private void Close()
         {
-            logger.LogDebug("Closing UsbAccess");
+            this.logger.LogDebug("Closing UsbAccess");
 
-            if (usbDevice != null)
+            if (this.usbDevice != null)
             {
-                if (usbDevice is IUsbDevice wholeUsbDevice)
+                if (this.usbDevice is IUsbDevice wholeUsbDevice)
                 {
                     wholeUsbDevice.ReleaseInterface(0);
                 }
-                usbDevice.Close();
+                this.usbDevice.Close();
             }
         }
 
         [ExcludeFromCodeCoverage]
         private async Task ReadDataAsync(CancellationToken cancellationToken)
         {
-            if (reader != null)
+            if (this.reader != null)
             {
                 int bufferSize = Marshal.SizeOf<CandleDataStructure.CandleDataFrame>();
                 byte[] buffer = new byte[bufferSize];
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    var ec = reader.Read(buffer, 2000, out int bytesRead);
+                    var ec = this.reader.Read(buffer, 2000, out int bytesRead);
                     if (ec == ErrorCode.None && bytesRead > 0)
                     {
-                        ProcessReceivedData(buffer);
+                        this.ProcessReceivedData(buffer);
                     }
 
                     await Task.Delay(1, cancellationToken).ConfigureAwait(false);
@@ -183,21 +186,21 @@ namespace Canable
             var timeStamp = new DateTime(frame.TimestampUs, DateTimeKind.Utc);
 
             var message = new DeviceCanMessage(canId, data, timeStamp);
-            DataReceived.Invoke(this, new DeviceCanMessageEventArgs(message));
+            this.DataReceived.Invoke(this, new DeviceCanMessageEventArgs(message));
         }
 
         [ExcludeFromCodeCoverage]
         private static byte[] ExtractData(CandleDataStructure.CandleDataFrame frame)
         {
             var data = new byte[Math.Min(frame.CanDlc, (byte)8)];
-            if (frame.CanDlc > 0) data[0] = frame.Data0;
-            if (frame.CanDlc > 1) data[1] = frame.Data1;
-            if (frame.CanDlc > 2) data[2] = frame.Data2;
-            if (frame.CanDlc > 3) data[3] = frame.Data3;
-            if (frame.CanDlc > 4) data[4] = frame.Data4;
-            if (frame.CanDlc > 5) data[5] = frame.Data5;
-            if (frame.CanDlc > 6) data[6] = frame.Data6;
-            if (frame.CanDlc > 7) data[7] = frame.Data7;
+            if (frame.CanDlc > 0) { data[0] = frame.Data0; }
+            if (frame.CanDlc > 1) { data[1] = frame.Data1; }
+            if (frame.CanDlc > 2) { data[2] = frame.Data2; }
+            if (frame.CanDlc > 3) { data[3] = frame.Data3; }
+            if (frame.CanDlc > 4) { data[4] = frame.Data4; }
+            if (frame.CanDlc > 5) { data[5] = frame.Data5; }
+            if (frame.CanDlc > 6) { data[6] = frame.Data6; }
+            if (frame.CanDlc > 7) { data[7] = frame.Data7; }
             return data;
         }
 
@@ -215,7 +218,7 @@ namespace Canable
         public void UsbControlMessageSet<T>(CanRequest request, ushort value, ushort index, T type) where T : struct
         {
             byte requestType = UsbDirOut | UsbTypeVendor | UsbRecipInterface;
-            UsbControlMessage(request, requestType, value, index, ref type);
+            this.UsbControlMessage(request, requestType, value, index, ref type);
         }
 
         [ExcludeFromCodeCoverage]
@@ -223,17 +226,17 @@ namespace Canable
         {
             T type = default;
             byte requestType = UsbDirIn | UsbTypeVendor | UsbRecipInterface;
-            UsbControlMessage(request, requestType, value, index, ref type);
+            this.UsbControlMessage(request, requestType, value, index, ref type);
             return type;
         }
 
         [ExcludeFromCodeCoverage]
         private void UsbControlMessage<T>(CanRequest request, byte requestType, ushort value, ushort index, ref T type) where T : struct
         {
-            if (usbDevice == null)
+            if (this.usbDevice == null)
             {
                 var exception = new InvalidOperationException("Device not opened.");
-                logger.LogError(exception, "Device not opened.");
+                this.logger.LogError(exception, "Device not opened.");
                 throw exception;
             }
 
@@ -263,11 +266,11 @@ namespace Canable
                 Index = (short)index,
                 Length = (short)data.Length
             };
-            bool success = usbDevice.ControlTransfer(ref setupPacket, data, data.Length, out _);
+            bool success = this.usbDevice.ControlTransfer(ref setupPacket, data, data.Length, out _);
             if (!success)
             {
                 var exception = new InvalidOperationException($"Control transfer failed: {UsbDevice.LastErrorString}");
-                logger.LogError(exception, "Control transfer failed: {error}", UsbDevice.LastErrorString);
+                this.logger.LogError(exception, "Control transfer failed: {error}", UsbDevice.LastErrorString);
                 throw exception;
             }
 
@@ -286,25 +289,25 @@ namespace Canable
         [ExcludeFromCodeCoverage]
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!this.disposed)
             {
                 // Cancel the token to stop the reading task
-                cancellationTokenSource.Cancel();
-                cancellationTokenSource.Dispose();
+                this.cancellationTokenSource.Cancel();
+                this.cancellationTokenSource.Dispose();
 
                 if (disposing)
                 {
-                    Close();
+                    this.Close();
                 }
 
-                disposed = true;
+                this.disposed = true;
             }
         }
 
         [ExcludeFromCodeCoverage]
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
     }

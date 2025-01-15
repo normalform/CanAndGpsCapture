@@ -152,7 +152,13 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var result = gsvMessage.ToString();
 
             // Assert
-            Assert.Equal("GSV: NumberOfMessages: 3, MessageNumber: 1, NumberOfSatellitesInView: 12, SatelliteViews: [[Id: 4, Elevation: 7, Azimuth: 144, SignalToNoiseRatio: 0], [Id: 5, Elevation: 23, Azimuth: 300, SignalToNoiseRatio: 16], [Id: 7, Elevation: 73, Azimuth: 65, SignalToNoiseRatio: 18], [Id: 8, Elevation: 39, Azimuth: 84, SignalToNoiseRatio: 10]]", result);
+            Assert.Equal(
+                "GSV: NumberOfMessages: 3, MessageNumber: 1, NumberOfSatellitesInView: 12, " +
+                "SatelliteViews: [[Id: 4, Elevation: 7, Azimuth: 144, SignalToNoiseRatio: 0], " +
+                "[Id: 5, Elevation: 23, Azimuth: 300, SignalToNoiseRatio: 16], " +
+                "[Id: 7, Elevation: 73, Azimuth: 65, SignalToNoiseRatio: 18], " +
+                "[Id: 8, Elevation: 39, Azimuth: 84, SignalToNoiseRatio: 10]]",
+                result);
         }
     }
 }

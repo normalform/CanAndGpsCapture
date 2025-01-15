@@ -15,10 +15,10 @@ namespace Canable
     {
         public CandleDataStructure.BitTiming BitTiming => new(
             PropSeg: 1,
-            PhaseSeg1: PhaseSeg1,
-            PhaseSeg2: PhaseSeg2,
+            PhaseSeg1: this.PhaseSeg1,
+            PhaseSeg2: this.PhaseSeg2,
             Sjw: 1,
-            Brp: Brp);
+            Brp: this.Brp);
 
         public static List<Timing> Timings { get; } =
             [

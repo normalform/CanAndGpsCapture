@@ -39,15 +39,21 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
         public override string ToString()
         {
             var satelliteViewStrList = new List<string>();
-            foreach (var satelliteView in SatelliteViews)
+            foreach (var satelliteView in this.SatelliteViews)
             {
-                var satelliteViewString = $"[Id: {satelliteView.Id}, Elevation: {satelliteView.Elevation}, Azimuth: {satelliteView.Azimuth}, SignalToNoiseRatio: {satelliteView.SignalToNoiseRatio}]";
+                var satelliteViewString = $"[Id: {satelliteView.Id}, " +
+                                          $"Elevation: {satelliteView.Elevation}, " +
+                                          $"Azimuth: {satelliteView.Azimuth}, " +
+                                          $"SignalToNoiseRatio: {satelliteView.SignalToNoiseRatio}]";
                 satelliteViewStrList.Add(satelliteViewString);
             }
 
             var satelliteViewsStr = string.Join(", ", satelliteViewStrList);
 
-            return $"GSV: NumberOfMessages: {NumberOfMessages}, MessageNumber: {MessageNumber}, NumberOfSatellitesInView: {NumberOfSatellitesInView}, SatelliteViews: [{satelliteViewsStr}]";
+            return $"GSV: NumberOfMessages: {this.NumberOfMessages}, " +
+                   $"MessageNumber: {this.MessageNumber}, " +
+                   $"NumberOfSatellitesInView: {this.NumberOfSatellitesInView}, " +
+                   $"SatelliteViews: [{satelliteViewsStr}]";
         }
     }
 }

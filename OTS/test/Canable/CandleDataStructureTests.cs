@@ -154,7 +154,7 @@ namespace Canable.Tests
                 0,
             };
 
-            // Act & Assert 
+            // Act & Assert
             Assert.Throws<ArgumentException>(() => CandleDataStructure.FromByteArray<CandleDataStructure.BitTimingStruct>(smallDataBuffer));
         }
     }

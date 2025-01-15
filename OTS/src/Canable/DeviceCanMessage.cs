@@ -21,7 +21,7 @@ namespace Canable
 
         public override string ToString()
         {
-            return $"ID: {Id}, DLC: {Dlc}, Data: {BitConverter.ToString([.. Data])}, Timestamp: {Timestamp}";
+            return $"ID: {this.Id}, DLC: {this.Dlc}, Data: {BitConverter.ToString([.. this.Data])}, Timestamp: {this.Timestamp}";
         }
     }
 }
