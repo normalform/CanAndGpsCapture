@@ -82,8 +82,13 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         public override string ToString()
         {
-            var satelliteNumbers = string.Join(", ", SatelliteNumbers);
-            return $"GSA: OperationMode: {OperationMode}, NavMode: {NavMode}, SatelliteNumber: {satelliteNumbers}, PositionDilutionOfPrecision: {PositionDilutionOfPrecision}, HorizontalDilutionOfPrecision: {HorizontalDilutionOfPrecision}, VerticalDilutionOfPrecision: {VerticalDilutionOfPrecision}";
+            var satelliteNumbers = string.Join(", ", this.SatelliteNumbers);
+            return $"GSA: OperationMode: {this.OperationMode}, " +
+                   $"NavMode: {this.NavMode}, " +
+                   $"SatelliteNumber: {satelliteNumbers}, " +
+                   $"PositionDilutionOfPrecision: {this.PositionDilutionOfPrecision}, " +
+                   $"HorizontalDilutionOfPrecision: {this.HorizontalDilutionOfPrecision}, " +
+                   $"VerticalDilutionOfPrecision: {this.VerticalDilutionOfPrecision}";
         }
     }
 }

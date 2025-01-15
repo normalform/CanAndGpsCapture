@@ -34,17 +34,17 @@ namespace CagCap.Framework.Processor.GpsData
 
             foreach (var ch in data)
             {
-                dataQueue.Enqueue(ch);
+                this.dataQueue.Enqueue(ch);
             }
-            Process();
+            this.Process();
         }
 
         private void Process()
         {
-            while (dataQueue.Count > 0)
+            while (this.dataQueue.Count > 0)
             {
-                var data = dataQueue.Dequeue();
-                var nmeaMessage = nemaProtocol.Process(data);
+                var data = this.dataQueue.Dequeue();
+                var nmeaMessage = this.nemaProtocol.Process(data);
                 if (nmeaMessage != null)
                 {
                     this.DataReceived.Invoke(this, new NmeaMessageEventArgs(nmeaMessage));

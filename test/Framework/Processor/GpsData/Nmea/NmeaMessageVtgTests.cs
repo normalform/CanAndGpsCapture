@@ -96,7 +96,11 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var vtgString = vtgMessage.ToString();
 
             // Assert
-            Assert.Equal("VTG: CourseOverGroundTrue: 77.52, CourseOverGroundMagnatic: 0, SpeedOverGroundKnots: 0.088, SpeedOverGroundKph: 0.163, PositionMode: DifferentialGnssFix", vtgString);
+            Assert.Equal(
+                "VTG: CourseOverGroundTrue: 77.52, CourseOverGroundMagnatic: 0, " +
+                "SpeedOverGroundKnots: 0.088, SpeedOverGroundKph: 0.163, " +
+                "PositionMode: DifferentialGnssFix",
+                vtgString);
         }
     }
 }

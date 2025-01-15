@@ -99,7 +99,12 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var currentYear = DateTime.Today.Year;
             var currentMonth = DateTime.Today.Month;
             var currentDay = DateTime.Today.Day;
-            Assert.Equal($"GLL: Latitude: 4916.45, LatitudeHemisphere: North, Longitude: 12311.12, LongitudeHemisphere: West, Time: {currentMonth}/{currentDay}/{currentYear} 10:54:44 PM, DataStatus: Valid, PositionMode: AutonomousGnssFix", result);
+            Assert.Equal(
+                $"GLL: Latitude: 4916.45, LatitudeHemisphere: North, Longitude: 12311.12, " +
+                $"LongitudeHemisphere: West, Time: {currentMonth}/{currentDay}/{currentYear} " +
+                $"10:54:44 PM, DataStatus: Valid, PositionMode: AutonomousGnssFix",
+                result
+            );
         }
     }
 }

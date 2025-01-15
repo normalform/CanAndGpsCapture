@@ -18,7 +18,7 @@ namespace Canable.Tests
 
         public CanableDeviceTests()
         {
-            canBusConfig = new CanBusConfig
+            this.canBusConfig = new CanBusConfig
             {
                 Enable = true,
                 BitRate = 500000,
@@ -30,10 +30,10 @@ namespace Canable.Tests
                 EnableUserId = true,
                 EnablePadPacketsToMaxPacketSize = true
             };
-            logger = new Mock<ILogger>().Object;
+            this.logger = new Mock<ILogger>().Object;
             var loggerFactoryMock = new Mock<ILoggerFactory>();
-            loggerFactoryMock.Setup(lf => lf.CreateLogger(It.IsAny<string>())).Returns(logger);
-            loggerFactory = loggerFactoryMock.Object;
+            loggerFactoryMock.Setup(lf => lf.CreateLogger(It.IsAny<string>())).Returns(this.logger);
+            this.loggerFactory = loggerFactoryMock.Object;
         }
 
         [Fact]
@@ -102,7 +102,7 @@ namespace Canable.Tests
             usbAccessMock.InSequence(mockSequence).Setup(ua => ua.StartReceive());
 
             // Act
-            var canableDevice = new CanableDevice(usbAccessMock.Object, canBusConfig, loggerFactory);
+            var canableDevice = new CanableDevice(usbAccessMock.Object, this.canBusConfig, this.loggerFactory);
 
             // Assert
             Assert.NotNull(canableDevice);
@@ -130,7 +130,7 @@ namespace Canable.Tests
         {
             // Arrange
             var usbAccessMock = new Mock<IUsbAccess>();
-            var canableDevice = new CanableDevice(usbAccessMock.Object, canBusConfig, loggerFactory);
+            var canableDevice = new CanableDevice(usbAccessMock.Object, this.canBusConfig, this.loggerFactory);
             var canMessage = new DeviceCanMessage(new DeviceCanId(0x123), [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]);
 
             // Act
@@ -180,7 +180,7 @@ namespace Canable.Tests
         public void GetSamplePoint_ValidInput_Success(string samplePointString, int expectedSamplePoint)
         {
             // Arrange & Act
-            var samplePoint = CanableDevice.GetSamplePoint(samplePointString, logger);
+            var samplePoint = CanableDevice.GetSamplePoint(samplePointString, this.logger);
 
             // Assert
             Assert.Equal(expectedSamplePoint, samplePoint);
@@ -193,7 +193,7 @@ namespace Canable.Tests
         [InlineData("", typeof(FormatException))]
         public void GetSamplePoint_InValidInput_Throw(string samplePointString, Type expectedExceptionType)
         {
-            Assert.Throws(expectedExceptionType, () => CanableDevice.GetSamplePoint(samplePointString, logger));
+            Assert.Throws(expectedExceptionType, () => CanableDevice.GetSamplePoint(samplePointString, this.logger));
         }
 
         [Fact]
@@ -201,7 +201,7 @@ namespace Canable.Tests
         {
             // Arrange
             var usbAccessMock = new Mock<IUsbAccess>();
-            var canableDevice = new CanableDevice(usbAccessMock.Object, canBusConfig, loggerFactory);
+            var canableDevice = new CanableDevice(usbAccessMock.Object, this.canBusConfig, this.loggerFactory);
             var dataReceivedEventTriggered = false;
             var deviceCanMessage = new DeviceCanMessage(new DeviceCanId(0x123), [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]);
             canableDevice.DataReceived += (sender, e) =>

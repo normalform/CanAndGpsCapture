@@ -27,17 +27,17 @@ namespace CagCap.Framework.Device.Adapter.Can
         {
             if (obj is CanId other)
             {
-                return Id == other.Id &&
-                       Extended == other.Extended &&
-                       Rtr == other.Rtr &&
-                       HasError == other.HasError;
+                return this.Id == other.Id &&
+                       this.Extended == other.Extended &&
+                       this.Rtr == other.Rtr &&
+                       this.HasError == other.HasError;
             }
             return false;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Id, Extended, Rtr, HasError);
+            return HashCode.Combine(this.Id, this.Extended, this.Rtr, this.HasError);
         }
     }
 }

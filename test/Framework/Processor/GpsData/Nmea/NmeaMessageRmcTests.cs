@@ -112,7 +112,11 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var rmcMessage = new NmeaMessageRmc(rmcData, loggerMock);
 
             // Assert
-            var expectedString = "RMC: Time: 1/12/2025 8:08:27 AM, Status: Valid, Latitude: 4734.98631, LatitudeHemisphere: North, Longitude: 12201.11522, LongitudeHemisphere: West, SpeedOverGroundKnots: 0.083, CourseOverGroundDeg: 0, PositionMode: DifferentialGnssFix";
+            var expectedString = "RMC: Time: 1/12/2025 8:08:27 AM, Status: Valid, " +
+                      "Latitude: 4734.98631, LatitudeHemisphere: North, " +
+                      "Longitude: 12201.11522, LongitudeHemisphere: West, " +
+                      "SpeedOverGroundKnots: 0.083, CourseOverGroundDeg: 0, " +
+                      "PositionMode: DifferentialGnssFix";
             Assert.Equal(expectedString, rmcMessage.ToString());
         }
     }

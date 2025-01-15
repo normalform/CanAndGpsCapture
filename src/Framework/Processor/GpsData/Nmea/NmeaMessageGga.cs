@@ -49,7 +49,18 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         public override string ToString()
         {
-            return $"GGA: Time: {Time}, Latitude: {Latitude}, LatitudeHemisphere: {LatitudeHemisphere}, Longitude: {Longitude}, LongitudeHemisphere: {LongitudeHemisphere}, Quality: {Quality}, Satellites: {Satellites}, HorizontalDilutionOfPrecision: {HorizontalDilutionOfPrecision}, Altitude: {Altitude}, GeoidSeparation: {GeoidSeparation}, AgeOfDifferentialCorrections: {AgeOfDifferentialCorrections}, DifferentialStationId: {DifferentialStationId}";
+            return $"GGA: Time: {this.Time}, " +
+                   $"Latitude: {this.Latitude}, " +
+                   $"LatitudeHemisphere: {this.LatitudeHemisphere}, " +
+                   $"Longitude: {this.Longitude}, " +
+                   $"LongitudeHemisphere: {this.LongitudeHemisphere}, " +
+                   $"Quality: {this.Quality}, " +
+                   $"Satellites: {this.Satellites}, " +
+                   $"HorizontalDilutionOfPrecision: {this.HorizontalDilutionOfPrecision}, " +
+                   $"Altitude: {this.Altitude}, " +
+                   $"GeoidSeparation: {this.GeoidSeparation}, " +
+                   $"AgeOfDifferentialCorrections: {this.AgeOfDifferentialCorrections}, " +
+                   $"DifferentialStationId: {this.DifferentialStationId}";
         }
     }
 }

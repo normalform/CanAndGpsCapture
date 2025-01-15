@@ -29,7 +29,13 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         public override string ToString()
         {
-            return $"GLL: Latitude: {Latitude}, LatitudeHemisphere: {LatitudeHemisphere}, Longitude: {Longitude}, LongitudeHemisphere: {LongitudeHemisphere}, Time: {Time}, DataStatus: {DataStatus}, PositionMode: {PositionMode}";
+            return $"GLL: Latitude: {this.Latitude}, " +
+                   $"LatitudeHemisphere: {this.LatitudeHemisphere}, " +
+                   $"Longitude: {this.Longitude}, " +
+                   $"LongitudeHemisphere: {this.LongitudeHemisphere}, " +
+                   $"Time: {this.Time}, " +
+                   $"DataStatus: {this.DataStatus}, " +
+                   $"PositionMode: {this.PositionMode}";
         }
     }
 }

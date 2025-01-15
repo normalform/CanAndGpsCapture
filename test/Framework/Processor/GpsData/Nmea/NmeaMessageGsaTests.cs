@@ -179,7 +179,11 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var result = gsaMessage.ToString();
 
             // Assert
-            Assert.Equal("GSA: OperationMode: Automatic, NavMode: Fix3D, SatelliteNumber: 14, 8, 30, 27, 5, 9, 7, PositionDilutionOfPrecision: 2.06, HorizontalDilutionOfPrecision: 1.03, VerticalDilutionOfPrecision: 1.78", result);
+            Assert.Equal(
+                "GSA: OperationMode: Automatic, NavMode: Fix3D, SatelliteNumber: 14, 8, 30, 27, 5, 9, 7, " +
+                "PositionDilutionOfPrecision: 2.06, HorizontalDilutionOfPrecision: 1.03, VerticalDilutionOfPrecision: 1.78",
+                result
+            );
         }
     }
 }

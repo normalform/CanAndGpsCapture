@@ -21,7 +21,11 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         public override string ToString()
         {
-            return $"VTG: CourseOverGroundTrue: {CourseOverGroundTrue}, CourseOverGroundMagnatic: {CourseOverGroundMagnatic}, SpeedOverGroundKnots: {SpeedOverGroundKnots}, SpeedOverGroundKph: {SpeedOverGroundKph}, PositionMode: {PositionMode}";
+            return $"VTG: CourseOverGroundTrue: {this.CourseOverGroundTrue}, " +
+                   $"CourseOverGroundMagnatic: {this.CourseOverGroundMagnatic}, " +
+                   $"SpeedOverGroundKnots: {this.SpeedOverGroundKnots}, " +
+                   $"SpeedOverGroundKph: {this.SpeedOverGroundKph}, " +
+                   $"PositionMode: {this.PositionMode}";
         }
     }
 }

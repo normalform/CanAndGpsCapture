@@ -7,7 +7,7 @@ namespace Canable
 {
     using System.Runtime.InteropServices;
 
-    public class CandleDataStructure
+    public static class CandleDataStructure
     {
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         internal struct CandleHostConfig

@@ -24,24 +24,37 @@ namespace Canable
 
         private readonly uint rawAvaliableFeature = rawAvaliableFeature;
 
-        public bool ListenOnly => (rawAvaliableFeature & ListenOnlyBit) != 0;
-        public bool Loopback => (rawAvaliableFeature & LoopbackBit) != 0;
-        public bool TripleSample => (rawAvaliableFeature & TripleSampleBit) != 0;
-        public bool OneShot => (rawAvaliableFeature & OneShotBit) != 0;
-        public bool HwTimeStamp => (rawAvaliableFeature & HwTimeStampBit) != 0;
-        public bool Identity => (rawAvaliableFeature & IdentityBit) != 0;
-        public bool UserId => (rawAvaliableFeature & UserIdBit) != 0;
-        public bool PadPacketsToMaxPacketSize => (rawAvaliableFeature & PadPacketsToMaxPacketSizeBit) != 0;
-        public bool Fd => (rawAvaliableFeature & FdBit) != 0;
-        public bool RequestUsbQuirkLpc546XX => (rawAvaliableFeature & RequestUsbQuirkLpc546XXBit) != 0;
-        public bool BtConstExt => (rawAvaliableFeature & BtConstExtBit) != 0;
-        public bool Termination => (rawAvaliableFeature & TerminationBit) != 0;
-        public bool BerrReporting => (rawAvaliableFeature & BerrReportingBit) != 0;
-        public bool GetState => (rawAvaliableFeature & GetStateBit) != 0;
+        public bool ListenOnly => (this.rawAvaliableFeature & ListenOnlyBit) != 0;
+        public bool Loopback => (this.rawAvaliableFeature & LoopbackBit) != 0;
+        public bool TripleSample => (this.rawAvaliableFeature & TripleSampleBit) != 0;
+        public bool OneShot => (this.rawAvaliableFeature & OneShotBit) != 0;
+        public bool HwTimeStamp => (this.rawAvaliableFeature & HwTimeStampBit) != 0;
+        public bool Identity => (this.rawAvaliableFeature & IdentityBit) != 0;
+        public bool UserId => (this.rawAvaliableFeature & UserIdBit) != 0;
+        public bool PadPacketsToMaxPacketSize => (this.rawAvaliableFeature & PadPacketsToMaxPacketSizeBit) != 0;
+        public bool Fd => (this.rawAvaliableFeature & FdBit) != 0;
+        public bool RequestUsbQuirkLpc546XX => (this.rawAvaliableFeature & RequestUsbQuirkLpc546XXBit) != 0;
+        public bool BtConstExt => (this.rawAvaliableFeature & BtConstExtBit) != 0;
+        public bool Termination => (this.rawAvaliableFeature & TerminationBit) != 0;
+        public bool BerrReporting => (this.rawAvaliableFeature & BerrReportingBit) != 0;
+        public bool GetState => (this.rawAvaliableFeature & GetStateBit) != 0;
 
         public override string ToString()
         {
-            return $"ListenOnly: {ListenOnly}, Loopback: {Loopback}, TripleSample: {TripleSample}, OneShot: {OneShot}, HwTimeStamp: {HwTimeStamp}, Identity: {Identity}, UserId: {UserId}, PadPacketsToMaxPacketSize: {PadPacketsToMaxPacketSize}, Fd: {Fd}, RequestUsbQuirkLpc546XX: {RequestUsbQuirkLpc546XX}, BtConstExt: {BtConstExt}, Termination: {Termination}, BerrReporting: {BerrReporting}, GetState: {GetState}";
+            return $"ListenOnly: {this.ListenOnly}, " +
+                   $"Loopback: {this.Loopback}, " +
+                   $"TripleSample: {this.TripleSample}, " +
+                   $"OneShot: {this.OneShot}, " +
+                   $"HwTimeStamp: {this.HwTimeStamp}, " +
+                   $"Identity: {this.Identity}, " +
+                   $"UserId: {this.UserId}, " +
+                   $"PadPacketsToMaxPacketSize: {this.PadPacketsToMaxPacketSize}, " +
+                   $"Fd: {this.Fd}, " +
+                   $"RequestUsbQuirkLpc546XX: {this.RequestUsbQuirkLpc546XX}, " +
+                   $"BtConstExt: {this.BtConstExt}, " +
+                   $"Termination: {this.Termination}, " +
+                   $"BerrReporting: {this.BerrReporting}, " +
+                   $"GetState: {this.GetState}";
         }
     }
 }

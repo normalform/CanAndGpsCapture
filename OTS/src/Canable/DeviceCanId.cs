@@ -18,17 +18,17 @@ namespace Canable
         public DeviceCanId(uint rawId)
         {
             this.rawId = rawId;
-            Id = this.rawId & (Extended ? IdFlagExtendedMask : IdFlagStandardMask);
+            this.Id = this.rawId & (this.Extended ? IdFlagExtendedMask : IdFlagStandardMask);
         }
 
         public uint Id { get; }
 
-        public bool Extended => (rawId & IdFlagExtended) != 0;
+        public bool Extended => (this.rawId & IdFlagExtended) != 0;
 
         // Remote Transmission Reuqest
-        public bool Rtr => (rawId & IdFlagRtr) != 0;
+        public bool Rtr => (this.rawId & IdFlagRtr) != 0;
 
-        public bool HasError => (rawId & IdFlagError) != 0;
+        public bool HasError => (this.rawId & IdFlagError) != 0;
 
         public static DeviceCanId StandardCanId(uint id, bool rtr = false, bool error = false)
         {
@@ -42,10 +42,10 @@ namespace Canable
 
         public override string ToString()
         {
-            var extendedText = Extended ? ", Extended" : string.Empty;
-            var errorText = HasError ? ", Error" : string.Empty;
-            var rtrText = Rtr ? ", RTR" : string.Empty;
-            return $"Id: {Id}(0x{Id:x}){rtrText}{extendedText}{errorText}, raw ID: 0x{rawId:x}";
+            var extendedText = this.Extended ? ", Extended" : string.Empty;
+            var errorText = this.HasError ? ", Error" : string.Empty;
+            var rtrText = this.Rtr ? ", RTR" : string.Empty;
+            return $"Id: {this.Id}(0x{this.Id:x}){rtrText}{extendedText}{errorText}, raw ID: 0x{this.rawId:x}";
         }
     }
 }

@@ -40,22 +40,22 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         public INmeaMessage? Process(char dataIn)
         {
-            switch (currentState)
+            switch (this.currentState)
             {
                 case NmeaState.Start:
-                    HandleStartState(dataIn);
+                    this.HandleStartState(dataIn);
                     break;
                 case NmeaState.Address:
-                    HandleAddressState(dataIn);
+                    this.HandleAddressState(dataIn);
                     break;
                 case NmeaState.Data:
-                    HandleDataState(dataIn);
+                    this.HandleDataState(dataIn);
                     break;
                 case NmeaState.Checksum:
-                    HandleChecksumState(dataIn);
+                    this.HandleChecksumState(dataIn);
                     break;
                 case NmeaState.Done:
-                    return HandleDoneState(dataIn);
+                    return this.HandleDoneState(dataIn);
             }
 
             return null;
@@ -65,75 +65,75 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
         {
             if (dataIn == NmeaPrefix)
             {
-                currentState = NmeaState.Address;
+                this.currentState = NmeaState.Address;
             }
         }
 
         private void HandleAddressState(char dataIn)
         {
-            addressBuffer[index++] = dataIn;
-            if (index == AddressLength)
+            this.addressBuffer[this.index++] = dataIn;
+            if (this.index == AddressLength)
             {
-                currentState = NmeaState.Data;
-                index = 0;
+                this.currentState = NmeaState.Data;
+                this.index = 0;
             }
-            checksum ^= (byte)dataIn;
+            this.checksum ^= (byte)dataIn;
         }
 
         private void HandleDataState(char dataIn)
         {
             if (dataIn == NmeaChecksum)
             {
-                currentState = NmeaState.Checksum;
-                index = 0;
+                this.currentState = NmeaState.Checksum;
+                this.index = 0;
                 return;
             }
 
             if (dataIn == NmeaDelimitor)
             {
-                if (index != 0)
+                if (this.index != 0)
                 {
-                    dataVector.Add(currentDataStringBuilder.ToString());
-                    currentDataStringBuilder.Clear();
+                    this.dataVector.Add(this.currentDataStringBuilder.ToString());
+                    this.currentDataStringBuilder.Clear();
                 }
             }
             else
             {
-                currentDataStringBuilder.Append(dataIn);
+                this.currentDataStringBuilder.Append(dataIn);
             }
 
-            index++;
+            this.index++;
 
-            checksum ^= (byte)dataIn;
+            this.checksum ^= (byte)dataIn;
         }
 
         private void HandleChecksumState(char dataIn)
         {
             if (dataIn == NmeaSuffix0)
             {
-                index = 0;
-                var checksumStr = new string(checksumBuffer);
+                this.index = 0;
+                var checksumStr = new string(this.checksumBuffer);
                 var localChecksum = Convert.ToInt32(checksumStr, 16);
-                if (localChecksum == checksum)
+                if (localChecksum == this.checksum)
                 {
-                    dataVector.Add(currentDataStringBuilder.ToString());
-                    currentState = NmeaState.Done;
+                    this.dataVector.Add(this.currentDataStringBuilder.ToString());
+                    this.currentState = NmeaState.Done;
                 }
                 else
                 {
-                    logger.LogError("Checksum error: {checksumStr} != {checksum}", localChecksum, checksum);
-                    ResetState();
+                    this.logger.LogError("Checksum error: {checksumStr} != {checksum}", localChecksum, this.checksum);
+                    this.ResetState();
                 }
             }
             else
             {
-                if (index >= ChecksumLength)
+                if (this.index >= ChecksumLength)
                 {
-                    ResetState();
+                    this.ResetState();
                 }
                 else
                 {
-                    checksumBuffer[index++] = dataIn;
+                    this.checksumBuffer[this.index++] = dataIn;
                 }
             }
         }
@@ -142,9 +142,9 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
         {
             if (dataIn == NmeaSuffix1)
             {
-                var address = new string(addressBuffer);
-                var message = NmeaMessageFactory.Create(address, [.. dataVector], logger);
-                ResetState();
+                var address = new string(this.addressBuffer);
+                var message = NmeaMessageFactory.Create(address, [.. this.dataVector], this.logger);
+                this.ResetState();
 
                 return message;
             }
@@ -154,11 +154,11 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
 
         private void ResetState()
         {
-            currentState = NmeaState.Start;
-            index = 0;
-            checksum = 0;
-            dataVector.Clear();
-            currentDataStringBuilder.Clear();
+            this.currentState = NmeaState.Start;
+            this.index = 0;
+            this.checksum = 0;
+            this.dataVector.Clear();
+            this.currentDataStringBuilder.Clear();
         }
     }
 }
