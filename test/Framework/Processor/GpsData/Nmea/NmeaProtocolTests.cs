@@ -66,7 +66,7 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
             var loggerMock = new Mock<ILogger>().Object;
             var nmeaProtocol = new NmeaProtocol(loggerMock);
 
-            var inputNmeaString = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*471\r\a";
+            var inputNmeaString = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47\r\a";
 
             // Act
             INmeaMessage? nmeaMessage = null;

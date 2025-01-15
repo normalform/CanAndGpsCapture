@@ -46,6 +46,8 @@ namespace Canable
         private UsbEndpointWriter? writer;
 
         private readonly CancellationTokenSource cancellationTokenSource = new();
+
+        [ExcludeFromCodeCoverage]
         public event EventHandler<DeviceCanMessageEventArgs> DataReceived = delegate { };
 
         [ExcludeFromCodeCoverage]
