@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OTS\src\Canable\Canable.csproj" />
+    <ProjectReference Include="..\..\OTS\src\UbloxGpsReceiver\UbloxGpsReceiver.csproj" />
+    <ProjectReference Include="..\DomainObject\CagCap.DomainObject.csproj" />
+  </ItemGroup>
+
+</Project>

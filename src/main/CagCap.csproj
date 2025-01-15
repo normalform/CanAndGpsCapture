@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="LibUsbDotNet" Version="2.2.29" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.1" />
+    <PackageReference Include="OpenTelemetry" Version="1.10.0" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OTS\src\Canable\Canable.csproj" />
+    <ProjectReference Include="..\..\OTS\src\UbloxGpsReceiver\UbloxGpsReceiver.csproj" />
+    <ProjectReference Include="..\Application\CagCap.Application.csproj" />
+    <ProjectReference Include="..\BusinessLogic\CagCap.BusinessLogic.csproj" />
+    <ProjectReference Include="..\DomainObject\CagCap.DomainObject.csproj" />
+    <ProjectReference Include="..\Framework\CagCap.Framework.csproj" />
+    <ProjectReference Include="..\UI\CagCap.Ui.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="CagCapSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

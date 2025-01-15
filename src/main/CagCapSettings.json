@@ -1,0 +1,40 @@
+{
+  "GpsReceiver": {
+    "Enable": true,
+    "Port": "COM3",
+    "BaudRate": 9600
+  },
+  "CanBus": {
+    "Enable": true,
+    "BitRate": 500000,
+    "SamplePoint": "50.0%",
+    "EnableListenOnly": false,
+    "EnableLoopback": false,
+    "EnableHwTimestamp": true,
+    "EnableIdentity": false,
+    "EnableUserId": false,
+    "EnablePadPacketsToMaxPacketSize": false
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "System": "Warning"
+    },
+    "Console": {
+      "LogLevel": {
+        "Default": "Information",
+        "GpsDevice": "Information",
+        "GpsDataProcessor": "Information",
+        "GpsReceiver": "Information"
+      }
+    },
+    "OpenTelemetry": {
+      "LogLevel": {
+        "Default": "Information",
+        "CanMessage": "Information",
+        "GpsMessage": "Information"
+      }
+    }
+  }
+}

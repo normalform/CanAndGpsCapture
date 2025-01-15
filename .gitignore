@@ -2,12 +2,13 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/src/CagCap/bin
-/src/CagCap/obj
-/test/bin/
-/test/obj
-/test/report
-/test/coverage-report
-/test/test-results
 *.exe
+
+/.vs
+
+# Ignore all bin and obj directories
+**/bin/
+**/obj/
+
+# Ignore test coverage results
+**/coverage/
