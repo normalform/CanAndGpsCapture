@@ -12,7 +12,7 @@ namespace CagCap.Framework.Tests.Device.Adapter.Gps
     public class GpsReceiverDeviceTests
     {
         [Fact]
-        public async Task WriteAsync()
+        public void WriteAsync()
         {
             // Arrange
             var mockUbloxGpsReceiverDevice = new Mock<IUbloxGpsReceiverDevice>();
@@ -20,10 +20,10 @@ namespace CagCap.Framework.Tests.Device.Adapter.Gps
             var data = "test data";
 
             // Act
-            await adapter.WriteAsync(data);
+            adapter.Write(data);
 
             // Assert
-            mockUbloxGpsReceiverDevice.Verify(x => x.WriteAsync(data), Times.Once);
+            mockUbloxGpsReceiverDevice.Verify(x => x.Write(data), Times.Once);
         }
 
         [Fact]

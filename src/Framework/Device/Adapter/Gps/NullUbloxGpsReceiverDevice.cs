@@ -7,7 +7,6 @@ namespace CagCap.Framework.Device.Adapter.Gps
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Threading.Tasks;
     using UbloxGpsReceiver;
 
     [ExcludeFromCodeCoverage]
@@ -17,9 +16,8 @@ namespace CagCap.Framework.Device.Adapter.Gps
         public event EventHandler<DataReceivedEventArgs> DataReceived = delegate { };
 #pragma warning restore CS0067
 
-        public async Task WriteAsync(string data)
+        public void Write(string data)
         {
-            await Task.CompletedTask.ConfigureAwait(false);
         }
     }
 }

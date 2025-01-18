@@ -22,6 +22,10 @@ namespace Canable
 
         public CanableDevice(IUsbAccess usbAccess, CanBusConfig canBusConfig, ILoggerFactory loggerFactory)
         {
+            ArgumentNullException.ThrowIfNull(usbAccess);
+            ArgumentNullException.ThrowIfNull(canBusConfig);
+            ArgumentNullException.ThrowIfNull(loggerFactory);
+
             this.usbAccess = usbAccess;
             this.canBusConfig = canBusConfig;
             this.logger = loggerFactory.CreateLogger("CanMessage");
@@ -42,6 +46,8 @@ namespace Canable
 
         public void SendMessage(DeviceCanMessage message)
         {
+            ArgumentNullException.ThrowIfNull(message);
+
             this.LogCanMessage("Send CAN message: {CanMessage}", message);
 
             var frame = new CandleDataStructure.CandleDataFrame
@@ -69,6 +75,9 @@ namespace Canable
 
         public static int GetSamplePoint(string samplePointConfig, ILogger logger)
         {
+            ArgumentNullException.ThrowIfNull(samplePointConfig);
+            ArgumentNullException.ThrowIfNull(logger);
+
             int samplePointInt;
             var samplePointString = samplePointConfig.TrimEnd('%');
             if (double.TryParse(samplePointString, out double samplePoint))
@@ -174,7 +183,7 @@ namespace Canable
                         Brp = bitTiming.Brp
                     };
 
-                    usbAccess.UsbControlMessageSet(CanRequest.BitTiming, 0, 0, bitTimingStruct);
+                    this.usbAccess.UsbControlMessageSet(CanRequest.BitTiming, 0, 0, bitTimingStruct);
                 }
             }
         }

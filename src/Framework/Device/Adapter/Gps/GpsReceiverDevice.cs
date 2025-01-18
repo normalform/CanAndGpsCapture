@@ -7,7 +7,6 @@ namespace CagCap.Framework.Device.Adapter.Gps
 {
     using CagCap.Framework.Device.Gps;
     using System;
-    using System.Threading.Tasks;
     using UbloxGpsReceiver;
 
     public class GpsReceiverDevice : IGpsReceiverDevice
@@ -26,9 +25,9 @@ namespace CagCap.Framework.Device.Adapter.Gps
             };
         }
 
-        public async Task WriteAsync(string data)
+        public void Write(string data)
         {
-            await ubloxGpsReceiverDevice.WriteAsync(data).ConfigureAwait(false);
+            this.ubloxGpsReceiverDevice.Write(data);
         }
     }
 }

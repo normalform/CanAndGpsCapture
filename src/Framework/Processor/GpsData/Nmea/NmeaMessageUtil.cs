@@ -121,7 +121,7 @@ namespace CagCap.Framework.Processor.GpsData.Nmea
         {
             if (string.IsNullOrEmpty(inputString))
             {
-                logger.LogWarning("Invalid intput string for LatitudeHemispher: {inputString}", inputString);
+                logger.LogWarning("Invalid intput string for LongitudeHemisphere: {inputString}", inputString);
                 return LongitudeHemisphere.West;
             }
 

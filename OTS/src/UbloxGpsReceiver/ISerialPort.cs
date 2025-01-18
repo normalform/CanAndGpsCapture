@@ -5,9 +5,20 @@
 
 namespace UbloxGpsReceiver
 {
-    public interface IUbloxGpsReceiverDevice
+    using System;
+
+    internal interface ISerialPort : IDisposable
     {
+        public event EventHandler<DataReceivedEventArgs> DataReceived;
+
+        bool IsOpen { get; }
+        int ReadTimeout { get; set; }
+        int WriteTimeout { get; set; }
+
+        void Open();
+        void Close();
+
         void Write(string data);
-        event EventHandler<DataReceivedEventArgs> DataReceived;
+        string ReadExisting();
     }
 }
