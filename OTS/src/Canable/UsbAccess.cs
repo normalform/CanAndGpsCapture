@@ -56,6 +56,8 @@ namespace Canable
         [ExcludeFromCodeCoverage]
         public UsbAccess(ILoggerFactory loggerFactory)
         {
+            ArgumentNullException.ThrowIfNull(loggerFactory);
+
             this.logger = loggerFactory.CreateLogger("UsbAccess");
             this.logger.LogDebug("Creating UsbAccess");
 

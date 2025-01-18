@@ -5,7 +5,7 @@
 
 namespace Canable
 {
-    public class CanableFeature(uint rawAvaliableFeature)
+    internal class CanableFeature(uint rawAvaliableFeature)
     {
         public const uint ListenOnlyBit = 0x01;
         public const uint LoopbackBit = 0x02;
