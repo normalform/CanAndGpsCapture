@@ -90,6 +90,8 @@ namespace Canable
 
         public static Guid[] GetDeviceGuid(IUsbUtils usbUtils)
         {
+            ArgumentNullException.ThrowIfNull(usbUtils);
+
             return usbUtils.GetDeviceSymbolicName(VendorId, ProductId);
         }
 

@@ -7,133 +7,78 @@ namespace UbloxGpsReceiver
 {
     using Microsoft.Extensions.Logging;
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO.Ports;
-    using System.Threading.Tasks;
 
-    [ExcludeFromCodeCoverage]
     public class UbloxGpsReceiverDevice : IUbloxGpsReceiverDevice, IDisposable
     {
-        private readonly SerialPort serialPort;
+        private readonly ISerialPort serialPort;
         private readonly ILogger logger;
         private bool disposed;
 
         public event EventHandler<DataReceivedEventArgs> DataReceived = delegate { };
 
         public UbloxGpsReceiverDevice(string portName, int baudRate, ILoggerFactory loggerFactory)
+            : this(CreateSerialPortAdapter(portName, baudRate), loggerFactory)
         {
+        }
+
+        private static SerialPortAdapter CreateSerialPortAdapter(string portName, int baudRate)
+        {
+            return new SerialPortAdapter(portName, baudRate, Parity.None, 8, StopBits.One);
+        }
+
+        internal UbloxGpsReceiverDevice(ISerialPort serialPort, ILoggerFactory loggerFactory)
+        {
+            ArgumentNullException.ThrowIfNull(serialPort);
+            ArgumentNullException.ThrowIfNull(loggerFactory);
+
+            this.serialPort = serialPort;
             this.logger = loggerFactory.CreateLogger("GpsDevice");
-            this.serialPort = new SerialPort(portName, baudRate)
-            {
-                Parity = Parity.None,
-                DataBits = 8,
-                StopBits = StopBits.One,
-                Handshake = Handshake.None,
-                ReadTimeout = 500,
-                WriteTimeout = 500
-            };
 
-            this.serialPort.DataReceived += new SerialDataReceivedEventHandler(this.DataReceivedHandler);
+            this.serialPort.DataReceived += this.DataReceivedHandler;
 
-            try
+            if (!this.serialPort.IsOpen)
             {
-                if (!this.serialPort.IsOpen)
-                {
-                    this.serialPort.Open();
-                }
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                this.logger.LogError(ex, "Unauthorized access error opening COM port: {message}", ex.Message);
-            }
-            catch (IOException ex)
-            {
-                this.logger.LogError(ex, "I/O error opening COM port: {message}", ex.Message);
-            }
-            catch (InvalidOperationException ex)
-            {
-                this.logger.LogError(ex, "Invalid operation error opening COM port: {message}", ex.Message);
-                Console.WriteLine($"Invalid operation error opening COM port: {ex.Message}");
-            }
-            catch (Exception ex) when (ex is ArgumentException || ex is ArgumentOutOfRangeException || ex is ArgumentNullException)
-            {
-                this.logger.LogError(ex, "Argument error opening COM port: {message}", ex.Message);
-                Console.WriteLine($"Argument error opening COM port: {ex.Message}");
+                this.serialPort.Open();
             }
         }
 
-        public async Task WriteAsync(string data)
+        public void Write(string data)
         {
-            try
+            if (this.serialPort.IsOpen)
             {
-                if (this.serialPort.IsOpen)
-                {
-                    await Task.Run(() => this.serialPort.WriteLine(data)).ConfigureAwait(false);
-                }
-            }
-            catch (InvalidOperationException ex)
-            {
-                this.logger.LogError(ex, "Invalid operation error writing to COM port: {message}", ex.Message);
-                Console.WriteLine($"Invalid operation error writing to COM port: {ex.Message}");
-            }
-            catch (TimeoutException ex)
-            {
-                this.logger.LogError(ex, "Timeout error writing to COM port: {message}", ex.Message);
-                Console.WriteLine($"Timeout error writing to COM port: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                this.logger.LogError(ex, "I/O error writing to COM port: {message}", ex.Message);
-                Console.WriteLine($"I/O error writing to COM port: {ex.Message}");
+                this.serialPort.Write(data);
             }
         }
 
-        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        private void DataReceivedHandler(object? sender, DataReceivedEventArgs e)
         {
-            try
-            {
-                var sp = (SerialPort)sender;
-                var data = sp.ReadExisting();
-                this.logger.LogDebug("Data received: {data}", data);
-                this.DataReceived.Invoke(this, new DataReceivedEventArgs(data));
-            }
-            catch (InvalidOperationException ex)
-            {
-                this.logger.LogError(ex, "Invalid operation error reading COM port: {message}", ex.Message);
-                Console.WriteLine($"Invalid operation error reading from COM port: {ex.Message}");
-            }
-            catch (TimeoutException ex)
-            {
-                this.logger.LogError(ex, "Timeout error reading COM port: {message}", ex.Message);
-                Console.WriteLine($"Timeout error reading from COM port: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                this.logger.LogError(ex, "I/O error reading COM port: {message}", ex.Message);
-                Console.WriteLine($"I/O error reading from COM port: {ex.Message}");
-            }
+            var sp = (ISerialPort)sender!;
+            var data = sp.ReadExisting();
+            this.logger.LogDebug("Data received: {data}", data);
+            this.DataReceived.Invoke(this, new DataReceivedEventArgs(data));
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!this.disposed)
             {
-                if (disposing && serialPort != null)
+                if (disposing)
                 {
-                    if (serialPort.IsOpen)
+                    if (this.serialPort.IsOpen)
                     {
-                        serialPort.Close();
+                        this.serialPort.Close();
                     }
-                    serialPort.Dispose();
+                    this.serialPort.Dispose();
                 }
 
-                disposed = true;
+                this.disposed = true;
             }
         }
     }

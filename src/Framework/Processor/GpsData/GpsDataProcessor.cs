@@ -20,6 +20,8 @@ namespace CagCap.Framework.Processor.GpsData
 
         public GpsDataProcessor(ILoggerFactory loggerFactory)
         {
+            ArgumentNullException.ThrowIfNull(loggerFactory);
+
             this.logger = loggerFactory.CreateLogger("GpsDataProcessor");
             this.dataQueue = new Queue<char>();
             this.nemaProtocol = new NmeaProtocol(logger);
@@ -27,6 +29,8 @@ namespace CagCap.Framework.Processor.GpsData
 
         public void Process(string data)
         {
+            ArgumentNullException.ThrowIfNull(data);
+
             if (data.Length == 0)
             {
                 return;

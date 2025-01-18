@@ -23,6 +23,8 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
         [InlineData("$GPNOP,,T,,M,0.088,N,0.163,K,D*36\r\n", typeof(NmeaMessageNull))]
         public void Process(string inputNmeaString, Type expectedType)
         {
+            ArgumentNullException.ThrowIfNull(inputNmeaString);
+
             // Arrange
             var loggerMock = new Mock<ILogger>().Object;
             var nmeaProtocol = new NmeaProtocol(loggerMock);
@@ -44,6 +46,8 @@ namespace CagCap.Framework.Tests.Processor.GpsData.Nmea
         [InlineData("$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*48\r\n")]
         public void Process_InvalidChecksum(string inputNmeaString)
         {
+            ArgumentNullException.ThrowIfNull(inputNmeaString);
+
             // Arrange
             var loggerMock = new Mock<ILogger>().Object;
             var nmeaProtocol = new NmeaProtocol(loggerMock);

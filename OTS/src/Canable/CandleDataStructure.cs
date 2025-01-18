@@ -10,12 +10,6 @@ namespace Canable
     public static class CandleDataStructure
     {
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        internal struct CandleHostConfig
-        {
-            public uint ByteOrder;
-        }
-
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct CandleDeviceConfig
         {
             public byte reserved1;
@@ -40,16 +34,6 @@ namespace Canable
             public uint BrpMin;     // Baud rate prescaler minimum
             public uint BrpMax;     // Baud rate prescaler maximum
             public uint BrpInc;     // Baud rate prescaler increment
-        }
-
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        internal struct CandleBitTiming
-        {
-            public uint PropSeg;
-            public uint PhaseSeg1;
-            public uint PhaseSeg2;
-            public uint Sjw;
-            public uint Brp;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -113,5 +97,21 @@ namespace Canable
             uint PhaseSeg2,
             uint Sjw,
             uint Brp);
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        internal struct CandleHostConfig
+        {
+            public uint ByteOrder;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        internal struct CandleBitTiming
+        {
+            public uint PropSeg;
+            public uint PhaseSeg1;
+            public uint PhaseSeg2;
+            public uint Sjw;
+            public uint Brp;
+        }
     }
 }

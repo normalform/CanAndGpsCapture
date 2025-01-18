@@ -19,6 +19,9 @@ namespace CagCap.Framework.Device.Adapter.Can
 
         public CanBusTransiver(ICanableDevice canableDevice, ILoggerFactory loggerFactory)
         {
+            ArgumentNullException.ThrowIfNull(canableDevice);
+            ArgumentNullException.ThrowIfNull(loggerFactory);
+
             this.logger = loggerFactory.CreateLogger("CanBusTransiver");
             this.canableDevice = canableDevice;
 
@@ -33,6 +36,8 @@ namespace CagCap.Framework.Device.Adapter.Can
 
         public void SendMessage(ICanMessage message)
         {
+            ArgumentNullException.ThrowIfNull(message);
+
             var canId = message.Id;
             var deviceCanId = canId.Extended ? DeviceCanId.ExtendedCanId(canId.Id, canId.Rtr, canId.HasError) : DeviceCanId.StandardCanId(canId.Id, canId.Rtr, canId.HasError);
             var deviceCanMessage = new DeviceCanMessage(deviceCanId, message.Data);

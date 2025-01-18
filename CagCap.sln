@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canable.Tests", "OTS\test\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CagCap.Application.Tests", "test\Application\CagCap.Application.Tests.csproj", "{64B416B1-830B-4884-B235-777D82EF7D52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbloxGpsReceiver.Tests", "OTS\test\UbloxGpsReceiver\UbloxGpsReceiver.Tests.csproj", "{4E47A8C0-7A22-4FB3-B12E-06DAD34D9AE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{64B416B1-830B-4884-B235-777D82EF7D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64B416B1-830B-4884-B235-777D82EF7D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64B416B1-830B-4884-B235-777D82EF7D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E47A8C0-7A22-4FB3-B12E-06DAD34D9AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E47A8C0-7A22-4FB3-B12E-06DAD34D9AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E47A8C0-7A22-4FB3-B12E-06DAD34D9AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E47A8C0-7A22-4FB3-B12E-06DAD34D9AE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +97,6 @@ Global
 		{E0BDBA94-789B-4826-A79C-038C1C01C20E} = {23B69664-6826-444D-91D5-DFF089B3FD9A}
 		{D968F79E-B4B0-429C-8D61-38A1B9D393DB} = {23B69664-6826-444D-91D5-DFF089B3FD9A}
 		{9F3827BC-3657-4DDB-A1C7-1EAD8F538ACC} = {23B69664-6826-444D-91D5-DFF089B3FD9A}
+		{4E47A8C0-7A22-4FB3-B12E-06DAD34D9AE0} = {23B69664-6826-444D-91D5-DFF089B3FD9A}
 	EndGlobalSection
 EndGlobal

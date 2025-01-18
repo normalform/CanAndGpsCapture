@@ -45,6 +45,10 @@ namespace CagCap.Framework.Device.Gps
 
         public GpsReceiver(IGpsReceiverDevice gpsReceiverDevice, IGpsDataProcessor gpsReceiverProcessor, ILoggerFactory loggerFactory)
         {
+            ArgumentNullException.ThrowIfNull(gpsReceiverDevice);
+            ArgumentNullException.ThrowIfNull(gpsReceiverProcessor);
+            ArgumentNullException.ThrowIfNull(loggerFactory);
+
             this.logger = loggerFactory.CreateLogger("GpsReceiver");
 
             this.timeoutTimer = new Timer(Timeout)
@@ -88,7 +92,7 @@ namespace CagCap.Framework.Device.Gps
 
         private void OnDataReceived(object? sender, NmeaMessageEventArgs message)
         {
-            this.logger.LogDebug("Data received: {message}", message);
+            this.logger.LogDebug("Data received: {message}", message.Message);
             this.timeoutTimer.Stop(); // Stop the timer if data is received
 
             switch (message.Message)
