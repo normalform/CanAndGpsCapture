@@ -12,6 +12,7 @@ namespace UbloxGpsReceiver
     internal class SerialPortAdapter : ISerialPort
     {
         private readonly SerialPort serialPort;
+        private bool disposed;
 
         public SerialPortAdapter(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
         {
@@ -40,11 +41,6 @@ namespace UbloxGpsReceiver
             this.serialPort.Close();
         }
 
-        public void Dispose()
-        {
-            this.serialPort.Dispose();
-        }
-
         public void Open()
         {
             this.serialPort.Open();
@@ -64,6 +60,30 @@ namespace UbloxGpsReceiver
         {
             var dummyArg = new DataReceivedEventArgs(string.Empty);
             this.DataReceived?.Invoke(this, dummyArg);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    this.serialPort.Dispose();
+                }
+
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~SerialPortAdapter()
+        {
+            this.Dispose(false);
         }
     }
 }
