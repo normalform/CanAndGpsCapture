@@ -5,7 +5,7 @@
 
 namespace Canable
 {
-    public record Timing(
+    internal record Timing(
                 uint BaseClk,
                 uint BitRate,
                 uint SamplePoint,
